@@ -1,0 +1,4 @@
+.banner_container {
+  height: 400px;
+  background: url('/public/background(2).jpg') center/cover no-repeat;
+}

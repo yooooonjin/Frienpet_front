@@ -1,0 +1,44 @@
+@value makerNavy,makerYellow, makerPink, makerGrey from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.title {
+  font-size: 2.2rem;
+  margin-top: 1em;
+  color: makerNavy;
+  text-align: center;
+  letter-spacing: -0.7px;
+}
+.subTitle {
+  font-size: 1rem;
+  color: makerGrey;
+  text-align: center;
+}
+.info {
+  margin: 2em auto;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  background-color: makerNavy;
+  padding: 2em;
+  height: 4.6em;
+  border-radius: 2.3em;
+  color: white;
+  font-weight: 700;
+}
+.locationIcon {
+  margin-right: 0.5em;
+  color: white;
+}
+.location {
+  font-size: 1.2rem;
+  margin-left: 0.5em;
+  color: makerYellow;
+}
+.time {
+  margin-left: 0.5em;
+  font-size: 0.8rem;
+}
+.feature {
+  margin-left: auto;
+  font-weight: 500;
+}

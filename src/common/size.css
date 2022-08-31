@@ -1,0 +1,7 @@
+@value mediaQuery: 480px;
+/* @value mediaQuery: 768px; */
+@value tabletQuery: 1024px;
+@value maxWidth: 60em;
+@value minWidth: 40em;
+
+@value container: 1024px;

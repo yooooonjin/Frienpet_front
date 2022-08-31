@@ -1,0 +1,30 @@
+@value makerNavy,makerBlue from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.header_container {
+  background-color: makerNavy;
+  height: 50px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: container;
+  margin: auto;
+}
+.logo {
+  height: 60%;
+}
+.button {
+  color: white;
+  border: 1px solid white;
+  border-radius: 13px;
+  height: 26px;
+  width: 90px;
+  margin-left: 1em;
+}
+.signUp {
+  color: makerBlue;
+  border: 1px solid makerBlue;
+}
