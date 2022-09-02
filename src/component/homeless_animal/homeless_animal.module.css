@@ -1,0 +1,106 @@
+@value makerNavy,makerYellow, makerPink, makerGrey from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.homelessPet {
+  width: 100%;
+  max-width: 900px;
+  margin: 2em auto;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+}
+.animalInfo {
+  display: flex;
+  align-items: center;
+  color: makerNavy;
+}
+.noticeInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3em;
+}
+.noticeNumber {
+  font-weight: 700;
+}
+.noticePeriod {
+  font-size: 0.7rem;
+  margin-left: 1em;
+}
+.image {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: grayscale(90%);
+  margin-right: 3em;
+  transition: all 100ms ease-in;
+}
+.image:hover {
+  filter: grayscale(0%);
+}
+.character {
+  display: flex;
+}
+.gender {
+  color: white;
+  padding: 0 0.8em;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+.female {
+  background-color: makerPink;
+}
+.male {
+  background-color: makerNavy;
+}
+.gender span {
+  background-color: makerYellow;
+  width: 18px;
+  height: 18px;
+  color: makerNavy;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  text-align: center;
+  font-weight: 700;
+  margin-left: 0.5em;
+}
+.kind {
+  margin-left: 0.8em;
+  font-size: 1.2rem;
+}
+.arrowIcon {
+  margin: 0 0.3em;
+}
+.privacy {
+  margin-top: 0.2em;
+  font-size: 1.2rem;
+  display: flex;
+}
+.privacy p,
+.rescueInfo p {
+  margin-right: 0.8em;
+}
+.privacy span,
+.rescueInfo span,
+.shelterInfo span {
+  font-weight: 700;
+}
+.feature {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+  margin: 0.8em 0;
+}
+.rescueInfo {
+  display: flex;
+  margin-bottom: 0.8em;
+}
+.remark {
+  margin-top: 5em;
+  margin-left: auto;
+  font-size: 0.6rem;
+  color: makerPink;
+  font-weight: 700;
+}

@@ -1,11 +1,178 @@
-import React from 'react';
+import React, { ReactNode, SetStateAction, useEffect, useState } from 'react';
+import moment from 'moment';
 import styles from './homeless.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faDog, faCat } from '@fortawesome/free-solid-svg-icons';
+import {
+  faDog,
+  faCat,
+  faCircleExclamation,
+  faAngleRight,
+  faAngleLeft,
+  faAnglesRight,
+  faAnglesLeft,
+} from '@fortawesome/free-solid-svg-icons';
+import Sido from './sido';
+import SiGunGu from './sigungu';
+import { getAbandonmentPublic } from '../../util/abandoned_animal_api';
+import Animals from './animals';
+import { HomelessProps } from '../../page/homeless_page/homeless_page';
+import { Dispatch } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const Homeless = () => {
+export interface SidoProps {
+  onSidoChange(sido: string): void;
+  onFilterChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ): void;
+}
+export interface SiGunGuProps {
+  selectedSido: string;
+  onFilterChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ): void;
+  onReset(): void;
+}
+export interface AnimalProps {
+  animal: Animals;
+  setSelectedAnimal: Dispatch<SetStateAction<Animals | undefined>>;
+}
+
+export type AnimalsFilter = {
+  bgnde: string;
+  endde: string;
+  upkind: string;
+  upr_cd: string;
+  org_cd: string;
+  state: string;
+  pageNo: number;
+  numOfRows: number;
+};
+
+export type Animals = {
+  age: string;
+  careAddr: string;
+  careNm: string;
+  careTel: string;
+  chargeNm: string;
+  colorCd: string;
+  desertionNo: string;
+  filename: string;
+  happenDt: string;
+  happenPlace: string;
+  kindCd: string;
+  neuterYn: string;
+  noticeEdt: string;
+  noticeNo: string;
+  noticeSdt: string;
+  officetel: string;
+  orgNm: string;
+  popfile: string;
+  processState: string;
+  sexCd: string;
+  specialMark: string;
+  weight: string;
+};
+
+const PER_PAGE: number = 5;
+
+const Homeless: React.FunctionComponent<HomelessProps> = ({
+  setSelectedAnimal,
+}) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [selectedSido, setSelectedSido] = useState<string>('');
+  const [animals, setAnimals] = useState<Array<Animals>>([]);
+  const [animalsFilter, setAnimalsFilter] = useState<AnimalsFilter>({
+    bgnde: moment(Date.now()).subtract(1, 'months').format('YYYY-MM-DD'),
+    endde: moment(Date.now()).format('YYYY-MM-DD'),
+    upkind: '417000',
+    upr_cd: '',
+    org_cd: '',
+    state: '',
+    pageNo: 1,
+    numOfRows: PER_PAGE,
+  });
+  // console.log(animalsFilter);
+
+  const [totalCount, setTotalCount] = useState<number>(0);
+
+  useEffect(() => {
+    animalDataRequest(animalsFilter);
+  }, []);
+
+  const onPageChange = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { id } = e.currentTarget;
+    let newAnimalsFilter: AnimalsFilter;
+    if (id === 'next') {
+      if (animalsFilter.pageNo === totalCount) return;
+      newAnimalsFilter = {
+        ...animalsFilter,
+        pageNo: animalsFilter.pageNo + 1,
+      };
+    } else if (id === 'pre') {
+      if (animalsFilter.pageNo === 1) return;
+      newAnimalsFilter = {
+        ...animalsFilter,
+        pageNo: animalsFilter.pageNo - 1,
+      };
+    }
+    setAnimalsFilter(newAnimalsFilter!);
+    animalDataRequest(newAnimalsFilter!);
+  };
+
+  const onSidoChange = (sido: string) => {
+    setSelectedSido(sido);
+  };
+
+  const onFilterChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setAnimalsFilter((animalsFilter) => {
+      return { ...animalsFilter, [name]: value };
+    });
+  };
+  const onSigunguReset = () => {
+    setAnimalsFilter((animalsFilter) => {
+      return { ...animalsFilter, org_cd: '' };
+    });
+  };
+
+  const onSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const newAnimalsFilter: AnimalsFilter = { ...animalsFilter, pageNo: 1 };
+
+    setAnimalsFilter(newAnimalsFilter);
+    animalDataRequest(newAnimalsFilter);
+  };
+
+  const animalDataRequest = (animalsFilter: AnimalsFilter) => {
+    setLoading(true);
+    const newBgnde = animalsFilter.bgnde.replace(/-/g, '');
+    const newEndde = animalsFilter.endde.replace(/-/g, '');
+    const newAnimalsFilter = {
+      ...animalsFilter,
+      bgnde: newBgnde,
+      endde: newEndde,
+    };
+
+    console.log('animalDataRequest', newAnimalsFilter);
+    getAbandonmentPublic(newAnimalsFilter)
+      .then((data: any) => {
+        setAnimals(data.data.response.body.items.item);
+        setTotalCount(Math.ceil(data.data.response.body.totalCount / PER_PAGE));
+      })
+      .then(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <section className={styles.homeless_container}>
+      {loading && (
+        <div className={styles.loading_container}>
+          <div className={styles.loader}></div>
+        </div>
+      )}
       <div className={styles.homeless}>
         <h2 className={styles.title}>보호중인 유기동물</h2>
         <p className={styles.subTitle}>
@@ -13,158 +180,86 @@ const Homeless = () => {
           동물입니다.
         </p>
         <form className={styles.search_bar}>
-          <input className={styles.radio} type='radio' name='kind' id='dog' />
+          <input
+            className={styles.radio}
+            type='radio'
+            name='upkind'
+            id='dog'
+            value='417000'
+            onChange={onFilterChange}
+            defaultChecked
+          />
           <label htmlFor='dog' className={styles.animal}>
             <FontAwesomeIcon icon={faDog} className={styles.animalIcon} />
           </label>
-          <input className={styles.radio} type='radio' name='kind' id='cat' />
+          <input
+            className={styles.radio}
+            type='radio'
+            name='upkind'
+            id='cat'
+            value='422400'
+            onChange={onFilterChange}
+          />
           <label htmlFor='cat' className={styles.animal}>
             <FontAwesomeIcon icon={faCat} className={styles.animalIcon} />
           </label>
-          <span>지역 : </span>
-          <select name='place' id='place'>
-            <option value=''>전체</option>
-            <option value=''>서울특별시</option>
-            <option value=''>부산광역시</option>
-            <option value=''>대구광역시</option>
-            <option value=''>인천광역시</option>
-            <option value=''>광주광역시</option>
-            <option value=''>대전광역시</option>
-            <option value=''>울산광역시</option>
-            <option value=''>세종특별시</option>
-            <option value=''>경기도</option>
-            <option value=''>강원도</option>
-            <option value=''>충청북도</option>
-            <option value=''>충청남도</option>
-            <option value=''>전라북도</option>
-            <option value=''>전라남도</option>
-            <option value=''>경상북도</option>
-            <option value=''>경상남도</option>
-            <option value=''>제주도</option>
-          </select>
-          <span>세부 지역 : </span>
-          <select name='place' id='place'>
-            <option value=''>전체</option>
-            <option value=''>강남구</option>
-            <option value=''>강동구</option>
-            <option value=''>강서구</option>
-            <option value=''>관악구</option>
-            <option value=''>광진구</option>
-            <option value=''>구로구</option>
-            <option value=''>금천구</option>
-            <option value=''>노원구</option>
-            <option value=''>도봉구</option>
-            <option value=''>동대문구</option>
-            <option value=''>동작구</option>
-            <option value=''>마포구</option>
-            <option value=''>서대문구</option>
-            <option value=''>서초구</option>
-            <option value=''>성동구</option>
-            <option value=''>성북구</option>
-            <option value=''>송파구</option>
-            <option value=''>양천구</option>
-            <option value=''>영등포구</option>
-            <option value=''>용산구</option>
-            <option value=''>은평구</option>
-            <option value=''>종로구</option>
-            <option value=''>중구</option>
-            <option value=''>중랑구</option>
-          </select>
-          <span>상태 : </span>
-          <select name='place' id='place'>
-            <option value=''>전체</option>
-            <option value=''>공고중</option>
-            <option value=''>보호중</option>
-          </select>
-          <span>날짜 : </span>
-          <input type='date' placeholder='날짜' />
-          <span>~</span>
-          <input type='date' placeholder='날짜' />
-          <button>찾아보기</button>
+          <div className={styles.upr_cd}>
+            <span>지역 : </span>
+            <Sido onSidoChange={onSidoChange} onFilterChange={onFilterChange} />
+          </div>
+          <div className={styles.org_cd}>
+            <span>세부 지역 : </span>
+            <SiGunGu
+              selectedSido={selectedSido}
+              onFilterChange={onFilterChange}
+              onReset={onSigunguReset}
+            />
+          </div>
+          <div className={styles.date}>
+            <span>날짜 : </span>
+            <input
+              type='date'
+              value={animalsFilter.bgnde}
+              name='bgnde'
+              onChange={onFilterChange}
+            />
+            <span>~</span>
+            <input
+              type='date'
+              value={animalsFilter.endde}
+              name='endde'
+              onChange={onFilterChange}
+            />
+          </div>
+          <button onClick={onSearch}>찾아보기</button>
         </form>
         <div className={styles.info_container}>
-          <div className={styles.info}>
-            <img className={styles.info_img} src='images/frienpet(1).jpg' />
-            <div className={styles.info_text}>
-              <div className={styles.gender}>암컷</div>
-              <p className={styles.feature}>
-                2019년생 믹스견 8kg__3개월령 얌전한 성격
-              </p>
-
-              <p className={styles.location}>
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  className={styles.locationIcon}
+          {animals &&
+            animals.map((data: Animals): ReactNode => {
+              return (
+                <Animals
+                  key={data.desertionNo}
+                  animal={data}
+                  setSelectedAnimal={setSelectedAnimal}
                 />
-                백암길93번길 6 집 앞
-              </p>
-              <div className={styles.period}>
-                2022.08.24 <br />~ 2022.09.05
-              </div>
+              );
+            })}
+          {!animals && (
+            <div>
+              <FontAwesomeIcon icon={faCircleExclamation} /> 해당하는 유기동물이
+              존재하지 않습니다.
             </div>
+          )}
+        </div>
+        <div className={styles.pagination}>
+          <div className={styles.arrow} id='pre' onClick={onPageChange}>
+            <FontAwesomeIcon icon={faAngleLeft} />
           </div>
-          {/* //////////////////////////////////////////// */}
-          <div className={styles.info}>
-            <img className={styles.info_img} src='images/frienpet(1).jpg' />
-            <div className={styles.info_text}>
-              <div className={styles.gender}>암컷</div>
-              <p className={styles.feature}>
-                2019년생 믹스견 8kg__3개월령 얌전한 성격
-              </p>
-
-              <p className={styles.location}>
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  className={styles.locationIcon}
-                />
-                우성2차 101동 908호
-              </p>
-              <div className={styles.period}>
-                2022.08.24 <br />~ 2022.09.05
-              </div>
-            </div>
-          </div>
-          {/* //////////////////////////////////////////// */}
-          <div className={styles.info}>
-            <img className={styles.info_img} src='images/frienpet(1).jpg' />
-            <div className={styles.info_text}>
-              <div className={styles.gender}>암컷</div>
-              <p className={styles.feature}>
-                2019년생 믹스견 8kg__3개월령 얌전한 성격
-              </p>
-
-              <p className={styles.location}>
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  className={styles.locationIcon}
-                />
-                백암길93번길 6 집 앞
-              </p>
-              <div className={styles.period}>
-                2022.08.24 <br />~ 2022.09.05
-              </div>
-            </div>
-          </div>
-          {/* //////////////////////////////////////////// */}
-          <div className={styles.info}>
-            <img className={styles.info_img} src='images/frienpet(1).jpg' />
-            <div className={styles.info_text}>
-              <div className={styles.gender}>암컷</div>
-              <p className={styles.feature}>
-                2019년생 믹스견 8kg__3개월령 얌전한 성격
-              </p>
-
-              <p className={styles.location}>
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  className={styles.locationIcon}
-                />
-                백암길93번길 6 집 앞
-              </p>
-              <div className={styles.period}>
-                2022.08.24 <br />~ 2022.09.05
-              </div>
-            </div>
+          <p className={styles.pageNumber}>
+            <span>{animalsFilter.pageNo}</span> / {totalCount}
+          </p>
+          <div className={styles.arrow} id='next' onClick={onPageChange}>
+            <FontAwesomeIcon icon={faAngleRight} />
           </div>
         </div>
       </div>
