@@ -1,0 +1,60 @@
+@value makerNavy,makerYellow, makerPink, makerGrey from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.login_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(245, 245, 245);
+  padding: 5em 2em 15em;
+  justify-content: center;
+  min-height: calc(100% - 50px);
+}
+.logo {
+  width: 6em;
+  margin-bottom: 2em;
+  cursor: pointer;
+}
+.title {
+  font-size: 1rem;
+  margin-bottom: 1em;
+}
+.form_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.8em;
+  background-color: white;
+  border: 1px solid makerGrey;
+  display: flex;
+  margin-bottom: 1em;
+}
+.input input {
+  background-color: transparent;
+  flex: 1;
+  border: none;
+  outline: 0;
+  font-size: 1rem;
+}
+.button {
+  width: 100%;
+  max-width: 400px;
+  padding: 1.3em;
+  background-color: makerNavy;
+  color: white;
+  margin-top: 2em;
+}
+.account {
+  display: flex;
+  font-size: 0.7rem;
+  margin-top: 1.5em;
+}
+.account div {
+  padding: 0 0.8em;
+  cursor: pointer;
+}

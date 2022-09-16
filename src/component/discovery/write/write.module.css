@@ -1,0 +1,88 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey from '../../../common/colors.css';
+@value container from '../../../common/size.css';
+
+.dim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+.write_popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 25em;
+  z-index: 3;
+  border-radius: 1em;
+  padding: 1em 1.5em 1.5em;
+}
+.close {
+  display: flex;
+  justify-content: flex-end;
+}
+.closeIcon {
+  color: makerNavy;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+.location div select {
+  margin-left: 0.5em;
+}
+.location div {
+  align-items: center;
+}
+.location,
+.character {
+  width: 100%;
+}
+.character div,
+.location div {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.5em;
+  align-items: center;
+}
+
+.character p,
+.detailLocation p {
+  margin-right: 0.5em;
+  font-size: 0.8rem;
+}
+.character select,
+.character input,
+.character textarea,
+.detailLocation input,
+.location div select {
+  border: none;
+  background-color: makerLightGrey;
+  padding: 0.5em;
+  flex: 1;
+}
+.desc {
+  flex-direction: column;
+}
+.desc textarea {
+  width: 100%;
+}
+.desc p {
+  margin: 0 auto 0.5em 0;
+}
+.line {
+  margin: 1em 0;
+  border-top: 1px dashed makerGrey;
+}
+.button {
+  margin-top: 1.5em;
+  width: 100%;
+  background-color: makerNavy;
+  color: white;
+  padding: 0.5em;
+}
+.button:hover {
+  transform: scale(1.01, 1.05);
+}

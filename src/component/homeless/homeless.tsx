@@ -8,30 +8,14 @@ import {
   faCircleExclamation,
   faAngleRight,
   faAngleLeft,
-  faAnglesRight,
-  faAnglesLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import Sido from './sido';
 import SiGunGu from './sigungu';
-import { getAbandonmentPublic } from '../../util/abandoned_animal_api';
+import { getAbandonmentPublic } from '../../service/abandoned_animal_api';
 import Animals from './animals';
-import { HomelessProps } from '../../page/homeless_page/homeless_page';
+import { HomelessProps } from '../../page/homeless/HomelessPage';
 import { Dispatch } from 'react';
-import { useLocation } from 'react-router-dom';
 
-export interface SidoProps {
-  onSidoChange(sido: string): void;
-  onFilterChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ): void;
-}
-export interface SiGunGuProps {
-  selectedSido: string;
-  onFilterChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ): void;
-  onReset(): void;
-}
 export interface AnimalProps {
   animal: Animals;
   setSelectedAnimal: Dispatch<SetStateAction<Animals | undefined>>;
@@ -119,8 +103,9 @@ const Homeless: React.FunctionComponent<HomelessProps> = ({
     animalDataRequest(newAnimalsFilter!);
   };
 
-  const onSidoChange = (sido: string) => {
-    setSelectedSido(sido);
+  const onSidoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedSido(e.target.value);
+    onFilterChange(e);
   };
 
   const onFilterChange = (
@@ -205,7 +190,7 @@ const Homeless: React.FunctionComponent<HomelessProps> = ({
           </label>
           <div className={styles.upr_cd}>
             <span>지역 : </span>
-            <Sido onSidoChange={onSidoChange} onFilterChange={onFilterChange} />
+            <Sido onSidoChange={onSidoChange} />
           </div>
           <div className={styles.org_cd}>
             <span>세부 지역 : </span>

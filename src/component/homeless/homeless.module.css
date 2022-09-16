@@ -1,5 +1,5 @@
 @value makerNavy,makerDarkNavy, makerPink, makerGrey, makerYellow from '../../common/colors.css';
-@value container from '../../common/size.css';
+@value container, size_title,size_sub from '../../common/size.css';
 
 .homeless_container {
   position: relative;
@@ -77,14 +77,14 @@
   margin: auto;
 }
 .title {
-  font-size: 2.2rem;
+  font-size: size_title;
   padding-top: 1.5em;
   color: makerYellow;
   text-align: center;
   letter-spacing: -0.7px;
 }
 .subTitle {
-  font-size: 1rem;
+  font-size: size_sub;
   color: white;
   text-align: center;
 }
@@ -148,6 +148,7 @@
 .date {
   text-align: center;
   width: 30%;
+  white-space: nowrap;
 }
 /* //////////////////////pagination///////////// */
 .pagination {

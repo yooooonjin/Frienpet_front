@@ -1,4 +1,4 @@
-import { AnimalsFilter } from './../component/homeless/homeless';
+import { AnimalsFilter } from '../component/homeless/homeless';
 import axios from 'axios';
 const apiKey = process.env.REACT_APP_ABANDONMENT_API_KEY;
 

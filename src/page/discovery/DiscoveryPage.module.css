@@ -1,0 +1,84 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.discovery_container {
+  background-color: makerLightGrey;
+  min-height: calc(100% - 50px);
+  width: 100%;
+  padding: 1em;
+}
+.discovery {
+  max-width: 600px;
+  margin: auto;
+}
+.write {
+  margin-left: auto;
+  background-color: makerNavy;
+  width: 5em;
+  font-size: 0.8rem;
+  color: white;
+  text-align: center;
+  padding: 0.3em 0;
+  margin-bottom: 2em;
+  cursor: pointer;
+}
+.animal {
+  width: 100%;
+  padding: 0.5em;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1em;
+}
+.animal:hover {
+  transform: scale(1.01);
+}
+.animal div:first-child {
+  display: flex;
+  align-items: center;
+}
+.photo {
+  background-color: makerGrey;
+  height: 4em;
+  width: 4em;
+}
+.info {
+  width: 100%;
+  padding: 0 1em;
+}
+.info > div:first-child {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+.locationIcon {
+  margin-right: 0.3em;
+}
+.date {
+  margin-left: auto;
+  color: makerGrey;
+  font-size: 0.8rem;
+}
+.time {
+  margin-left: 0.5em;
+  color: makerPink;
+  font-size: 0.8rem;
+}
+.character {
+  margin-top: 0.3em;
+  font-size: 0.9rem;
+  display: flex;
+}
+.character div {
+  margin-right: 0.8em;
+}
+.character div:first-child {
+  font-weight: 700;
+}
+.desc {
+  margin-top: 1em;
+  padding: 0.5em 0.8em;
+  background-color: makerLightGrey;
+  font-size: 0.7rem;
+  height: 2.5em;
+  overflow-y: scroll;
+}

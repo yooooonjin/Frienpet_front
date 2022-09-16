@@ -5,3 +5,6 @@
 @value minWidth: 40em;
 
 @value container: 1024px;
+
+@value size_title: 1.8rem;
+@value size_sub: .8rem;

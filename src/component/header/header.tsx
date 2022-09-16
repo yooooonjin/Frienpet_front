@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Guest from './guest/guest';
 import styles from './header.module.css';
+import Member from './member/member';
 
-const Header = () => {
+interface HeaderProps {
+  accessToken: string;
+}
+
+const Header: React.FunctionComponent<HeaderProps> = ({ accessToken }) => {
   const navigate = useNavigate();
-
   const [selectedPage, setSelectedPage] = useState<string>();
 
-  const onPageChange = (
-    e: React.MouseEvent<HTMLLIElement | HTMLImageElement>
-  ) => {
-    const target = e.target as HTMLLIElement;
-    setSelectedPage(target.id);
-    navigate(`/${target.id}`);
+  const onPageChange = (e: React.MouseEvent<HTMLElement>) => {
+    const { id } = e.currentTarget;
+    setSelectedPage(id);
+    navigate(`/${id}`);
   };
+
   return (
     <header className={styles.header_container}>
       <div className={styles.header}>
@@ -47,12 +51,11 @@ const Header = () => {
             보호중인 유기동물
           </li>
         </ul>
-        <div className={styles.button_container}>
-          <button className={`${styles.button} ${styles.login}`}>로그인</button>
-          <button className={`${styles.button} ${styles.signUp}`}>
-            회원가입
-          </button>
-        </div>
+        {accessToken ? (
+          <Member onPageChange={onPageChange} />
+        ) : (
+          <Guest onPageChange={onPageChange} />
+        )}
       </div>
     </header>
   );

@@ -1,0 +1,94 @@
+@value makerNavy,makerYellow, makerPink, makerGrey from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.join_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(245, 245, 245);
+  padding: 2em 2em 5em;
+  min-height: calc(100% - 50px);
+}
+
+.title {
+  font-size: 2rem;
+}
+.sub_title {
+  margin-bottom: 1.5em;
+  text-align: center;
+  font-size: 0.8rem;
+}
+.nav_container {
+  background-color: rgb(235, 235, 235);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  padding: 1em 4em;
+  align-items: center;
+  justify-content: center;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 1px solid makerGrey;
+}
+.current {
+  border: 2px solid makerNavy;
+  background-color: #82a2b0;
+}
+.current_title {
+  color: makerNavy;
+  font-weight: 700;
+}
+.nav_title {
+  font-size: 0.7rem;
+  margin-left: 0.8em;
+}
+.line {
+  width: 8%;
+  height: 0;
+  border-top: 1px dashed makerGrey;
+  margin: 0 0.6em;
+}
+.info_wrap {
+  width: 100%;
+  max-width: 600px;
+}
+.hide {
+  display: none;
+}
+
+/* ////////////////////////////////////////////// */
+.completion_container {
+  background-color: white;
+  width: 100%;
+  padding: 3em 4em;
+  text-align: center;
+  color: makerNavy;
+}
+.checkIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.3em;
+}
+.completion_title {
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+}
+.completion_sub_title {
+  font-size: 0.8rem;
+  color: black;
+}
+.button {
+  margin-top: 3.5em;
+  background-color: darkgrey;
+  padding: 0.6em 3.5em;
+  color: white;
+  font-size: 0.8rem;
+  background-color: makerNavy;
+}

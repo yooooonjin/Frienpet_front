@@ -1,0 +1,121 @@
+@value makerNavy,makerYellow,makerGrey,makerLightGrey from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.user_container {
+  width: 100%;
+}
+.user {
+  background-color: makerYellow;
+  text-align: center;
+  color: makerNavy;
+  padding: 1em 0 1.5em;
+}
+.userIcon {
+  font-size: 4rem;
+}
+.userName {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 0.5em;
+}
+/* ///////////animal//////////// */
+.animal {
+  margin: 1.5em auto 3em;
+  max-width: 800px;
+}
+.button {
+  margin-left: auto;
+  margin-bottom: 2em;
+  background-color: makerGrey;
+  color: white;
+  width: 6em;
+  padding: 0.4em 0;
+  font-size: 0.6rem;
+  text-align: center;
+  cursor: pointer;
+}
+.edit {
+  background-color: makerNavy;
+}
+.animalInfo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  min-height: 3.5em;
+  background-color: white;
+  padding-right: 1em;
+}
+.animalInfo > input,
+.animalInfo > textarea,
+.animalInfo > div,
+.animalInfo > select,
+.animal_character {
+  text-align: center;
+  font-size: 1rem;
+  border: none;
+  padding: 0.6em;
+  outline: 0;
+  width: 100%;
+}
+.animal_weight_wrap {
+  display: flex;
+  align-items: center;
+  background-color: makerDarkGrey;
+}
+.animal_weight {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  border: none;
+  outline: 0;
+}
+.animal_character {
+  width: 100%;
+  border-top: 1px dashed makerGrey;
+  height: 8em;
+  text-align: left;
+  padding: 1.5em;
+  font-size: 0.8rem;
+}
+.animal_character::placeholder {
+  text-align: center;
+}
+.animal_name {
+  font-weight: 700;
+  background-color: makerNavy;
+  color: white;
+}
+.animal_photo {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+}
+.photo {
+  width: 35%;
+  height: 15em;
+  background-color: white;
+  position: relative;
+  border: 1px solid transparent;
+}
+.photoEdit {
+  cursor: pointer;
+}
+.photoEdit:hover {
+  border: 1px solid makerNavy;
+}
+.myPetImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dogImg {
+  width: 5em;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: grayscale(100%);
+}
+.photoInput {
+  display: none;
+}

@@ -1,0 +1,87 @@
+@value makerNavy,makerYellow, makerPink, makerGrey from '../../../common/colors.css';
+@value container from '../../../common/size.css';
+
+.form_container {
+  background-color: white;
+  width: 100%;
+  padding: 3em 4em;
+}
+.info_wrap {
+  margin-bottom: 1em;
+}
+.info_title {
+  margin-bottom: 0.3em;
+  font-size: 0.8rem;
+}
+.desc {
+  margin-left: 1em;
+  font-size: 0.7rem;
+  color: makerGrey;
+}
+.input {
+  width: 100%;
+  padding: 0.8em;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid makerGrey;
+  display: flex;
+}
+.input input,
+.input textarea {
+  background-color: transparent;
+  flex: 1;
+  border: none;
+  outline: 0;
+  font-size: 1rem;
+}
+.address_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.address {
+  display: flex;
+  width: 49%;
+  padding: 0.8em;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid makerGrey;
+}
+.address span {
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.address select {
+  outline: none;
+  border: none;
+  margin-left: 0.8em;
+  background-color: transparent;
+  width: 100%;
+}
+.error {
+  border: 1px solid makerPink;
+}
+.checkIcon {
+  color: makerGrey;
+  font-size: 1.3rem;
+}
+.check {
+  color: makerNavy;
+}
+.errorMsg {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: makerPink;
+}
+.button_wrap {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3em;
+}
+.button {
+  background-color: darkgrey;
+  padding: 0.6em 3.5em;
+  color: white;
+  font-size: 0.8rem;
+}
+.submit {
+  background-color: makerNavy;
+}

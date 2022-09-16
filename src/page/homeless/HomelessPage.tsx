@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import Banner from '../../component/banner/banner';
 import Homeless, { Animals } from '../../component/homeless/homeless';
 import HomelessAnimal from '../../component/homeless_animal/homeless_animal';
-import styles from './homeless_page.module.css';
 
 export interface HomelessAnimalProps {
   selectedAnimal: Animals | undefined;

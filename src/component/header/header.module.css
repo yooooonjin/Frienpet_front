@@ -1,4 +1,4 @@
-@value makerNavy,makerYellow from '../../common/colors.css';
+@value makerNavy,makerYellow,makerGrey from '../../common/colors.css';
 @value container from '../../common/size.css';
 
 .header_container {
@@ -14,7 +14,7 @@
   margin: auto;
 }
 .logo {
-  height: 50%;
+  height: 40%;
   cursor: pointer;
 }
 .nav {
@@ -30,14 +30,4 @@
 .nav .selected {
   font-weight: 700;
   border-bottom: 1px solid makerNavy;
-}
-.button {
-  color: white;
-  border: 1px solid white;
-  border-radius: 13px;
-  height: 26px;
-  width: 90px;
-  margin-left: 1em;
-}
-.signUp {
 }

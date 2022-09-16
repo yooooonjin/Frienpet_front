@@ -1,44 +1,65 @@
-@value makerNavy,makerYellow, makerPink, makerGrey from '../../common/colors.css';
-@value container from '../../common/size.css';
+@value makerNavy,makerYellow, makerPink, makerGrey, makerDarkGrey from '../../common/colors.css';
+@value container, size_title,size_sub from '../../common/size.css';
 
+.discovery_container {
+  background-color: white;
+  padding: 1.8em 0;
+}
 .title {
-  font-size: 2.2rem;
-  margin-top: 1em;
+  font-size: size_title;
   color: makerNavy;
-  text-align: center;
   letter-spacing: -0.7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 .subTitle {
-  font-size: 1rem;
-  color: makerGrey;
+  font-size: size_sub;
+  color: makerDarkGrey;
   text-align: center;
 }
+.more {
+  font-size: 0.6rem;
+  margin-left: 1.2em;
+}
 .info {
-  margin: 2em auto;
-  max-width: 900px;
+  margin: 1em auto;
+  max-width: 800px;
   display: flex;
   align-items: center;
   background-color: makerNavy;
-  padding: 2em;
-  height: 4.6em;
-  border-radius: 2.3em;
+  padding-right: 2em;
+  height: 4em;
+  border-radius: 2em;
   color: white;
   font-weight: 700;
 }
+.photo {
+  width: 3.2em;
+  height: 3.2em;
+  border-radius: 50%;
+  margin-left: 0.4em;
+  background-color: makerLightGrey;
+}
 .locationIcon {
-  margin-right: 0.5em;
-  color: white;
+  margin: 0 0.3em 0 0.8em;
+  color: makerYellow;
 }
 .location {
   font-size: 1.2rem;
-  margin-left: 0.5em;
   color: makerYellow;
 }
-.time {
+.time,
+.date {
   margin-left: 0.5em;
   font-size: 0.8rem;
 }
+.time {
+  color: makerPink;
+}
 .feature {
   margin-left: auto;
-  font-weight: 500;
+  font-weight: 300;
+  font-size: 0.9rem;
 }

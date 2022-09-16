@@ -1,6 +1,10 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { getSido } from '../../util/abandoned_animal_api';
-import { SidoProps } from './homeless';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
+import { getSido } from '../../service/abandoned_animal_api';
+
+interface SidoProps {
+  onSidoChange(e: React.ChangeEvent<HTMLSelectElement>): void;
+  userSido?: string;
+}
 
 type Sido = {
   orgCd: string;
@@ -8,7 +12,7 @@ type Sido = {
 };
 const Sido: FunctionComponent<SidoProps> = ({
   onSidoChange,
-  onFilterChange,
+  userSido,
 }): JSX.Element => {
   const [sido, setSido] = useState([]);
 
@@ -19,12 +23,17 @@ const Sido: FunctionComponent<SidoProps> = ({
   }, []);
 
   const handleChangeSido = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onSidoChange(e.target.value);
-    onFilterChange(e);
+    onSidoChange(e);
   };
 
   return (
-    <select name='upr_cd' id='upr_cd' onChange={handleChangeSido}>
+    <select
+      name='upr_cd'
+      id='upr_cd'
+      onChange={handleChangeSido}
+      value={userSido && userSido}
+      disabled={userSido ? true : false}
+    >
       <option value=''>전체</option>
       {sido.map((data: Sido) => {
         return (

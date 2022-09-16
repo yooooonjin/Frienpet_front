@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Main from './page/main/main';
-import HomelessPage from './page/homeless_page/homeless_page';
-import Header from './component/header/header';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './Router';
+import storage from './service/storage';
+import { setLoggedInfo } from './modules/user';
+import { useDispatch } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
+
+  const initializeUserInfo = async () => {
+    const loggedInfo = storage.get('loggedInfo');
+    if (!loggedInfo) return;
+    dispatch(setLoggedInfo(loggedInfo));
+  };
+
+  useEffect(() => {
+    initializeUserInfo();
+  }, []);
+
   return (
     <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/homeless' element={<HomelessPage />} />
-      </Routes>
+      <Router />
     </BrowserRouter>
   );
 }

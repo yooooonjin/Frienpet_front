@@ -1,6 +1,7 @@
 @import url('https://webfontworld.github.io/kopus/KoPubWorldDotum.css');
 body {
   font-family: KoPubWorldDotum;
+  background-color: rgb(245, 245, 245);
 }
 * {
   margin: 0;
@@ -15,4 +16,9 @@ button {
   border: none;
   font-family: KoPubWorldDotum;
   cursor: pointer;
+}
+input,
+textarea,
+select {
+  font-family: KoPubWorldDotum;
 }

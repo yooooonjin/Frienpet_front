@@ -1,0 +1,106 @@
+@value makerNavy,makerYellow, makerPink, makerGrey from '../../../common/colors.css';
+@value container from '../../../common/size.css';
+
+.form_container {
+  background-color: white;
+  width: 100%;
+  padding: 3em 4em;
+}
+.form_desc {
+  font-size: 0.8rem;
+  margin-bottom: 2em;
+  color: makerGrey;
+}
+.info_wrap {
+  margin-bottom: 1em;
+}
+.info_title {
+  margin-bottom: 0.3em;
+  font-size: 0.8rem;
+}
+.input {
+  width: 100%;
+  padding: 0.8em;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid makerGrey;
+  display: flex;
+}
+.input input,
+.input textarea {
+  background-color: transparent;
+  flex: 1;
+  border: none;
+  outline: 0;
+  font-size: 0.8rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+.row .info_wrap {
+  width: 49%;
+}
+.upkind_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.upkind {
+  display: flex;
+  width: 49%;
+  padding: 0.8em;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid makerGrey;
+}
+.upkind span {
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.upkind select,
+.upkind input {
+  outline: none;
+  border: none;
+  margin-left: 0.8em;
+  background-color: transparent;
+  width: 100%;
+}
+.radio_wrap {
+  margin-top: 0.7em;
+  display: flex;
+  justify-content: space-between;
+}
+.gender_label {
+  font-size: 0.8rem;
+  width: 48%;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid makerGrey;
+  text-align: center;
+  padding: 0.5em;
+}
+.gender {
+  display: none;
+}
+.gender:checked + label {
+  border: 1px solid makerNavy;
+  color: makerNavy;
+  font-weight: 700;
+}
+.kg {
+  font-size: 0.8rem;
+}
+
+.button_wrap {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3em;
+}
+.button {
+  background-color: darkgrey;
+  padding: 0.6em 3.5em;
+  color: white;
+  font-size: 0.8rem;
+}
+.submit {
+  background-color: makerNavy;
+}

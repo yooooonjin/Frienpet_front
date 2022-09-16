@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './homeless_animal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { HomelessAnimalProps } from '../../page/homeless_page/homeless_page';
+import { HomelessAnimalProps } from '../../page/homeless/HomelessPage';
 
 const HomelessAnimal: React.FunctionComponent<HomelessAnimalProps> = ({
   selectedAnimal,

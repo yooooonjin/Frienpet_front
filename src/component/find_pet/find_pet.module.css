@@ -1,21 +1,23 @@
-@value makerNavy, makerPink, makerGrey from '../../common/colors.css';
-@value container from '../../common/size.css';
+@value makerNavy, makerPink, makerGrey,makerDarkGrey from '../../common/colors.css';
+@value container, size_title,size_sub from '../../common/size.css';
 
+.findPet_container {
+  padding: 1.8em 0;
+}
 .findPet {
   width: 100%;
   max-width: 900px;
   margin: auto;
 }
 .title {
-  font-size: 2.2rem;
-  margin-top: 1.5em;
+  font-size: size_title;
   color: makerNavy;
   text-align: center;
   letter-spacing: -0.7px;
 }
 .subTitle {
-  font-size: 1rem;
-  color: makerGrey;
+  font-size: size_sub;
+  color: makerDarkGrey;
   text-align: center;
 }
 .info_container {
