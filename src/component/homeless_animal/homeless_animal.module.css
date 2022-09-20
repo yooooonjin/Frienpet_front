@@ -45,7 +45,6 @@
 .gender {
   color: white;
   padding: 0 0.8em;
-  border-radius: 5px;
   display: flex;
   align-items: center;
 }

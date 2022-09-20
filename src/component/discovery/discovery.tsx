@@ -58,7 +58,7 @@ const Discovery = () => {
           연락주세요.
         </p>
         <div className={styles.info}>
-          <img className={styles.photo} src={discovery[count].photo} alt='' />
+          <img className={styles.photo} src={discovery[count]?.photo} alt='' />
           <p className={styles.location}>
             <FontAwesomeIcon
               icon={faLocationDot}

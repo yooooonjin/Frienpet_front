@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './find_pet.module.css';
+import styles from './lost_pet.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
-const FindPet = () => {
+const LostPet = () => {
   return (
-    <section className={styles.findPet_container}>
-      <div className={styles.findPet}>
+    <section className={styles.lostPet_container}>
+      <div className={styles.lostPet}>
         <h2 className={styles.title}>함께 우리동네 반려동물 찾기</h2>
         <p className={styles.subTitle}>
           우리동네 잃어버린 반려동물입니다. 집에 무사히 도착할 수 있도록
@@ -102,4 +102,4 @@ const FindPet = () => {
   );
 };
 
-export default FindPet;
+export default LostPet;

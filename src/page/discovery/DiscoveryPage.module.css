@@ -55,8 +55,8 @@
 }
 .date {
   margin-left: auto;
-  color: makerGrey;
   font-size: 0.8rem;
+  font-weight: 500;
 }
 .time {
   margin-left: 0.5em;
@@ -80,5 +80,5 @@
   background-color: makerLightGrey;
   font-size: 0.7rem;
   height: 2.5em;
-  overflow-y: scroll;
+  overflow-y: auto;
 }

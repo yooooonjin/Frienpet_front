@@ -9,10 +9,7 @@ export const savePetInfo = async (animal: SaveAnimal) => {
 };
 //반려동물 정보 불러오기
 export const getPetInfo = async (email: string) => {
-  console.log(email);
-
   const result = await axios.get('/api/animal', { params: { email } });
-  console.log(result);
   return result.data[0];
 };
 //반려동물 정보 수정하기

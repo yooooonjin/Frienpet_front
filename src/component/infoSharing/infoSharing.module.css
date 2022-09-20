@@ -1,0 +1,93 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.lostMyPet {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+.title {
+  display: flex;
+}
+.title > p {
+  color: makerYellow;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.title > div {
+  margin-left: auto;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.lostInfo {
+  align-items: center;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.lostInfo > div {
+  margin-left: 0.5em;
+}
+.date {
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+.time {
+  color: makerPink;
+  font-size: 0.8rem;
+}
+.participant {
+  display: flex;
+  align-items: center;
+  height: 34px;
+}
+.chat p {
+  font-size: 0.8rem;
+}
+.chatting {
+  width: 100%;
+  height: 6em;
+  background-color: makerLightGrey;
+}
+.send {
+  width: 100%;
+  display: flex;
+}
+.sendBtn {
+  width: 3em;
+  background-color: makerNavy;
+}
+.sendIcon {
+  font-size: 1em;
+  color: white;
+}
+.chat textarea {
+  flex: 1;
+  padding: 0.2em 0.5em;
+  height: 2em;
+  font-size: 0.8rem;
+}
+.helpersInfo,
+.guardianInfo {
+  display: flex;
+  margin-left: auto;
+}
+.guardianInfoIcon {
+  font-size: 1.1rem;
+  margin-right: 0.3em;
+}
+.helper {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  margin-left: 0.3em;
+  text-align: center;
+  line-height: 2em;
+  font-weight: 700;
+  background-color: makerGrey;
+  font-size: 0.8rem;
+}
+.me {
+  background-color: makerNavy;
+  color: white;
+}

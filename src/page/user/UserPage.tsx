@@ -26,6 +26,7 @@ const UserPage = () => {
     kind: '',
     gender: '',
     weight: '',
+    color: '',
     character: '',
   });
   const [myPetPhoto, setMyPetPhoto] = useState<Photo>({ 0: '', 1: '', 2: '' });
@@ -158,7 +159,7 @@ const UserPage = () => {
             </div>
             <input
               className={styles.animal_color}
-              value='흰색'
+              value={myPet.color}
               name='color'
               onChange={onChange}
               readOnly={editMode ? false : true}

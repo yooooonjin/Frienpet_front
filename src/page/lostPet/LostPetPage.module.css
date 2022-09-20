@@ -1,0 +1,175 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.lostMyPet_container {
+  background-color: white;
+  width: 100%;
+}
+.lostMyPet {
+  padding: 2em 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+}
+.line {
+  border-right: 1px solid makerGrey;
+  margin: 0 2em;
+}
+
+.lostpet_container {
+  background-color: makerLightGrey;
+  min-height: calc(100% - 50px);
+  width: 100%;
+  padding: 1em;
+}
+.lostpet {
+  max-width: 1000px;
+  margin: auto;
+}
+.write {
+  margin-left: auto;
+  background-color: makerNavy;
+  width: 5em;
+  font-size: 0.8rem;
+  color: white;
+  text-align: center;
+  padding: 0.3em 0;
+  margin-bottom: 2em;
+  cursor: pointer;
+}
+.lostAnimals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.animal {
+  display: flex;
+  flex-direction: column;
+  min-width: 230px;
+  width: 300px;
+  height: 350px;
+  padding: 0.8em;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.05);
+  margin: 0.5em;
+}
+
+.animal:hover {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
+  /* transform: scale(1.01); */
+}
+
+.animalPhoto {
+  display: flex;
+  margin: 0.5em 0;
+  width: 100%;
+}
+.photo {
+  background-color: makerLightGrey;
+  height: 5.8em;
+  width: 32%;
+  margin: 0 1%;
+}
+.info {
+  width: 100%;
+}
+.lostInfo {
+  align-items: center;
+  font-weight: 700;
+}
+.location {
+  display: flex;
+  align-items: center;
+}
+.locationIcon {
+  margin-right: 0.3em;
+}
+.datetime {
+  display: flex;
+}
+.date {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0 0.5em 0.5em 1.5em;
+}
+.time {
+  color: makerPink;
+  font-size: 0.8rem;
+}
+.character {
+  padding-bottom: 0.3em;
+  font-size: 0.8rem;
+  display: flex;
+  border-bottom: 1px dashed makerGrey;
+}
+.character div {
+  margin-right: 0.8em;
+}
+.character div:first-child {
+  font-weight: 700;
+}
+.desc {
+  padding: 0.5em;
+  margin: 0.5em 0;
+  font-size: 0.7rem;
+  flex: 1;
+  overflow: auto;
+}
+.desc::-webkit-scrollbar {
+  width: 8px;
+}
+.desc::-webkit-scrollbar-thumb {
+  background-color: makerNavy;
+  border-radius: 4px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+.helpers {
+  position: relative;
+  border-top: 1px solid makerGrey;
+  display: flex;
+  width: 100%;
+}
+.helpersInfo {
+  display: flex;
+  height: 56px;
+}
+.helper {
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  margin: 0.5em 0.18em 0.5em;
+  text-align: center;
+  line-height: 2.5em;
+  font-weight: 700;
+}
+.helper:nth-child(even) {
+  background-color: makerNavy;
+  color: white;
+}
+.helper:nth-child(odd) {
+  background-color: makerYellow;
+}
+.participate {
+  opacity: 0;
+  transition: all 200ms ease-in;
+}
+.participate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: makerNavy;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.animal:hover .participate {
+  opacity: 1;
+}

@@ -37,8 +37,8 @@ const Header: React.FunctionComponent<HeaderProps> = ({ accessToken }) => {
             우리동네 반려동물 발견
           </li>
           <li
-            className={`${selectedPage === 'findPet' && styles.selected}`}
-            id='findPet'
+            className={`${selectedPage === 'lostPet' && styles.selected}`}
+            id='lostPet'
             onClick={onPageChange}
           >
             함께 우리동네 반려동물 찾기

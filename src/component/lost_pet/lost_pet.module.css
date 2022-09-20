@@ -1,10 +1,10 @@
 @value makerNavy, makerPink, makerGrey,makerDarkGrey from '../../common/colors.css';
 @value container, size_title,size_sub from '../../common/size.css';
 
-.findPet_container {
+.lostPet_container {
   padding: 1.8em 0;
 }
-.findPet {
+.lostPet {
   width: 100%;
   max-width: 900px;
   margin: auto;

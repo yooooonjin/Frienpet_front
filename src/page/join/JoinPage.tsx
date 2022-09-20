@@ -36,6 +36,7 @@ export type Animal = {
   kind: string;
   gender: string;
   weight: string;
+  color: string;
   character: string;
 };
 
@@ -58,6 +59,7 @@ const JoinPage = () => {
     kind: '',
     gender: '',
     weight: '',
+    color: '',
     character: '',
   });
 

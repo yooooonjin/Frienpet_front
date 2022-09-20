@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Banner from '../../component/banner/banner';
 import Discovery from '../../component/discovery/discovery';
-import FindPet from '../../component/find_pet/find_pet';
-import Header from '../../component/header/header';
+import LostPet from '../../component/lost_pet/lost_pet';
 import Homeless, { Animals } from '../../component/homeless/homeless';
 
 const Main = () => {
@@ -11,7 +10,7 @@ const Main = () => {
     <>
       <Banner />
       <Discovery />
-      <FindPet />
+      <LostPet />
       <Homeless setSelectedAnimal={setSelectedAnimal} />
     </>
   );

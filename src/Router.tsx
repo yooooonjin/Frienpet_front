@@ -1,13 +1,14 @@
-import React, { SetStateAction } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import DiscoveryPage from './page/discovery/DiscoveryPage';
 import HomelessPage from './page/homeless/HomelessPage';
-import JoinPage, { User } from './page/join/JoinPage';
+import JoinPage from './page/join/JoinPage';
 import LoginPage from './page/login/LoginPage';
 import Main from './page/main/MainPage';
 import UserPage from './page/user/UserPage';
 import { Cookies } from 'react-cookie';
 import Header from './component/header/header';
+import LostPetPage from './page/lostPet/LostPetPage';
 
 const Router = () => {
   const cookies = new Cookies();
@@ -22,6 +23,7 @@ const Router = () => {
             <Route path='/' element={<Main />} />
             <Route path='/user' element={<UserPage />} />
             <Route path='/discovery' element={<DiscoveryPage />} />
+            <Route path='/lostPet' element={<LostPetPage />} />
             <Route path='/homeless' element={<HomelessPage />} />
             <Route path='*' element={<Main />} />
           </>

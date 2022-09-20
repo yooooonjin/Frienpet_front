@@ -19,7 +19,6 @@
   font-size: 0.8rem;
 }
 .input {
-  width: 100%;
   padding: 0.8em;
   background-color: rgb(245, 245, 245);
   border: 1px solid makerGrey;
@@ -27,6 +26,7 @@
 }
 .input input,
 .input textarea {
+  width: 100%;
   background-color: transparent;
   flex: 1;
   border: none;
@@ -34,13 +34,6 @@
   font-size: 0.8rem;
 }
 
-.row {
-  display: flex;
-  justify-content: space-between;
-}
-.row .info_wrap {
-  width: 49%;
-}
 .upkind_wrap {
   display: flex;
   justify-content: space-between;
@@ -63,6 +56,13 @@
   margin-left: 0.8em;
   background-color: transparent;
   width: 100%;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+.row .info_wrap {
+  width: 32%;
 }
 .radio_wrap {
   margin-top: 0.7em;

@@ -85,7 +85,12 @@ const JoinAnimalInfo: React.FunctionComponent<JoinAnimalInfoProps> = ({
             <input type='number' name='weight' onChange={onChange} />
             <div className={styles.kg}>kg</div>
           </div>
-          <p className={styles.errorMsg}></p>
+        </div>
+        <div className={styles.info_wrap}>
+          <p className={styles.info_title}>색깔</p>
+          <div className={styles.input}>
+            <input type='text' name='color' onChange={onChange} />
+          </div>
         </div>
       </div>
       <div className={styles.info_wrap}>
@@ -93,7 +98,6 @@ const JoinAnimalInfo: React.FunctionComponent<JoinAnimalInfoProps> = ({
         <div className={styles.input}>
           <textarea name='character' onChange={onChange} />
         </div>
-        <p className={styles.errorMsg}></p>
       </div>
       <div className={styles.info_wrap}>
         <p className={styles.info_title}>사진</p>

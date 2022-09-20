@@ -47,6 +47,8 @@ const DiscoveryPage = () => {
 
   const [addDiscoveryPop, setAddDiscoveryPop] = useState(false);
 
+  console.log(discoveryAnimal);
+
   useEffect(() => {
     getDiscoveryAnimalsData();
   }, []);
