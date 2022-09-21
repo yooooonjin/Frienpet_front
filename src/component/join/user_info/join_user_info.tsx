@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { SignupValidation } from '../../../page/join/validation';
 import { JoinUserInfoProps, User } from '../../../page/join/JoinPage';
 import Alert from '../../alert/alert';
+import { addrlink } from '../../../service/address';
+import PopupDom from './popupDom';
+import PopupPostCode from './popupPostCode';
 
 const JoinUserInfo: React.FunctionComponent<JoinUserInfoProps> = ({
   setCurrentPage,
@@ -18,6 +21,7 @@ const JoinUserInfo: React.FunctionComponent<JoinUserInfoProps> = ({
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [rePwError, setRePwError] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const onValueCheck = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value, parentNode, parentElement, nextElementSibling } =
@@ -53,17 +57,27 @@ const JoinUserInfo: React.FunctionComponent<JoinUserInfoProps> = ({
     }
   };
 
-  const onAddressChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setUser((user: User): User => {
-      return { ...user, [name]: value };
+  // const onAddressChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const { name, value } = e.target;
+  //   setUser((user: User): User => {
+  //     return { ...user, [name]: value };
+  //   });
+  // };
+
+  // const onSigunguReset = () => {
+  //   setUser((user: User): User => {
+  //     return { ...user, org_cd: '' };
+  //   });
+  // };
+
+  const onSetAddress = (data: any) => {
+    setUser((user) => {
+      return { ...user, ...data };
     });
   };
 
-  const onSigunguReset = () => {
-    setUser((user: User): User => {
-      return { ...user, org_cd: '' };
-    });
+  const onPopupControl = (toChange: boolean) => {
+    setIsPopupOpen(toChange);
   };
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -156,6 +170,30 @@ const JoinUserInfo: React.FunctionComponent<JoinUserInfoProps> = ({
         </div>
         <div className={styles.info_wrap}>
           <p className={styles.info_title}>* 주소</p>
+          <div className={`${styles.address}`}>
+            <input type='text' readOnly value={user.sido} />
+            <input type='text' readOnly value={user.sigungu} />
+            <input type='text' readOnly value={user.bname} />
+            <div
+              className={styles.searchBtn}
+              onClick={() => onPopupControl(true)}
+            >
+              검색
+            </div>
+          </div>
+        </div>
+        <div id='PopupDom' className={styles.popup}>
+          {isPopupOpen && (
+            <PopupDom>
+              <PopupPostCode
+                onPopupControl={onPopupControl}
+                onSetAddress={onSetAddress}
+              />
+            </PopupDom>
+          )}
+        </div>
+        {/* <div className={styles.info_wrap}>
+          <p className={styles.info_title}>* 주소</p>
           <div className={styles.address_wrap}>
             <div className={styles.address}>
               <span>지역 : </span>
@@ -170,7 +208,7 @@ const JoinUserInfo: React.FunctionComponent<JoinUserInfoProps> = ({
               />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className={styles.button_wrap}>
           <button
             onClick={() => {

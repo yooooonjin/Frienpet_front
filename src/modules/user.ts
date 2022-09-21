@@ -20,8 +20,9 @@ const initialState = {
     email: '',
     name: '',
     phone: '',
-    upr_cd: '',
-    org_cd: '',
+    sido: '',
+    sigungu: '',
+    bname: '',
   },
   logged: false, //현재 로그인중인지 확인
 };

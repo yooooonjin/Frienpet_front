@@ -13,6 +13,7 @@
   color: makerYellow;
   font-weight: 700;
   font-size: 0.8rem;
+  margin-bottom: 0.5em;
 }
 .title > div {
   margin-left: auto;
@@ -27,6 +28,12 @@
 }
 .lostInfo > div {
   margin-left: 0.5em;
+}
+.address {
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin: 0.2em 0;
+  color: makerDarkGrey;
 }
 .date {
   font-weight: 500;

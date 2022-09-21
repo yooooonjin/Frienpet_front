@@ -16,8 +16,9 @@ export const setDiscoveryAnimals = (
 const initialState = [
   {
     discoveryid: '',
-    upr_cd: '',
-    org_cd: '',
+    sido: '',
+    sigungu: '',
+    bname: '',
     location: '',
     upkind: '',
     kind: '',

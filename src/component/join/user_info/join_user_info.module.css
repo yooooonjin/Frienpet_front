@@ -33,7 +33,26 @@
   outline: 0;
   font-size: 1rem;
 }
-.address_wrap {
+.address {
+  display: flex;
+  justify-content: space-between;
+}
+.address input {
+  width: 26%;
+  padding: 0.8em;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid makerGrey;
+  outline: 0;
+}
+.searchBtn {
+  width: 17%;
+  padding: 0.8em;
+  text-align: center;
+  background-color: makerNavy;
+  color: white;
+  cursor: pointer;
+}
+/* .address_wrap {
   display: flex;
   justify-content: space-between;
 }
@@ -54,7 +73,7 @@
   margin-left: 0.8em;
   background-color: transparent;
   width: 100%;
-}
+} */
 .error {
   border: 1px solid makerPink;
 }
@@ -84,4 +103,11 @@
 }
 .submit {
   background-color: makerNavy;
+}
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
 }

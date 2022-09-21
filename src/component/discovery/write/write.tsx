@@ -40,7 +40,7 @@ const Write: React.FunctionComponent<WriteProps> = ({
 
   const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (form.location == '' || form.upr_cd == '' || form.org_cd == '') {
+    if (form.location == '') {
       locationRef.current?.focus();
       return;
     }
@@ -59,28 +59,34 @@ const Write: React.FunctionComponent<WriteProps> = ({
         <div className={styles.close} onClick={() => setAddDiscoveryPop(false)}>
           <FontAwesomeIcon icon={faCircleXmark} className={styles.closeIcon} />
         </div>
-        <div className={styles.location}>
-          <div>
+        <div className={`${styles.location} ${styles.address}`}>
+          <p>
             <FontAwesomeIcon
               icon={faLocationDot}
               className={styles.locationIcon}
             />
-            <Sido onSidoChange={onChange} userSido={userInfo.upr_cd} />
+          </p>
+          <input
+            type='text'
+            readOnly
+            value={`${form.sido} ${form.sigungu} ${form.bname}`}
+          />
+
+          {/* <Sido onSidoChange={onChange} userSido={userInfo.upr_cd} />
             <SiGunGu
               selectedSido={userInfo.upr_cd}
               onFilterChange={onChange}
               userSiGunGu={userInfo.org_cd}
-            />
-          </div>
-          <div className={styles.detailLocation}>
-            <p>*상세위치:</p>
-            <input
-              ref={locationRef}
-              type='text'
-              name='location'
-              onChange={onChange}
-            />
-          </div>
+            /> */}
+        </div>
+        <div className={styles.location}>
+          <p>*상세위치:</p>
+          <input
+            ref={locationRef}
+            type='text'
+            name='location'
+            onChange={onChange}
+          />
         </div>
         <div className={styles.character}>
           <div>
@@ -111,7 +117,7 @@ const Write: React.FunctionComponent<WriteProps> = ({
           <div>
             <p>성별 : </p>
             <select name='gender' id='gender' onChange={onChange}>
-              <option value=''>선택</option>
+              <option value=''>미상</option>
               <option value='F'>암컷</option>
               <option value='M'>수컷</option>
             </select>

@@ -10,8 +10,14 @@ export const saveLostpet = async (finpet: LostPet) => {
 };
 
 //잃어버린 반려동물 정보 전체 불러오기
-export const getLostAnimals = async () => {
-  const result = await axios.get('/api/lostpet');
+export const getLostAnimals = async (
+  limit: boolean,
+  range: string,
+  address: string
+) => {
+  const result = await axios.get('/api/lostpet', {
+    params: { limit, range, address },
+  });
   return result.data;
 };
 //내가 잃어버린 반려동물 정보 불러오기

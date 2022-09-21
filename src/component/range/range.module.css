@@ -1,0 +1,26 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+@value container from '../../common/size.css';
+
+.range {
+  display: flex;
+}
+.range label {
+  display: block;
+  font-size: 0.8rem;
+  background-color: white;
+  text-align: center;
+  width: 4.5em;
+  height: 2.4em;
+  margin-right: 0.5em;
+  border-radius: 1.2em;
+  line-height: 2.4em;
+  cursor: pointer;
+}
+.range input {
+  display: none;
+}
+.range input:checked + label {
+  background-color: makerNavy;
+  color: white;
+  font-weight: 700;
+}

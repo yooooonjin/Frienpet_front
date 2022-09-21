@@ -10,7 +10,12 @@ export const saveDiscoveryAnimalInfo = async (
   await axios.post('/api/discovery/save', discoveryAnimal);
 };
 //발견한 동물 정보 불러오기
-export const getDiscoveryAnimalInfo = async () => {
-  const result = await axios.get('/api/discovery');
+export const getDiscoveryAnimalInfo = async (
+  range: string,
+  address: string
+) => {
+  const result = await axios.get('/api/discovery', {
+    params: { range, address },
+  });
   return result.data;
 };

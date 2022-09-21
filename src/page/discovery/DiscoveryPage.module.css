@@ -1,4 +1,4 @@
-@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey from '../../common/colors.css';
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
 @value container from '../../common/size.css';
 
 .discovery_container {
@@ -52,6 +52,11 @@
 }
 .locationIcon {
   margin-right: 0.3em;
+}
+.address {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: makerDarkGrey;
 }
 .date {
   margin-left: auto;

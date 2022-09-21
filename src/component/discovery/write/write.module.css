@@ -30,18 +30,15 @@
   margin-bottom: 1em;
   cursor: pointer;
 }
-.location div select {
-  margin-left: 0.5em;
+.address input {
+  outline: 0;
+  color: makerGrey !important;
 }
-.location div {
-  align-items: center;
-}
-.location,
 .character {
   width: 100%;
 }
 .character div,
-.location div {
+.location {
   display: flex;
   width: 100%;
   margin-bottom: 0.5em;
@@ -49,15 +46,14 @@
 }
 
 .character p,
-.detailLocation p {
+.location p {
   margin-right: 0.5em;
   font-size: 0.8rem;
 }
 .character select,
 .character input,
 .character textarea,
-.detailLocation input,
-.location div select {
+.location input {
   border: none;
   background-color: makerLightGrey;
   padding: 0.5em;

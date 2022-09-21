@@ -8,4 +8,11 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    '/addrlink',
+    createProxyMiddleware({
+      target: 'https://business.juso.go.kr',
+      changeOrigin: true,
+    })
+  );
 };

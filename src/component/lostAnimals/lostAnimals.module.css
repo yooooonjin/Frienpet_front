@@ -1,0 +1,54 @@
+@value makerNavy, makerPink, makerGrey,makerDarkGrey from '../../common/colors.css';
+@value container, size_title,size_sub from '../../common/size.css';
+
+.lostPet_container {
+  padding: 1.8em 0 3em;
+}
+.lostPet {
+  width: 100%;
+  max-width: 950px;
+  margin: auto;
+}
+.title {
+  font-size: size_title;
+  color: makerNavy;
+  letter-spacing: -0.7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.subTitle {
+  font-size: size_sub;
+  color: makerDarkGrey;
+  text-align: center;
+}
+.more {
+  font-size: 0.6rem;
+  margin-left: 1.2em;
+}
+.info_container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2em;
+}
+.lostAnimals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.animal_wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 230px;
+  width: 300px;
+  padding: 0.8em;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.05);
+  margin: 0.5em;
+}
+
+.animal_wrap:hover {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
+}

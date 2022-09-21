@@ -30,6 +30,9 @@ const InfoSharing: React.FunctionComponent<InfoSharingProps> = ({
           삭제
         </div>
       </div>
+      <div className={styles.address}>
+        {lostInfo?.sido} &gt; {lostInfo?.sigungu} &gt; {lostInfo?.bname}
+      </div>
       <div className={styles.lostInfo}>
         <FontAwesomeIcon icon={faLocationDot} className={styles.locationIcon} />
         <div>{lostInfo?.location}</div>

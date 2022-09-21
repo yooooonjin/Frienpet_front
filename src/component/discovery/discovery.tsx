@@ -19,7 +19,7 @@ const Discovery = () => {
   const interval = useRef<NodeJS.Timer>();
   useEffect(() => {
     const discoveryAnimalInfo = async () => {
-      const result = await getDiscoveryAnimalInfo();
+      const result = await getDiscoveryAnimalInfo('all', '');
       console.log(result);
 
       setDiscovery(result);

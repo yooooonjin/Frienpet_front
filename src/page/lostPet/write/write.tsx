@@ -8,6 +8,7 @@ import { RootState } from '../../../modules';
 import { LostPet } from '../LostPetPage';
 import { getPetInfo } from '../../../apis/pet';
 import { saveLostpet } from '../../../apis/lostPet';
+import storage from '../../../service/storage';
 
 interface WriteProps {
   setLostPetPop: React.Dispatch<SetStateAction<boolean>>;
@@ -26,6 +27,9 @@ const Write: React.FunctionComponent<WriteProps> = ({
   const [basicInfo, setBasicInfo] = useState({
     userid: userid,
     petid: '',
+    sido: storage.get('loggedInfo')?.sido,
+    sigungu: storage.get('loggedInfo')?.sigungu,
+    bname: storage.get('loggedInfo')?.bname,
     phone: userphone,
   });
 

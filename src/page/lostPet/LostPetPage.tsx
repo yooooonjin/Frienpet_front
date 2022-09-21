@@ -20,11 +20,16 @@ import { RootState } from '../../modules';
 import { useSelector } from 'react-redux';
 import Alert from '../../component/alert/alert';
 import InfoSharing from '../../component/infoSharing/infoSharing';
+import LostInfo from '../../component/lostInfo/lostInfo';
+import Range from '../../component/range/range';
 
 export type LostPet = {
   lostpetid?: string;
   petid?: string;
   userid?: string;
+  sido?: string;
+  sigungu?: string;
+  bname?: string;
   phone?: string;
   location: string;
   desc: string;
@@ -48,9 +53,10 @@ export type LostAnimal = Animal &
   LostPet & { photo: Photo[] } & { helpers: Helper[] };
 
 const LostPetPage = () => {
-  const { email, name, phone } = useSelector(
+  const { email, name, phone, sido, sigungu, bname } = useSelector(
     (state: RootState) => state.user.loggedInfo
   );
+
   const [lostPetPop, setLostPetPop] = useState(false);
   const [lostAnimals, setLostAnimals] = useState<Array<LostAnimal>>();
 
@@ -60,9 +66,7 @@ const LostPetPage = () => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  useEffect(() => {
-    getLostAnimalsData();
-  }, []);
+  const [range, setRange] = useState({ range: 'sigungu', address: sigungu });
 
   useEffect(() => {
     getLostPetByParam({ userid: email }).then((lostpet) => {
@@ -83,8 +87,13 @@ const LostPetPage = () => {
     });
   }, [lostAnimals]);
 
+  useEffect(() => {
+    range.address && getLostAnimalsData();
+  }, [range]);
+
   const getLostAnimalsData = async () => {
-    const result = await getLostAnimals();
+    const result = await getLostAnimals(false, range.range, range.address);
+
     let lostPetInfo: Array<LostAnimal> = [];
 
     for (const lostpet of result) {
@@ -154,6 +163,13 @@ const LostPetPage = () => {
     getLostAnimalsData();
   };
 
+  const onRangeChange = (range: string) => {
+    const addrByRange =
+      range === 'sido' ? sido : range === 'sigungu' ? sigungu : bname;
+
+    setRange({ range, address: addrByRange });
+  };
+
   return (
     <>
       {(lostMyPet || helping) && (
@@ -169,54 +185,19 @@ const LostPetPage = () => {
       )}
       <section className={styles.lostpet_container}>
         <div className={styles.lostpet}>
-          <div className={styles.write} onClick={onRegistration}>
-            등록하기
+          <div className={styles.header}>
+            <div>
+              <Range onRangeChange={onRangeChange} />
+            </div>
+            <div className={styles.write} onClick={onRegistration}>
+              등록하기
+            </div>
           </div>
           <div className={styles.lostAnimals}>
             {lostAnimals?.map((animal) => {
               return (
-                <div className={styles.animal} key={animal.lostpetid}>
-                  <div>
-                    <div className={styles.info}>
-                      <div className={styles.lostInfo}>
-                        <div className={styles.location}>
-                          <FontAwesomeIcon
-                            icon={faLocationDot}
-                            className={styles.locationIcon}
-                          />
-                          <div>{animal.location}</div>
-                        </div>
-                        <div className={styles.datetime}>
-                          <div className={styles.date}>
-                            {moment(animal.createddate).format('MM월 DD일')}
-                          </div>
-                          <div className={styles.time}>
-                            {moment(animal.createddate).format('HH시 mm분')}
-                          </div>
-                        </div>
-                      </div>
-                      <div className={styles.animalPhoto}>
-                        {animal.photo.map((photo, idx) => {
-                          return (
-                            <img
-                              className={styles.photo}
-                              src={photo.url}
-                              key={idx}
-                            />
-                          );
-                        })}
-                      </div>
-                      <div className={styles.character}>
-                        {animal.upkind && <div>{animal.upkind}</div>}
-                        {animal.kind && <div>{animal.kind}</div>}
-                        {animal.color && <div>{animal.color}</div>}
-                        {animal.weight && <div>{animal.weight}kg</div>}
-                        {animal.gender && (
-                          <div>{animal.gender === 'F' ? '암컷' : '수컷'}</div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+                <div className={styles.animal_wrap} key={animal.lostpetid}>
+                  <LostInfo lostInfo={animal} key={animal.lostpetid} />
                   <div className={styles.desc}>{animal.desc}</div>
                   <div className={styles.helpers}>
                     <div

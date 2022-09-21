@@ -1,0 +1,13 @@
+@value makerNavy,makerLightGrey, makerPink, makerGrey from '../../../common/colors.css';
+@value container from '../../../common/size.css';
+
+.postCodeBtn {
+  width: 500px;
+  height: 3em;
+  background-color: makerLightGrey;
+  text-align: center;
+  line-height: 3em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}

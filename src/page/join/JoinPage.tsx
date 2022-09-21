@@ -26,8 +26,9 @@ export type User = {
   name: string;
   pw?: string;
   phone: string;
-  upr_cd: string;
-  org_cd: string;
+  sido: string;
+  sigungu: string;
+  bname: string;
 };
 export type Animal = {
   petid: string;
@@ -48,8 +49,9 @@ const JoinPage = () => {
     name: '',
     pw: '',
     phone: '',
-    upr_cd: '',
-    org_cd: '',
+    sido: '',
+    sigungu: '',
+    bname: '',
   });
 
   const [animal, setAnimal] = useState<Animal>({
