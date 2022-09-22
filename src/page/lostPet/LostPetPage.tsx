@@ -22,6 +22,7 @@ import Alert from '../../component/alert/alert';
 import InfoSharing from '../../component/infoSharing/infoSharing';
 import LostInfo from '../../component/lostInfo/lostInfo';
 import Range from '../../component/range/range';
+import LostPetSkeleton from './skeleton/lostPetSkeleton';
 
 export type LostPet = {
   lostpetid?: string;
@@ -68,6 +69,8 @@ const LostPetPage = () => {
 
   const [range, setRange] = useState({ range: 'sigungu', address: sigungu });
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     getLostPetByParam({ userid: email }).then((lostpet) => {
       if (lostpet) {
@@ -92,6 +95,8 @@ const LostPetPage = () => {
   }, [range]);
 
   const getLostAnimalsData = async () => {
+    setIsLoading(true);
+
     const result = await getLostAnimals(false, range.range, range.address);
 
     let lostPetInfo: Array<LostAnimal> = [];
@@ -109,6 +114,7 @@ const LostPetPage = () => {
       lostPetInfo.push(lostInfo);
     }
     setLostAnimals(lostPetInfo);
+    setIsLoading(false);
   };
 
   const onRegistration = () => {
@@ -193,34 +199,37 @@ const LostPetPage = () => {
               등록하기
             </div>
           </div>
-          <div className={styles.lostAnimals}>
-            {lostAnimals?.map((animal) => {
-              return (
-                <div className={styles.animal_wrap} key={animal.lostpetid}>
-                  <LostInfo lostInfo={animal} key={animal.lostpetid} />
-                  <div className={styles.desc}>{animal.desc}</div>
-                  <div className={styles.helpers}>
-                    <div
-                      className={styles.participate}
-                      id={animal.lostpetid}
-                      onClick={onParticipate}
-                    >
-                      <p>참여하기</p>
-                    </div>
-                    <div className={styles.helpersInfo}>
-                      {animal.helpers?.map((helper, idx) => {
-                        return (
-                          <div className={styles.helper} key={idx}>
-                            {helper.name.substring(0, 1)}
-                          </div>
-                        );
-                      })}
+          {!isLoading && (
+            <div className={styles.lostAnimals}>
+              {lostAnimals?.map((animal) => {
+                return (
+                  <div className={styles.animal_wrap} key={animal.lostpetid}>
+                    <LostInfo lostInfo={animal} key={animal.lostpetid} />
+                    <div className={styles.desc}>{animal.desc}</div>
+                    <div className={styles.helpers}>
+                      <div
+                        className={styles.participate}
+                        id={animal.lostpetid}
+                        onClick={onParticipate}
+                      >
+                        <p>참여하기</p>
+                      </div>
+                      <div className={styles.helpersInfo}>
+                        {animal.helpers?.map((helper, idx) => {
+                          return (
+                            <div className={styles.helper} key={idx}>
+                              {helper.name.substring(0, 1)}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
+          {isLoading && <LostPetSkeleton />}
         </div>
         {lostPetPop && (
           <Write

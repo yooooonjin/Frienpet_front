@@ -1,0 +1,52 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../../common/colors.css';
+@value container from '../../../common/size.css';
+
+.discovery {
+  max-width: 600px;
+  margin: auto;
+}
+.animal {
+  width: 100%;
+  padding: 0.5em;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1em;
+}
+.animal div:first-child {
+  display: flex;
+  align-items: center;
+}
+.photo {
+  background-color: makerGrey;
+  height: 4em;
+  width: 4em;
+}
+.info {
+  width: 100%;
+  padding: 0 1em;
+}
+.location {
+  display: flex;
+}
+.locationText {
+  width: 40%;
+  height: 1.3em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.datetime {
+  margin-left: 0.5em;
+  width: 20%;
+  height: 0.8em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.character {
+  margin-top: 0.7em;
+  width: 30%;
+  height: 1em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.desc {
+  margin-top: 0.7em;
+  background-color: makerLightGrey;
+  height: 28px;
+}

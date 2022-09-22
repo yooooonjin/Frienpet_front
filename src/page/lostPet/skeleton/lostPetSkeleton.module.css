@@ -1,0 +1,89 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../../common/colors.css';
+@value container from '../../../common/size.css';
+
+.animal_wrap {
+  display: flex;
+  justify-content: center;
+}
+.animal {
+  display: flex;
+  flex-direction: column;
+  min-width: 230px;
+  width: 300px;
+  height: 350px;
+  padding: 0.8em;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.05);
+  margin: 0.5em;
+}
+
+.info {
+  width: 100%;
+}
+.lostInfo {
+  align-items: center;
+}
+.location {
+  width: 50%;
+  height: 1.2em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.basicLostInfo {
+  margin: 0.5em 0;
+  display: flex;
+  justify-content: space-between;
+}
+.address,
+.datetime,
+.character,
+.descText {
+  width: 30%;
+  height: 0.9em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.animalPhoto {
+  display: flex;
+  margin: 0.5em 0;
+  width: 100%;
+}
+.photo {
+  background-color: makerLightGrey;
+  height: 5.8em;
+  width: 32%;
+  margin: 0 1%;
+}
+.character {
+  width: 60%;
+  height: 1.2em;
+}
+
+.desc {
+  border-top: 1px dashed makerGrey;
+  padding: 1em 0;
+  margin: 0.5em 0;
+  font-size: 0.7rem;
+  flex: 1;
+  overflow: auto;
+}
+.descText {
+  margin-bottom: 0.4em;
+  width: 80%;
+  height: 1.2em;
+}
+.helpers {
+  position: relative;
+  border-top: 1px solid makerGrey;
+  display: flex;
+  width: 100%;
+}
+.helpersInfo {
+  display: flex;
+  height: 56px;
+}
+.helper {
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  margin: 0.5em 0.18em 0.5em;
+  background-color: rgba(0, 0, 0, 0.1);
+}

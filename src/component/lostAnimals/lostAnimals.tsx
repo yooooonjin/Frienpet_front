@@ -7,15 +7,20 @@ import { getPetInfo } from '../../apis/pet';
 import { getPetPhoto } from '../../apis/photo';
 import LostInfo from '../lostInfo/lostInfo';
 import { Animal } from '../../page/join/JoinPage';
+import LostInfoSkeleton from '../lostInfo/skeleton/lostInfoSkeleton';
 
 const LostAnimals = () => {
   const [lostAnimals, setLostAnimals] = useState<Array<LostAnimal>>();
+
+  const [isLoading, setIsLoading] = useState(true);
+
   const navigate = useNavigate();
   useEffect(() => {
     getLostAnimalsData();
   }, []);
 
   const getLostAnimalsData = async () => {
+    setIsLoading(true);
     const result = await getLostAnimals(true, 'all', '');
     let lostPetInfo: Array<LostAnimal> = [];
 
@@ -30,6 +35,7 @@ const LostAnimals = () => {
       lostPetInfo.push(lostInfo);
     }
     setLostAnimals(lostPetInfo);
+    setIsLoading(false);
   };
   return (
     <section className={styles.lostPet_container}>
@@ -48,13 +54,15 @@ const LostAnimals = () => {
         </p>
         <div className={styles.info_container}>
           <div className={styles.lostAnimals}>
-            {lostAnimals?.map((lostInfo) => {
-              return (
-                <div className={styles.animal_wrap} key={lostInfo.lostpetid}>
-                  <LostInfo lostInfo={lostInfo} key={lostInfo.lostpetid} />
-                </div>
-              );
-            })}
+            {!isLoading &&
+              lostAnimals?.map((lostInfo) => {
+                return (
+                  <div className={styles.animal_wrap} key={lostInfo.lostpetid}>
+                    <LostInfo lostInfo={lostInfo} key={lostInfo.lostpetid} />
+                  </div>
+                );
+              })}
+            {isLoading && <LostInfoSkeleton />}
           </div>
         </div>
       </div>

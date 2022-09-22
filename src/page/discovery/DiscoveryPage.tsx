@@ -10,6 +10,7 @@ import moment from 'moment';
 import Write from '../../component/discovery/write/write';
 import storage from '../../service/storage';
 import Range from '../../component/range/range';
+import DiscoverySkeleton from './skeleton/discoverySkeleton';
 
 export type DiscoveryAnimal = {
   discoveryid: string;
@@ -54,18 +55,20 @@ const DiscoveryPage = () => {
   const [addDiscoveryPop, setAddDiscoveryPop] = useState(false);
   const [range, setRange] = useState({ range: 'sigungu', address: sigungu });
 
-  console.log(discoveryAnimal);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     range.address && getDiscoveryAnimalsData();
   }, [range]);
 
   const getDiscoveryAnimalsData = async () => {
+    setIsLoading(true);
     const discoveryAnimalInfo = await getDiscoveryAnimalInfo(
       range.range,
       range.address
     );
     dispatch(setDiscoveryAnimals(discoveryAnimalInfo));
+    setIsLoading(false);
   };
 
   const onRangeChange = (range: string) => {
@@ -91,43 +94,47 @@ const DiscoveryPage = () => {
             글쓰기
           </div>
         </div>
-        {discoveryAnimal.map((animal) => {
-          return (
-            <div className={styles.animal} key={animal.discoveryid}>
-              <div>
-                <img className={styles.photo} src={animal.photo} alt='' />
-                <div className={styles.info}>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faLocationDot}
-                      className={styles.locationIcon}
-                    />
-                    <div className={styles.locationIcon}>{animal.location}</div>
-                    <div className={styles.address}>
-                      {animal.sido} &gt; {animal.sigungu} &gt; {animal.bname}
+        {!isLoading &&
+          discoveryAnimal.map((animal) => {
+            return (
+              <div className={styles.animal} key={animal.discoveryid}>
+                <div>
+                  <img className={styles.photo} src={animal.photo} alt='' />
+                  <div className={styles.info}>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faLocationDot}
+                        className={styles.locationIcon}
+                      />
+                      <div className={styles.locationIcon}>
+                        {animal.location}
+                      </div>
+                      <div className={styles.address}>
+                        {animal.sido} &gt; {animal.sigungu} &gt; {animal.bname}
+                      </div>
+                      <div className={styles.time}>
+                        {moment(animal.createddate).format('HH시 mm분')}
+                      </div>
+                      <div className={styles.date}>
+                        {moment(animal.createddate).format('MM월 DD일')}
+                      </div>
                     </div>
-                    <div className={styles.time}>
-                      {moment(animal.createddate).format('HH시 mm분')}
+                    <div className={styles.character}>
+                      <div>[ {animal.upkind} ]</div>
+                      {animal.kind && <div>{animal.kind}</div>}
+                      {animal.color && <div>{animal.color}</div>}
+                      {animal.size && <div>{animal.size}</div>}
+                      {animal.gender && (
+                        <div>{animal.gender === 'F' ? '암컷' : '수컷'}</div>
+                      )}
                     </div>
-                    <div className={styles.date}>
-                      {moment(animal.createddate).format('MM월 DD일')}
-                    </div>
-                  </div>
-                  <div className={styles.character}>
-                    <div>[ {animal.upkind} ]</div>
-                    {animal.kind && <div>{animal.kind}</div>}
-                    {animal.color && <div>{animal.color}</div>}
-                    {animal.size && <div>{animal.size}</div>}
-                    {animal.gender && (
-                      <div>{animal.gender === 'F' ? '암컷' : '수컷'}</div>
-                    )}
                   </div>
                 </div>
+                <div className={styles.desc}>{animal.desc}</div>
               </div>
-              <div className={styles.desc}>{animal.desc}</div>
-            </div>
-          );
-        })}
+            );
+          })}
+        {isLoading && <DiscoverySkeleton />}
       </div>
       {addDiscoveryPop && (
         <Write
