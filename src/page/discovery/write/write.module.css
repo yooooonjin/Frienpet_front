@@ -30,6 +30,11 @@
   margin-bottom: 1em;
   cursor: pointer;
 }
+.map {
+  width: 100%;
+  height: 10em;
+  margin-bottom: 1em;
+}
 .address input {
   outline: 0;
   color: makerGrey !important;
@@ -37,10 +42,10 @@
 .character {
   width: 100%;
 }
-.character div,
+.character > .row > div,
 .location {
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   margin-bottom: 0.5em;
   align-items: center;
 }
@@ -49,6 +54,7 @@
 .location p {
   margin-right: 0.5em;
   font-size: 0.8rem;
+  white-space: nowrap;
 }
 .character select,
 .character input,
@@ -58,6 +64,9 @@
   background-color: makerLightGrey;
   padding: 0.5em;
   flex: 1;
+}
+.character input {
+  width: 6em;
 }
 .desc {
   flex-direction: column;
@@ -81,4 +90,13 @@
 }
 .button:hover {
   transform: scale(1.01, 1.05);
+}
+.row {
+  display: flex;
+}
+.row > div {
+  flex: 1;
+}
+.row > div:not(:first-of-type) > p {
+  margin-left: 1em;
 }

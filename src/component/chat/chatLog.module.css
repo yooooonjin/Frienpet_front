@@ -1,0 +1,37 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+
+.chatting {
+  width: 100%;
+  height: 9em;
+  background-color: makerLightGrey;
+  overflow-y: auto;
+  padding: 0.6em 1em;
+  font-size: 0.8rem;
+}
+.chat {
+  display: flex;
+  align-items: center;
+}
+.sendMsg {
+  flex-direction: row-reverse;
+  justify-content: end;
+}
+.sendMsg .userId {
+  display: none;
+}
+.userId {
+  font-size: 0.7rem;
+  margin-right: 0.4em;
+  background-color: makerGrey;
+  padding: 0em 0.2em;
+}
+.time {
+  font-size: 0.5em;
+  margin: 0 0.8em;
+  color: makerDarkGrey;
+}
+.alert {
+  font-size: 0.6rem;
+  color: makerDarkGrey;
+  margin: auto;
+}

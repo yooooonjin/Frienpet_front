@@ -20,6 +20,8 @@ const initialState = [
     sigungu: '',
     bname: '',
     location: '',
+    // lat: 0,
+    // lng: 0,
     upkind: '',
     kind: '',
     size: '',

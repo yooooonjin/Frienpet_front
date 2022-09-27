@@ -46,7 +46,8 @@
 .participant {
   display: flex;
   align-items: center;
-  height: 34px;
+  height: 10px;
+  margin-bottom: 0.5em;
 }
 .chat p {
   font-size: 0.8rem;
@@ -55,18 +56,6 @@
   width: 100%;
   height: 6em;
   background-color: makerLightGrey;
-}
-.send {
-  width: 100%;
-  display: flex;
-}
-.sendBtn {
-  width: 3em;
-  background-color: makerNavy;
-}
-.sendIcon {
-  font-size: 1em;
-  color: white;
 }
 .chat textarea {
   flex: 1;

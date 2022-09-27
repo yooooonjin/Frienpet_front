@@ -8,6 +8,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@googlemaps/react-wrapper": "^1.1.35",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -29,6 +30,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.4.1",
+    "socket.io-client": "^4.5.2",
     "typescript": "^4.8.2",
     "web-vitals": "^2.1.0"
   },
@@ -55,5 +57,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/google.maps": "^3.50.1"
   }
 }

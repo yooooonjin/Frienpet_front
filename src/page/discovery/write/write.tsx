@@ -5,16 +5,12 @@ import {
   faLocationDot,
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import Sido from '../../homeless/sido';
-import SiGunGu from '../../homeless/sigungu';
-import {
-  DiscoveryAnimal,
-  initDiscoveryData,
-} from '../../../page/discovery/DiscoveryPage';
-import useInput from '../../../hooks/useInput';
 import { saveDiscoveryAnimalInfo } from '../../../apis/discoveryAnimal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../modules';
+import { DiscoveryAnimal, initDiscoveryData } from '../DiscoveryPage';
+import useInput from '../../../hooks/useInput';
+import MapWrapper from '../../../component/map/mapWrapper';
 
 interface WriteProps {
   setAddDiscoveryPop: React.Dispatch<SetStateAction<boolean>>;
@@ -29,14 +25,18 @@ const Write: React.FunctionComponent<WriteProps> = ({
   const locationRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const userInfo = useSelector((state: RootState) => state.user.loggedInfo);
+  const [marker, setMarker] = useState<Array<{ lat: number; lng: number }>>();
 
-  console.log(form);
+  const userInfo = useSelector((state: RootState) => state.user.loggedInfo);
 
   useEffect(() => {
     reset();
     formRef.current?.reset();
   }, []);
+
+  const onSetMarker = (lat: number, lng: number) => {
+    setMarker([{ lat, lng }]);
+  };
 
   const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -44,8 +44,10 @@ const Write: React.FunctionComponent<WriteProps> = ({
       locationRef.current?.focus();
       return;
     }
+    const discoveryMarker = marker && marker[0];
     await saveDiscoveryAnimalInfo({
       ...form,
+      ...discoveryMarker,
       email: userInfo.email,
     });
     setAddDiscoveryPop(false);
@@ -88,39 +90,46 @@ const Write: React.FunctionComponent<WriteProps> = ({
             onChange={onChange}
           />
         </div>
+        <div className={styles.map}>
+          <MapWrapper markers={marker} onSetMarker={onSetMarker} />
+        </div>
         <div className={styles.character}>
-          <div>
-            <p>축종 : </p>
-            <select name='upkind' id='upkind' onChange={onChange}>
-              <option value='기타'>기타</option>
-              <option value='개'>개</option>
-              <option value='고양이'>고양이</option>
-            </select>
+          <div className={styles.row}>
+            <div>
+              <p>축종 : </p>
+              <select name='upkind' id='upkind' onChange={onChange}>
+                <option value='기타'>기타</option>
+                <option value='개'>개</option>
+                <option value='고양이'>고양이</option>
+              </select>
+            </div>
+            <div>
+              <p>품종 : </p>
+              <input type='text' name='kind' onChange={onChange} />
+            </div>
           </div>
-          <div>
-            <p>품종 : </p>
-            <input type='text' name='kind' onChange={onChange} />
-          </div>
-          <div>
-            <p>크기 : </p>
-            <select name='size' id='size' onChange={onChange}>
-              <option value=''>선택</option>
-              <option value='소형'>소형</option>
-              <option value='중형'>중형</option>
-              <option value='대형'>대형</option>
-            </select>
-          </div>
-          <div>
-            <p>색깔 : </p>
-            <input type='text' name='color' onChange={onChange} />
-          </div>
-          <div>
-            <p>성별 : </p>
-            <select name='gender' id='gender' onChange={onChange}>
-              <option value=''>미상</option>
-              <option value='F'>암컷</option>
-              <option value='M'>수컷</option>
-            </select>
+          <div className={styles.row}>
+            <div>
+              <p>크기 : </p>
+              <select name='size' id='size' onChange={onChange}>
+                <option value=''>선택</option>
+                <option value='소형'>소형</option>
+                <option value='중형'>중형</option>
+                <option value='대형'>대형</option>
+              </select>
+            </div>
+            <div>
+              <p>색깔 : </p>
+              <input type='text' name='color' onChange={onChange} />
+            </div>
+            <div>
+              <p>성별 : </p>
+              <select name='gender' id='gender' onChange={onChange}>
+                <option value=''>미상</option>
+                <option value='F'>암컷</option>
+                <option value='M'>수컷</option>
+              </select>
+            </div>
           </div>
           <div className={styles.line}></div>
           <div className={styles.desc}>

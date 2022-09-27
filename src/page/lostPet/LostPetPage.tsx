@@ -50,8 +50,8 @@ export type Helper = {
   phone: string;
 };
 
-export type LostAnimal = Animal &
-  LostPet & { photo: Photo[] } & { helpers: Helper[] };
+export type LostAnimal =
+  | Animal & LostPet & { photo: Photo[] } & { helpers: Helper[] };
 
 const LostPetPage = () => {
   const { email, name, phone, sido, sigungu, bname } = useSelector(
@@ -61,8 +61,8 @@ const LostPetPage = () => {
   const [lostPetPop, setLostPetPop] = useState(false);
   const [lostAnimals, setLostAnimals] = useState<Array<LostAnimal>>();
 
-  const [lostMyPet, setLostMyPet] = useState<LostAnimal>();
-  const [helping, setHelping] = useState<LostAnimal>();
+  const [lostMyPet, setLostMyPet] = useState<LostAnimal | null>();
+  const [helping, setHelping] = useState<LostAnimal | null>();
 
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -73,11 +73,15 @@ const LostPetPage = () => {
 
   useEffect(() => {
     getLostPetByParam({ userid: email }).then((lostpet) => {
-      if (lostpet) {
-        getHelpers(lostpet?.lostpetid).then((helpers) =>
-          setLostMyPet({ ...lostpet, helpers })
-        );
-      }
+      console.log(lostpet);
+
+      setLostMyPet(lostpet);
+      // if (lostpet) {
+      //   getHelpers(lostpet?.lostpetid).then((helpers) =>
+
+      //     setLostMyPet({ ...lostpet, helpers })
+      //   );
+      // }
     });
   }, [lostAnimals]);
 
@@ -157,16 +161,15 @@ const LostPetPage = () => {
     setError(true);
   };
 
-  const onDelete = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onDelete = async (e: React.MouseEvent<HTMLDivElement>) => {
     const { id } = e.currentTarget;
 
     if (id === 'myLostPet') {
-      deleteLostPet(lostMyPet?.lostpetid!);
+      await deleteLostPet(lostMyPet?.lostpetid!);
     } else if (id === 'helping') {
-      deleteHelping(email);
+      await deleteHelping(email);
     }
-
-    getLostAnimalsData();
+    await getLostAnimalsData();
   };
 
   const onRangeChange = (range: string) => {
@@ -182,10 +185,10 @@ const LostPetPage = () => {
         <div className={styles.lostMyPet_container}>
           <div className={styles.lostMyPet}>
             {lostMyPet && (
-              <InfoSharing lostInfo={lostMyPet} onDelete={onDelete} />
+              <InfoSharing lostMyPet={lostMyPet} onDelete={onDelete} />
             )}
             {lostMyPet && helping && <p className={styles.line}></p>}
-            {helping && <InfoSharing lostInfo={helping} onDelete={onDelete} />}
+            {helping && <InfoSharing helping={helping} onDelete={onDelete} />}
           </div>
         </div>
       )}

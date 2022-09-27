@@ -2,14 +2,15 @@
 @value container from '../../common/size.css';
 
 .discovery_container {
-  background-color: makerLightGrey;
   min-height: calc(100% - 50px);
   width: 100%;
   padding: 1em;
-}
-.discovery {
-  max-width: 600px;
+  max-width: 1000px;
   margin: auto;
+}
+.discovery_header {
+  display: flex;
+  width: 100%;
 }
 .write {
   margin-left: auto;
@@ -22,7 +23,20 @@
   margin-bottom: 2em;
   cursor: pointer;
 }
+.discovery_wrap {
+  display: flex;
+}
+.discovery {
+  flex: 1;
+}
+.map {
+  width: 25em;
+  height: 25em;
+  top: 0;
+  margin-right: 2em;
+}
 .animal {
+  cursor: pointer;
   width: 100%;
   padding: 0.5em;
   background-color: white;
@@ -40,9 +54,10 @@
   background-color: makerGrey;
   height: 4em;
   width: 4em;
+  object-fit: cover;
 }
 .info {
-  width: 100%;
+  flex: 1;
   padding: 0 1em;
 }
 .info > div:first-child {

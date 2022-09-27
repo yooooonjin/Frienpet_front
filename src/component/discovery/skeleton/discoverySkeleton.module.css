@@ -1,0 +1,21 @@
+@value makerNavy,makerYellow, makerPink, makerGrey, makerDarkGrey from '../../../common/colors.css';
+
+.photo {
+  width: 3.2em;
+  height: 3.2em;
+  border-radius: 50%;
+  margin-left: 0.4em;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.location {
+  width: 30%;
+  height: 1.4em;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-left: 0.5em;
+}
+.feature {
+  width: 20%;
+  height: 1em;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-left: auto;
+}

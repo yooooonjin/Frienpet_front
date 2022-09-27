@@ -9,6 +9,7 @@ import {
 import moment from 'moment';
 import { getDiscoveryAnimalInfo } from '../../apis/discoveryAnimal';
 import { useNavigate } from 'react-router-dom';
+import DiscoverySkeleton from './skeleton/discoverySkeleton';
 
 const Discovery = () => {
   const navigate = useNavigate();
@@ -16,13 +17,16 @@ const Discovery = () => {
   const [discovery, setDiscovery] = useState<Array<DiscoveryAnimal>>([
     initDiscoveryData,
   ]);
+
+  const [isLoading, setIsLoading] = useState(true);
+
   const interval = useRef<NodeJS.Timer>();
   useEffect(() => {
+    setIsLoading(true);
     const discoveryAnimalInfo = async () => {
       const result = await getDiscoveryAnimalInfo('all', '');
-      console.log(result);
-
       setDiscovery(result);
+      setIsLoading(false);
     };
     discoveryAnimalInfo();
   }, []);
@@ -57,31 +61,42 @@ const Discovery = () => {
           우리 동네에 돌아다니는 동물 정보입니다. 주인이거나 주인을 아는 분들은
           연락주세요.
         </p>
-        <div className={styles.info}>
-          <img className={styles.photo} src={discovery[count]?.photo} alt='' />
-          <p className={styles.location}>
-            <FontAwesomeIcon
-              icon={faLocationDot}
-              className={styles.locationIcon}
-            />
-            {discovery[count]?.location}
-          </p>
-          <p className={styles.date}>
-            {moment(discovery[count]?.createddate).format('MM월 DD일')}
-          </p>
-          <p className={styles.time}>
-            {moment(discovery[count]?.createddate).format('HH시 mm분')}
-          </p>
-          <span className={styles.feature}>
-            [ {discovery[count]?.upkind} ] {discovery[count]?.kind}{' '}
-            {discovery[count]?.size} {discovery[count]?.color}{' '}
-            {discovery[count]?.gender === 'F'
-              ? '암컷'
-              : discovery[count]?.gender === 'M'
-              ? '수컷'
-              : ''}
-          </span>
-        </div>
+        {!isLoading && (
+          <div className={styles.info}>
+            {discovery[count]?.photo ? (
+              <img className={styles.photo} src={discovery[count]?.photo} />
+            ) : (
+              <img className={styles.photo} src='emptyPhoto.png' />
+            )}
+            <p className={styles.location}>
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                className={styles.locationIcon}
+              />
+              {discovery[count]?.location}
+            </p>
+            <p className={styles.date}>
+              {moment(discovery[count]?.createddate).format('MM월 DD일')}
+            </p>
+            <p className={styles.time}>
+              {moment(discovery[count]?.createddate).format('HH시 mm분')}
+            </p>
+            <span className={styles.feature}>
+              [ {discovery[count]?.upkind} ] {discovery[count]?.kind}{' '}
+              {discovery[count]?.size} {discovery[count]?.color}{' '}
+              {discovery[count]?.gender === 'F'
+                ? '암컷'
+                : discovery[count]?.gender === 'M'
+                ? '수컷'
+                : ''}
+            </span>
+          </div>
+        )}
+        {isLoading && (
+          <div className={styles.info}>
+            <DiscoverySkeleton />
+          </div>
+        )}
       </div>
     </section>
   );

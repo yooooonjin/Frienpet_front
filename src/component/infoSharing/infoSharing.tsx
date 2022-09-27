@@ -1,32 +1,36 @@
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import { LostAnimal } from '../../page/lostPet/LostPetPage';
 import styles from './infoSharing.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLocationDot,
-  faPaperPlane,
   faSquarePhone,
 } from '@fortawesome/free-solid-svg-icons';
+import Chat from '../chat/chat';
+import storage from '../../service/storage';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../modules';
 
 interface InfoSharingProps {
-  lostInfo?: LostAnimal;
+  lostMyPet?: LostAnimal;
+  helping?: LostAnimal;
   onDelete(e: React.MouseEvent<HTMLDivElement>): void;
 }
 const InfoSharing: React.FunctionComponent<InfoSharingProps> = ({
-  lostInfo,
+  lostMyPet,
+  helping,
   onDelete,
 }) => {
-  console.log(lostInfo);
+  const { name } = useSelector((state: RootState) => state.user.loggedInfo);
+  const lostInfo = lostMyPet ? lostMyPet : helping;
+  const roomId = lostInfo!.lostpetid!;
 
   return (
     <section className={styles.lostMyPet}>
       <div className={styles.title}>
-        <p>{lostInfo?.helpers ? '나의 반려견 찾기' : '우리동네 반려견 찾기'}</p>
-        <div
-          id={lostInfo?.helpers ? 'myLostPet' : 'helping'}
-          onClick={onDelete}
-        >
+        <p>{lostMyPet ? '나의 반려견 찾기' : '우리동네 반려견 찾기'}</p>
+        <div id={lostMyPet ? 'myLostPet' : 'helping'} onClick={onDelete}>
           삭제
         </div>
       </div>
@@ -45,8 +49,7 @@ const InfoSharing: React.FunctionComponent<InfoSharingProps> = ({
       </div>
       <form className={styles.chat}>
         <div className={styles.participant}>
-          <p>실시간 정보 공유</p>
-          {lostInfo?.helpers && (
+          {/* {lostInfo?.helpers && (
             <div className={styles.helpersInfo}>
               <div className={`${styles.helper} ${styles.me}`}>나</div>
               {lostInfo?.helpers?.map((helper, idx) => {
@@ -57,8 +60,8 @@ const InfoSharing: React.FunctionComponent<InfoSharingProps> = ({
                 );
               })}
             </div>
-          )}
-          {!lostInfo?.helpers && (
+          )} */}
+          {helping && (
             <p className={styles.guardianInfo}>
               <FontAwesomeIcon
                 icon={faSquarePhone}
@@ -68,13 +71,7 @@ const InfoSharing: React.FunctionComponent<InfoSharingProps> = ({
             </p>
           )}
         </div>
-        <div className={styles.chatting}></div>
-        <div className={styles.send}>
-          <textarea name='' id=''></textarea>
-          <button className={styles.sendBtn}>
-            <FontAwesomeIcon icon={faPaperPlane} className={styles.sendIcon} />
-          </button>
-        </div>
+        <Chat roomId={roomId} userId={name} />
       </form>
     </section>
   );
