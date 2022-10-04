@@ -7,6 +7,10 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  white-space: nowrap;
+}
+textarea {
+  white-space: normal;
 }
 ul {
   list-style: none;

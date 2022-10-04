@@ -7,8 +7,6 @@ type SaveDiscoveryAnimal = DiscoveryAnimal & { email: string };
 export const saveDiscoveryAnimalInfo = async (
   discoveryAnimal: SaveDiscoveryAnimal
 ) => {
-  console.log('discoveryAnimal', discoveryAnimal);
-
   await axios.post('/api/discovery/save', discoveryAnimal);
 };
 //발견한 동물 정보 불러오기

@@ -24,24 +24,9 @@
   align-items: center;
   font-weight: 700;
   display: flex;
-  align-items: center;
 }
-.lostInfo > div {
+.lostInfo > div:not(:first-child) {
   margin-left: 0.5em;
-}
-.address {
-  font-size: 0.7rem;
-  font-weight: 500;
-  margin: 0.2em 0;
-  color: makerDarkGrey;
-}
-.date {
-  font-weight: 500;
-  font-size: 0.8rem;
-}
-.time {
-  color: makerPink;
-  font-size: 0.8rem;
 }
 .participant {
   display: flex;
@@ -69,7 +54,7 @@
   margin-left: auto;
 }
 .guardianInfoIcon {
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   margin-right: 0.3em;
 }
 .helper {

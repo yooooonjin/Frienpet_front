@@ -15,5 +15,4 @@ export const getPetInfo = async (email: string) => {
 //반려동물 정보 수정하기
 export const updatePetInfo = async (myPet: Animal) => {
   const result = await axios.put('/api/animal/update', myPet);
-  console.log(result);
 };

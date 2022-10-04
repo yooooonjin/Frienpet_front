@@ -1,9 +1,10 @@
-@value makerNavy,makerDarkNavy, makerPink, makerGrey, makerYellow from '../../common/colors.css';
-@value container, size_title,size_sub from '../../common/size.css';
+@value makerNavy,makerDarkNavy, makerPink, makerGrey,makerLightGrey, makerYellow from '../../common/colors.css';
+@value container,mediaQueryWidth,mediaQuery,mediaWidth from '../../common/size.css';
 
 .homeless_container {
   position: relative;
   background-color: makerNavy;
+  min-width: mediaWidth;
 }
 .loading_container {
   position: absolute;
@@ -72,21 +73,13 @@
 }
 /* ///////////////////////////////// */
 .homeless {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.8rem 1em;
   width: 100%;
   max-width: container;
   margin: auto;
-}
-.title {
-  font-size: size_title;
-  padding-top: 1.5em;
-  color: makerYellow;
-  text-align: center;
-  letter-spacing: -0.7px;
-}
-.subTitle {
-  font-size: size_sub;
-  color: white;
-  text-align: center;
 }
 .search_bar {
   margin-top: 2em;
@@ -124,38 +117,59 @@
   font-weight: 700;
   font-size: 0.8rem;
 }
-
+.info_container {
+  text-align: center;
+}
+.upkind {
+  display: flex;
+  height: 100%;
+}
+.filter_wrap {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 0 1em;
+}
+.region {
+  flex: 2;
+  display: flex;
+}
+.upr_cd {
+  text-align: center;
+  flex: 1;
+}
+.org_cd {
+  text-align: center;
+  flex: 1;
+}
+.date {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1em;
+}
+.dateFomat {
+  display: flex;
+  flex-direction: column;
+}
+.dateFomat input {
+  font-size: 0.8rem;
+  line-height: 90%;
+}
 .search_bar button {
   background-color: makerYellow;
   height: 100%;
   margin-left: auto;
   font-weight: 700;
-  flex: 1;
-  margin-left: 3em;
-}
-.info_container {
-  text-align: center;
-}
-
-.upr_cd {
-  text-align: center;
   width: 20%;
-}
-.org_cd {
-  text-align: center;
-  width: 20%;
-}
-.date {
-  text-align: center;
-  width: 30%;
-  white-space: nowrap;
 }
 /* //////////////////////pagination///////////// */
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.5em 0 3em;
+  padding-top: 1.5em;
 }
 .pageNumber {
   color: white;
@@ -173,4 +187,45 @@
   line-height: 30px;
   border-radius: 50%;
   text-align: center;
+}
+@media (max-width: mediaQueryWidth) {
+  .search_bar {
+    height: 60px;
+  }
+  .filter_wrap {
+    flex-direction: column;
+  }
+  .dateFomat {
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media (max-width: mediaQuery) {
+  .search_bar {
+    flex-direction: column;
+    height: 130px;
+  }
+  .filter_wrap {
+    flex: none;
+    margin: 0.5em 0 0.5em;
+  }
+  .search_bar button {
+    flex: 1;
+    width: 100%;
+  }
+  .upkind {
+    display: flex;
+    height: auto;
+  }
+  .animal {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+    background-color: makerLightGrey;
+    border-radius: 50%;
+    margin: 0.8em 0.3em 0;
+  }
+  .region select {
+    font-size: 0.8rem;
+  }
 }

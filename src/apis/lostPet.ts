@@ -1,6 +1,4 @@
 import { Helper } from './../page/lostPet/LostPetPage';
-import { Animal } from '../page/join/JoinPage';
-import { getPetInfo } from './pet';
 import { LostPet } from '../page/lostPet/LostPetPage';
 import axios from 'axios';
 
@@ -43,7 +41,7 @@ export const getAllHelpers = async () => {
   const result = await axios.get('/api/lostpet/allHelpers');
   return result.data;
 };
-//반려동물 찾기 참여자 불러오기
+//반려동물 찾기 지정 게시글 참여자 불러오기
 export const getHelpers = async (lostpetid: string) => {
   const result = await axios.get('/api/lostpet/helpers', {
     params: { lostpetid },

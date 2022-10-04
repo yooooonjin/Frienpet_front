@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import Dropdown from '../../dropdown/dropdown';
 import styles from './guest.module.css';
 
 interface GuestProps {
@@ -6,28 +7,31 @@ interface GuestProps {
 }
 
 const Guest: React.FunctionComponent<GuestProps> = ({ onPageChange }) => {
-  const listRef = useRef<HTMLDivElement | null>(null);
-  const onDropDown = () => {
-    listRef.current!.classList.toggle(`${styles.hide}`);
-  };
-
   return (
-    <div className={styles.button_container}>
-      <button
-        className={`${styles.button} ${styles.signUp}`}
-        id='join'
-        onClick={onPageChange}
-      >
-        회원가입
-      </button>
-      <button
-        className={`${styles.button} ${styles.login}`}
-        id='login'
-        onClick={onPageChange}
-      >
-        로그인
-      </button>
-    </div>
+    <>
+      <div className={styles.button_container}>
+        <button id='join' onClick={onPageChange}>
+          회원가입
+        </button>
+        <button className={styles.login} id='login' onClick={onPageChange}>
+          로그인
+        </button>
+      </div>
+      <div className={styles.guest}>
+        <Dropdown
+          firstText='회원가입'
+          firstId='join'
+          onFirstClick={(e) => {
+            onPageChange(e);
+          }}
+          secondText='로그인'
+          secondId='login'
+          onSecondClick={(e) => {
+            onPageChange(e);
+          }}
+        />
+      </div>
+    </>
   );
 };
 

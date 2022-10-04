@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './LostPetPage.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import Write from './write/write';
 import { getPetInfo } from '../../apis/pet';
-import {
-  deleteHelping,
-  deleteLostPet,
-  getAllHelpers,
-  getHelpers,
-  getLostAnimals,
-  getLostPetByParam,
-  saveLostpetHelper,
-} from '../../apis/lostPet';
+import * as lostPetData from '../../apis/lostPet';
 import { Animal } from '../join/JoinPage';
 import { getPetPhoto } from '../../apis/photo';
-import moment from 'moment';
 import { RootState } from '../../modules';
 import { useSelector } from 'react-redux';
 import Alert from '../../component/alert/alert';
@@ -23,6 +12,8 @@ import InfoSharing from '../../component/infoSharing/infoSharing';
 import LostInfo from '../../component/lostInfo/lostInfo';
 import Range from '../../component/range/range';
 import LostPetSkeleton from './skeleton/lostPetSkeleton';
+import EmptyMsg from '../../component/emptyMsg/emptyMsg';
+import Button from '../../component/button/button';
 
 export type LostPet = {
   lostpetid?: string;
@@ -58,61 +49,60 @@ const LostPetPage = () => {
     (state: RootState) => state.user.loggedInfo
   );
 
-  const [lostPetPop, setLostPetPop] = useState(false);
+  const [showWritePopup, setShowWritePopup] = useState(false);
   const [lostAnimals, setLostAnimals] = useState<Array<LostAnimal>>();
 
   const [lostMyPet, setLostMyPet] = useState<LostAnimal | null>();
   const [helping, setHelping] = useState<LostAnimal | null>();
 
-  const [error, setError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-
   const [range, setRange] = useState({ range: 'sigungu', address: sigungu });
 
+  const [error, setError] = useState({ status: false, msg: '' });
   const [isLoading, setIsLoading] = useState(true);
 
+  //내가 등록한 게시글
   useEffect(() => {
-    getLostPetByParam({ userid: email }).then((lostpet) => {
-      console.log(lostpet);
-
+    lostPetData.getLostPetByParam({ userid: email }).then((lostpet) => {
       setLostMyPet(lostpet);
-      // if (lostpet) {
-      //   getHelpers(lostpet?.lostpetid).then((helpers) =>
-
-      //     setLostMyPet({ ...lostpet, helpers })
-      //   );
-      // }
     });
   }, [lostAnimals]);
 
+  //도움을 주고있는 게시글
   useEffect(() => {
-    getAllHelpers().then((helpers) => {
+    lostPetData.getAllHelpers().then((helpers) => {
       const lostInfo = helpers.find((res: Helper) => res.userid === email);
-      getLostPetByParam({ lostpetid: lostInfo?.lostpetid }).then((res) => {
-        setHelping(res);
-      });
+      lostPetData
+        .getLostPetByParam({ lostpetid: lostInfo?.lostpetid })
+        .then((res) => {
+          setHelping(res);
+        });
     });
   }, [lostAnimals]);
 
+  //범위 선택 시 지정 범위에 맞는 데이터 불러오기
   useEffect(() => {
     range.address && getLostAnimalsData();
   }, [range]);
 
+  //데이터 불러오기
   const getLostAnimalsData = async () => {
     setIsLoading(true);
 
-    const result = await getLostAnimals(false, range.range, range.address);
-
+    const result = await lostPetData.getLostAnimals(
+      false,
+      range.range,
+      range.address
+    );
     let lostPetInfo: Array<LostAnimal> = [];
-
+    //잃어버린 상황 정보
     for (const lostpet of result) {
-      const petInfo = await getPetInfo(lostpet.userid!);
-      const petPhoto = await getPetPhoto(lostpet.petid!);
-      const helpers = await getHelpers(lostpet.lostpetid);
+      const petInfo = await getPetInfo(lostpet.userid!); //반려동물 정보
+      const photo = await getPetPhoto(lostpet.petid!); //반려동물 사진
+      const helpers = await lostPetData.getHelpers(lostpet.lostpetid); //도움을 주고있는 사람들
       const lostInfo = {
         ...lostpet,
         ...petInfo,
-        photo: petPhoto,
+        photo,
         helpers,
       };
       lostPetInfo.push(lostInfo);
@@ -121,61 +111,58 @@ const LostPetPage = () => {
     setIsLoading(false);
   };
 
+  //등록하기 버튼 클릭 시
   const onRegistration = () => {
     if (lostMyPet) {
-      onError('이미 등록한 게시글이 존재합니다.');
+      setError({ status: true, msg: '이미 등록한 게시글이 존재합니다.' });
       return;
     }
-    setLostPetPop(true);
+    setShowWritePopup(true);
   };
 
+  //참여하기 버튼 클릭 시
   const onParticipate = async (e: React.MouseEvent<HTMLDivElement>) => {
     const { id } = e.currentTarget;
 
-    const lostInfo = lostAnimals?.find(
+    const selectedPost = lostAnimals?.find(
       (lostAnimal) => lostAnimal.lostpetid === id
     );
-    const overlap = lostInfo?.helpers.findIndex(
+    const duplicate = selectedPost?.helpers.findIndex(
       (helper) => helper.userid === email
     );
 
-    if (overlap! >= 0) {
-      onError('이미 참여중입니다.');
+    if (duplicate! >= 0) {
+      setError({ status: true, msg: '이미 참여중입니다.' });
       return;
-    } else if (lostInfo?.userid === email) {
-      onError('내가 올린 게시글 입니다.');
+    } else if (selectedPost?.userid === email) {
+      setError({ status: true, msg: '내가 올린 게시글 입니다.' });
       return;
     } else if (helping) {
-      onError('다른 게시글에 참여중 입니다.');
+      setError({ status: true, msg: '다른 게시글에 참여중 입니다.' });
       return;
-    } else if (lostInfo?.helpers.length! >= 6) {
-      onError('정원 초과로 참여할 수 없습니다.');
+    } else if (selectedPost?.helpers.length! >= 6) {
+      setError({ status: true, msg: '정원 초과로 참여할 수 없습니다.' });
       return;
     }
     const helper = { lostpetid: id, userid: email, name, phone };
-    await saveLostpetHelper(helper).then(getLostAnimalsData);
+    await lostPetData.saveLostpetHelper(helper).then(getLostAnimalsData);
   };
 
-  const onError = (msg: string) => {
-    setErrorMsg(msg);
-    setError(true);
-  };
-
+  //삭제 버튼 클릭 시
   const onDelete = async (e: React.MouseEvent<HTMLDivElement>) => {
     const { id } = e.currentTarget;
-
     if (id === 'myLostPet') {
-      await deleteLostPet(lostMyPet?.lostpetid!);
+      await lostPetData.deleteLostPet(lostMyPet?.lostpetid!);
     } else if (id === 'helping') {
-      await deleteHelping(email);
+      await lostPetData.deleteHelping(email);
     }
     await getLostAnimalsData();
   };
 
+  //범위 변경
   const onRangeChange = (range: string) => {
     const addrByRange =
       range === 'sido' ? sido : range === 'sigungu' ? sigungu : bname;
-
     setRange({ range, address: addrByRange });
   };
 
@@ -198,11 +185,12 @@ const LostPetPage = () => {
             <div>
               <Range onRangeChange={onRangeChange} />
             </div>
-            <div className={styles.write} onClick={onRegistration}>
-              등록하기
-            </div>
+            <Button msg='등록하기' onClick={onRegistration} />
           </div>
-          {!isLoading && (
+          {lostAnimals?.length === 0 && !isLoading && <EmptyMsg />}
+          {isLoading ? (
+            <LostPetSkeleton />
+          ) : (
             <div className={styles.lostAnimals}>
               {lostAnimals?.map((animal) => {
                 return (
@@ -232,17 +220,16 @@ const LostPetPage = () => {
               })}
             </div>
           )}
-          {isLoading && <LostPetSkeleton />}
         </div>
-        {lostPetPop && (
+        {showWritePopup && (
           <Write
-            setLostPetPop={setLostPetPop}
+            setShowWritePopup={setShowWritePopup}
             getLostAnimalsData={getLostAnimalsData}
             userid={email}
             userphone={phone}
           />
         )}
-        {error && <Alert message={errorMsg} setError={setError} />}
+        {error.status && <Alert message={error.msg} setErrorMsg={setError} />}
       </section>
     </>
   );

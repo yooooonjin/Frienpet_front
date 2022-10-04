@@ -1,24 +1,21 @@
 import React, { SetStateAction, useEffect, useRef, useState } from 'react';
 import styles from './write.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import useInput from '../../../hooks/useInput';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../modules';
 import { LostPet } from '../LostPetPage';
 import { getPetInfo } from '../../../apis/pet';
 import { saveLostpet } from '../../../apis/lostPet';
 import storage from '../../../service/storage';
+import Icon from '../../../component/icon/icon';
 
 interface WriteProps {
-  setLostPetPop: React.Dispatch<SetStateAction<boolean>>;
+  setShowWritePopup: React.Dispatch<SetStateAction<boolean>>;
   getLostAnimalsData(): void;
   userid: string;
   userphone?: string;
 }
 
 const Write: React.FunctionComponent<WriteProps> = ({
-  setLostPetPop,
+  setShowWritePopup,
   getLostAnimalsData,
   userid,
   userphone,
@@ -42,6 +39,7 @@ const Write: React.FunctionComponent<WriteProps> = ({
     formRef.current?.reset();
   }, []);
 
+  //기본정보 입력
   useEffect(() => {
     getPetInfo(userid).then((res) => {
       setBasicInfo({ ...basicInfo, petid: res.petid });
@@ -57,7 +55,7 @@ const Write: React.FunctionComponent<WriteProps> = ({
       ...basicInfo,
       ...form,
     });
-    setLostPetPop(false);
+    setShowWritePopup(false);
     getLostAnimalsData();
   };
 
@@ -65,8 +63,10 @@ const Write: React.FunctionComponent<WriteProps> = ({
     <section>
       <div className={styles.dim}></div>
       <form ref={formRef} className={styles.write_popup}>
-        <div className={styles.close} onClick={() => setLostPetPop(false)}>
-          <FontAwesomeIcon icon={faCircleXmark} className={styles.closeIcon} />
+        <div className={styles.close} onClick={() => setShowWritePopup(false)}>
+          <div className={styles.closeIcon}>
+            <Icon icon='CircleXmark' />
+          </div>
         </div>
         <div className={styles.location}>
           <div className={styles.detailLocation}>

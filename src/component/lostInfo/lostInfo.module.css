@@ -23,44 +23,9 @@
   align-items: center;
   font-weight: 700;
 }
-.location {
-  display: flex;
-  align-items: center;
-}
-.locationIcon {
-  margin-right: 0.3em;
-}
 .basicLostInfo {
   margin: 0.5em 0;
   display: flex;
   font-weight: 500;
   font-size: 0.7rem;
-}
-.address {
-  font-weight: 500;
-  color: makerDarkGrey;
-}
-.datetime {
-  margin-left: auto;
-  display: flex;
-}
-.clockIcon {
-  margin-right: 0.2em;
-}
-.time {
-  margin-left: 0.5em;
-  color: makerPink;
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-.character {
-  padding-bottom: 0.3em;
-  font-size: 0.8rem;
-  display: flex;
-}
-.character div {
-  margin-right: 0.8em;
-}
-.character div:first-child {
-  font-weight: 700;
 }

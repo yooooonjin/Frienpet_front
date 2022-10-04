@@ -1,0 +1,16 @@
+@value makerNavy,makerGrey from '../../common/colors.css';
+
+.write {
+  margin-left: auto;
+  background-color: makerNavy;
+  width: 5em;
+  font-size: 0.8rem;
+  color: white;
+  text-align: center;
+  padding: 0.3em 0;
+  margin-bottom: 2em;
+  cursor: pointer;
+}
+.light {
+  background-color: makerGrey;
+}

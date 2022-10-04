@@ -1,0 +1,7 @@
+@value makerDarkGrey from '../../common/colors.css';
+
+.emptyMsg {
+  text-align: center;
+  margin-top: 3em;
+  color: makerDarkGrey;
+}

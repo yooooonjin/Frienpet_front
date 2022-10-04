@@ -1,20 +1,17 @@
-import moment from 'moment';
-import React, { useState } from 'react';
-import { LostAnimal } from '../../page/lostPet/LostPetPage';
+import React from 'react';
+import { LostPet } from '../../page/lostPet/LostPetPage';
 import styles from './infoSharing.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faLocationDot,
-  faSquarePhone,
-} from '@fortawesome/free-solid-svg-icons';
 import Chat from '../chat/chat';
-import storage from '../../service/storage';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
+import DateTime from '../dateTime/dateTime';
+import Location from '../location/location';
+import Address from '../address/address';
+import Icon from '../icon/icon';
 
 interface InfoSharingProps {
-  lostMyPet?: LostAnimal;
-  helping?: LostAnimal;
+  lostMyPet?: LostPet;
+  helping?: LostPet;
   onDelete(e: React.MouseEvent<HTMLDivElement>): void;
 }
 const InfoSharing: React.FunctionComponent<InfoSharingProps> = ({
@@ -23,7 +20,7 @@ const InfoSharing: React.FunctionComponent<InfoSharingProps> = ({
   onDelete,
 }) => {
   const { name } = useSelector((state: RootState) => state.user.loggedInfo);
-  const lostInfo = lostMyPet ? lostMyPet : helping;
+  const lostInfo = (lostMyPet ? lostMyPet : helping) as LostPet;
   const roomId = lostInfo!.lostpetid!;
 
   return (
@@ -34,40 +31,19 @@ const InfoSharing: React.FunctionComponent<InfoSharingProps> = ({
           삭제
         </div>
       </div>
-      <div className={styles.address}>
-        {lostInfo?.sido} &gt; {lostInfo?.sigungu} &gt; {lostInfo?.bname}
-      </div>
+      <Address address={lostInfo} />
       <div className={styles.lostInfo}>
-        <FontAwesomeIcon icon={faLocationDot} className={styles.locationIcon} />
-        <div>{lostInfo?.location}</div>
-        <div className={styles.date}>
-          {moment(lostInfo?.createddate).format('MM월 DD일')}
-        </div>
-        <div className={styles.time}>
-          {moment(lostInfo?.createddate).format('HH시 mm분')}
-        </div>
+        <Location location={lostInfo.location} />
+        <DateTime dateTime={lostInfo.createddate!} />
       </div>
       <form className={styles.chat}>
         <div className={styles.participant}>
-          {/* {lostInfo?.helpers && (
-            <div className={styles.helpersInfo}>
-              <div className={`${styles.helper} ${styles.me}`}>나</div>
-              {lostInfo?.helpers?.map((helper, idx) => {
-                return (
-                  <div className={styles.helper} key={idx}>
-                    {helper.name.substring(0, 1)}
-                  </div>
-                );
-              })}
-            </div>
-          )} */}
           {helping && (
             <p className={styles.guardianInfo}>
-              <FontAwesomeIcon
-                icon={faSquarePhone}
-                className={styles.guardianInfoIcon}
-              />{' '}
-              {lostInfo?.phone}
+              <span className={styles.guardianInfoIcon}>
+                <Icon icon='Phone' />
+              </span>
+              {lostInfo.phone}
             </p>
           )}
         </div>

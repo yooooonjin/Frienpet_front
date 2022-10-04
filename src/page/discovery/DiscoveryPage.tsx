@@ -4,14 +4,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../modules';
 import { setDiscoveryAnimals } from '../../modules/discoveryAnimals';
 import { getDiscoveryAnimalInfo } from '../../apis/discoveryAnimal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import moment from 'moment';
 import Write from './write/write';
 import storage from '../../service/storage';
 import Range from '../../component/range/range';
 import DiscoverySkeleton from './skeleton/discoverySkeleton';
 import MapWrapper from '../../component/map/mapWrapper';
+import EmptyMsg from '../../component/emptyMsg/emptyMsg';
+import DateTime from '../../component/dateTime/dateTime';
+import Character from '../../component/character/character';
+import Address from '../../component/address/address';
+import Location from '../../component/location/location';
+import Button from '../../component/button/button';
+import Icon from '../../component/icon/icon';
 
 export type DiscoveryAnimal = {
   discoveryid: string;
@@ -56,18 +60,19 @@ const DiscoveryPage = () => {
   const { sido, sigungu, bname } = useSelector(
     (state: RootState) => state.user.loggedInfo
   );
-  const [addDiscoveryPop, setAddDiscoveryPop] = useState(false);
+  const [showWritePopup, setShowWritePopup] = useState(false);
   const [range, setRange] = useState({ range: 'sigungu', address: sigungu });
   const [markers, setMarkers] = useState<Array<{ lat: number; lng: number }>>();
-
   const [panTo, setPanTo] = useState<{ lat: number; lng: number }>();
 
   const [isLoading, setIsLoading] = useState(true);
 
+  //범위 선택 시 지정 범위에 맞는 데이터 불러오기
   useEffect(() => {
     range.address && getDiscoveryAnimalsData();
   }, [range]);
 
+  //데이터 불러오기
   const getDiscoveryAnimalsData = async () => {
     setIsLoading(true);
     const discoveryAnimalInfo = await getDiscoveryAnimalInfo(
@@ -75,32 +80,32 @@ const DiscoveryPage = () => {
       range.address
     );
     dispatch(setDiscoveryAnimals(discoveryAnimalInfo));
-    setMarkers(onMarkersPosition(discoveryAnimalInfo));
+    setMarkers(onMarkersPosition(discoveryAnimalInfo)); //지도에 마커 띄우기
 
     setIsLoading(false);
   };
 
-  const onMarkersPosition = (animalInfo: any) => {
-    return animalInfo
-      .map((info: any) => {
-        return { lat: info.lat, lng: info.lng };
-      })
-      .filter((position: any) => {
-        return position.lat !== null && position.lng !== null;
-      });
-  };
-
+  //지정 범위 바꾸기
   const onRangeChange = (range: string) => {
     const addrByRange =
       range === 'sido' ? sido : range === 'sigungu' ? sigungu : bname;
-
     setRange({ range, address: addrByRange });
   };
 
+  //위도 경도가 존재하는 게시글만 추려 마커 띄우기
+  const onMarkersPosition = (animalInfo: Array<DiscoveryAnimal>) => {
+    return animalInfo
+      .map((info: DiscoveryAnimal) => ({ lat: info.lat!, lng: info.lng! }))
+      .filter(
+        (position: any) => position.lat !== null && position.lng !== null
+      );
+  };
+
+  //게시글 클릭 시 지도에 마커 표시
   const onShowMarker = (lat: number | undefined, lng: number | undefined) => {
     if (lat && lng) {
       setMarkers([{ lat, lng }]);
-      setPanTo({ lat, lng });
+      setPanTo({ lat, lng }); //지정 위치로 센터 이동
     } else {
       setMarkers([{ lat: 0, lng: 0 }]);
     }
@@ -112,21 +117,28 @@ const DiscoveryPage = () => {
         <div>
           <Range onRangeChange={onRangeChange} />
         </div>
-        <div
-          className={styles.write}
+        <Button
+          msg='글쓰기'
           onClick={() => {
-            setAddDiscoveryPop(true);
+            setShowWritePopup(true);
           }}
-        >
-          글쓰기
-        </div>
+        />
       </div>
+      <p className={styles.explanation}>
+        <span className={styles.locationIcon}>
+          <Icon icon='LocationDot' />
+        </span>
+        게시글을 눌러 지도에서 위치를 확인해주세요.
+      </p>
       <div className={styles.discovery_wrap}>
         <div className={styles.map}>
           <MapWrapper markers={markers} panToPosition={panTo} />
         </div>
         <div className={styles.discovery}>
-          {!isLoading &&
+          {discoveryAnimal?.length === 0 && !isLoading && <EmptyMsg />}
+          {isLoading ? (
+            <DiscoverySkeleton />
+          ) : (
             discoveryAnimal.map((animal: DiscoveryAnimal) => {
               return (
                 <div
@@ -135,52 +147,38 @@ const DiscoveryPage = () => {
                   onClick={() => onShowMarker(animal.lat, animal.lng)}
                 >
                   <div>
-                    {animal.photo === '' ? (
-                      <img className={styles.photo} src='emptyPhoto.png' />
-                    ) : (
-                      <img className={styles.photo} src={animal.photo} />
-                    )}
+                    <img
+                      className={styles.photo}
+                      src={
+                        animal.photo === '' ? 'emptyPhoto.png' : animal.photo
+                      }
+                    />
                     <div className={styles.info}>
-                      <div>
-                        <FontAwesomeIcon
-                          icon={faLocationDot}
-                          className={styles.locationIcon}
-                        />
-                        <div className={styles.locationIcon}>
-                          {animal.location}
+                      <div className={styles.lostInfo}>
+                        <div className={styles.location}>
+                          <Location
+                            location={animal.location}
+                            marker={animal.lat ? true : false}
+                          />
                         </div>
                         <div className={styles.address}>
-                          {animal.sido} &gt; {animal.sigungu} &gt;{' '}
-                          {animal.bname}
+                          <Address address={animal} />
                         </div>
-                        <div className={styles.time}>
-                          {moment(animal.createddate).format('HH시 mm분')}
-                        </div>
-                        <div className={styles.date}>
-                          {moment(animal.createddate).format('MM월 DD일')}
-                        </div>
+                        <DateTime dateTime={animal.createddate} />
                       </div>
-                      <div className={styles.character}>
-                        {animal.upkind && <div>[ {animal.upkind} ]</div>}
-                        {animal.kind && <div>{animal.kind}</div>}
-                        {animal.color && <div>{animal.color}</div>}
-                        {animal.size && <div>{animal.size}</div>}
-                        {animal.gender && (
-                          <div>{animal.gender === 'F' ? '암컷' : '수컷'}</div>
-                        )}
-                      </div>
+                      <Character animal={animal} />
                     </div>
                   </div>
                   <div className={styles.desc}>{animal.desc}</div>
                 </div>
               );
-            })}
-          {isLoading && <DiscoverySkeleton />}
+            })
+          )}
         </div>
       </div>
-      {addDiscoveryPop && (
+      {showWritePopup && (
         <Write
-          setAddDiscoveryPop={setAddDiscoveryPop}
+          setShowWritePopup={setShowWritePopup}
           getDiscoveryAnimalsData={getDiscoveryAnimalsData}
         />
       )}

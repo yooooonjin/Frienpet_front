@@ -1,3 +1,4 @@
+import { emailCheck } from '../../apis/user';
 import { User } from './JoinPage';
 export const SignupValidation = (
   element: string,
@@ -8,7 +9,7 @@ export const SignupValidation = (
     case 'email':
       var emailReg =
         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      https: if (!emailReg.test(value)) {
+      if (!emailReg.test(value)) {
         return '이메일 주소를 다시 확인해주세요.';
       } else {
         return value;

@@ -1,5 +1,5 @@
 @value makerNavy,makerGrey from '../../common/colors.css';
-@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+@value mediaQuery,mediaWidth from '../../common/size.css';
 
 .dim {
   position: fixed;
@@ -13,7 +13,7 @@
 .icon {
   font-size: 2rem;
   color: makerNavy;
-  margin-bottom: 0.8em;
+  margin-bottom: 0.5em;
 }
 .alert {
   display: flex;
@@ -23,8 +23,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: 90%;
   max-width: 25em;
+  min-width: mediaWidth;
   background-color: white;
   border-radius: 1em;
   text-align: center;
@@ -36,11 +37,4 @@
 .button {
   margin-top: 2em;
   font-weight: 700;
-}
-
-@media screen and (max-width: mediaQuery) {
-  .confirmModal {
-    width: 80%;
-    height: 13em;
-  }
 }

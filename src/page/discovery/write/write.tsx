@@ -1,24 +1,20 @@
 import React, { SetStateAction, useEffect, useRef, useState } from 'react';
 import styles from './write.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faLocationDot,
-  faCircleXmark,
-} from '@fortawesome/free-solid-svg-icons';
 import { saveDiscoveryAnimalInfo } from '../../../apis/discoveryAnimal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../modules';
 import { DiscoveryAnimal, initDiscoveryData } from '../DiscoveryPage';
 import useInput from '../../../hooks/useInput';
 import MapWrapper from '../../../component/map/mapWrapper';
+import Icon from '../../../component/icon/icon';
 
 interface WriteProps {
-  setAddDiscoveryPop: React.Dispatch<SetStateAction<boolean>>;
+  setShowWritePopup: React.Dispatch<SetStateAction<boolean>>;
   getDiscoveryAnimalsData(): void;
 }
 
 const Write: React.FunctionComponent<WriteProps> = ({
-  setAddDiscoveryPop,
+  setShowWritePopup,
   getDiscoveryAnimalsData,
 }) => {
   const [form, onChange, reset] = useInput<DiscoveryAnimal>(initDiscoveryData);
@@ -29,15 +25,18 @@ const Write: React.FunctionComponent<WriteProps> = ({
 
   const userInfo = useSelector((state: RootState) => state.user.loggedInfo);
 
+  //글씨기 팝업 오픈 시 form 초기화
   useEffect(() => {
     reset();
     formRef.current?.reset();
   }, []);
 
+  //마커 생성
   const onSetMarker = (lat: number, lng: number) => {
     setMarker([{ lat, lng }]);
   };
 
+  //등록하기
   const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (form.location == '') {
@@ -50,7 +49,7 @@ const Write: React.FunctionComponent<WriteProps> = ({
       ...discoveryMarker,
       email: userInfo.email,
     });
-    setAddDiscoveryPop(false);
+    setShowWritePopup(false);
     getDiscoveryAnimalsData();
   };
 
@@ -58,28 +57,20 @@ const Write: React.FunctionComponent<WriteProps> = ({
     <section>
       <div className={styles.dim}></div>
       <form ref={formRef} className={styles.write_popup}>
-        <div className={styles.close} onClick={() => setAddDiscoveryPop(false)}>
-          <FontAwesomeIcon icon={faCircleXmark} className={styles.closeIcon} />
+        <div className={styles.close} onClick={() => setShowWritePopup(false)}>
+          <div className={styles.closeIcon}>
+            <Icon icon='CircleXmark' />
+          </div>
         </div>
         <div className={`${styles.location} ${styles.address}`}>
-          <p>
-            <FontAwesomeIcon
-              icon={faLocationDot}
-              className={styles.locationIcon}
-            />
+          <p className={styles.locationIcon}>
+            <Icon icon='LocationDot' />
           </p>
           <input
             type='text'
             readOnly
             value={`${form.sido} ${form.sigungu} ${form.bname}`}
           />
-
-          {/* <Sido onSidoChange={onChange} userSido={userInfo.upr_cd} />
-            <SiGunGu
-              selectedSido={userInfo.upr_cd}
-              onFilterChange={onChange}
-              userSiGunGu={userInfo.org_cd}
-            /> */}
         </div>
         <div className={styles.location}>
           <p>*상세위치:</p>

@@ -1,0 +1,85 @@
+@value makerNavy, makerPink, makerGrey from '../../../common/colors.css';
+@value mediaQuery from '../../../common/size.css';
+
+.info_wrap {
+  margin-bottom: 1em;
+}
+.info_title {
+  margin-bottom: 0.3em;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.desc {
+  margin-left: 1em;
+  font-size: 0.7rem;
+  color: makerGrey;
+}
+.input {
+  flex: 1;
+  padding: 0.8em;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid makerGrey;
+  display: flex;
+  min-height: 3.2em;
+  min-width: 4em;
+}
+.input input,
+.input textarea,
+.input select {
+  background-color: transparent;
+  border: none;
+  outline: 0;
+  font-size: 1rem;
+  width: 100%;
+}
+.checkIcon {
+  color: makerGrey;
+  font-size: 1.3rem;
+  line-height: 100%;
+}
+.check {
+  color: makerNavy;
+}
+.errorMsg {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: makerPink;
+}
+.error {
+  border: 1px solid makerPink;
+}
+.radio {
+  display: flex;
+  justify-content: space-between;
+  min-width: 8em;
+}
+.gender_label:not(:last-of-type) {
+  margin-right: 5%;
+}
+.gender_label {
+  white-space: nowrap;
+  width: 100%;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid makerGrey;
+  text-align: center;
+  padding: 0.8em;
+  min-height: 3.2em;
+}
+.gender {
+  display: none;
+}
+.gender:checked + label {
+  border: 1px solid makerNavy;
+  color: makerNavy;
+  font-weight: 700;
+}
+
+@media (max-width: mediaQuery) {
+  .radio {
+  }
+  .input input,
+  .input textarea,
+  .input select {
+    font-size: 0.7rem;
+  }
+}

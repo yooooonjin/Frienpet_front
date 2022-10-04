@@ -1,9 +1,11 @@
-@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../../common/colors.css';
-@value container from '../../../common/size.css';
+@value makerGrey,makerLightGrey from '../../../common/colors.css';
 
 .animal_wrap {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  max-height: 366px;
+  overflow: hidden;
 }
 .animal {
   display: flex;

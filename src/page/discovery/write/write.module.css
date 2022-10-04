@@ -1,5 +1,5 @@
 @value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey from '../../../common/colors.css';
-@value container from '../../../common/size.css';
+@value mediaQuery,mediaWidth from '../../../common/size.css';
 
 .dim {
   position: fixed;
@@ -20,6 +20,10 @@
   z-index: 3;
   border-radius: 1em;
   padding: 1em 1.5em 1.5em;
+  display: flex;
+  flex-direction: column;
+  max-height: 650px;
+  overflow-y: auto;
 }
 .close {
   display: flex;
@@ -99,4 +103,30 @@
 }
 .row > div:not(:first-of-type) > p {
   margin-left: 1em;
+}
+
+@media (max-width: mediaQuery) {
+  .write_popup {
+    max-width: mediaWidth;
+    width: 90%;
+  }
+  .row {
+    display: block;
+  }
+  .row > div:not(:first-of-type) > p {
+    margin-left: 0em;
+  }
+  .character select,
+  .character input,
+  .character textarea,
+  .location input {
+    padding: 0.4em;
+    font-size: 0.7rem;
+  }
+  .map {
+    height: 8em;
+  }
+  .line {
+    margin: 0.5em 0;
+  }
 }

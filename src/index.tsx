@@ -13,7 +13,6 @@ const root = ReactDOM.createRoot(
 );
 const store = createStore(rootReducer, composeWithDevTools());
 root.render(
-  // <React.StrictMode>
   <Provider store={store}>
     <App />
   </Provider>

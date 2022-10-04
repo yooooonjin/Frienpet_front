@@ -1,4 +1,12 @@
+@value mediaQuery from '../../common/size.css';
+
 .banner_container {
   height: 180px;
   background: url('/public/background.jpg') center/cover no-repeat;
+}
+
+@media (max-width: mediaQuery) {
+  .banner_container {
+    height: 130px;
+  }
 }

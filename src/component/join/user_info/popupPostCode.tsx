@@ -1,11 +1,10 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import DaumPostcode from 'react-daum-postcode';
-import { User } from '../../../page/join/JoinPage';
 import styles from './popupPostCode.module.css';
 
 interface PopupPostCodeProps {
-  onPopupControl(onChange: boolean): void;
-  onSetAddress(data: any): void;
+  onPopupControl: Dispatch<SetStateAction<boolean>>;
+  onSetAddress(value: string | any, name?: string): void;
 }
 
 const PopupPostCode: React.FunctionComponent<PopupPostCodeProps> = ({
@@ -18,7 +17,6 @@ const PopupPostCode: React.FunctionComponent<PopupPostCodeProps> = ({
       sigungu: data.sigungu,
       bname: data.bname,
     };
-    // console.log(data);
     onSetAddress(address);
     onPopupControl(false);
   };
@@ -26,7 +24,6 @@ const PopupPostCode: React.FunctionComponent<PopupPostCodeProps> = ({
   const postCodeStyle = {
     display: 'block',
     top: '120px',
-    width: '500px',
     height: '450px',
   };
   return (

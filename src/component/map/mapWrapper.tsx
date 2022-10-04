@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
 import Map from './map';
 import Marker from './marker';
@@ -16,18 +16,17 @@ const MapWrapper: React.FunctionComponent<MapWrapperProps> = ({
   const [zoom, setZoom] = useState(3);
   const [center, setCenter] = useState<google.maps.LatLngLiteral>();
 
-  const render = (status: Status) => {
-    return <h1>{status}</h1>;
-  };
-
+  //지도 클릭 시 마커 생성 // 글쓰기 페이지에서 사용
   const onClick = (e: google.maps.MapMouseEvent) => {
     onSetMarker && onSetMarker(e.latLng!.lat(), e.latLng!.lng());
   };
+
   const onIdle = (m: google.maps.Map) => {
     setZoom(m.getZoom()!);
     setCenter(m.getCenter()!.toJSON());
   };
 
+  //현재 위치 좌표 불러오기 성공 시 현재 위치를 센터로 지정
   const success = (location: any) => {
     const lat = location.coords.latitude;
     const lng = location.coords.longitude;
@@ -36,6 +35,7 @@ const MapWrapper: React.FunctionComponent<MapWrapperProps> = ({
   const error = (error: any) => {
     console.log(error);
   };
+  //현재 위치 좌표 불러오기
   useEffect(() => {
     const geoLocation = window.navigator.geolocation;
     geoLocation.getCurrentPosition(success, error, {
@@ -44,7 +44,7 @@ const MapWrapper: React.FunctionComponent<MapWrapperProps> = ({
   }, []);
 
   return (
-    <Wrapper apiKey='AIzaSyDXtOZ_LoGxzIuADsnCMQr6S8fmxw__j88' render={render}>
+    <Wrapper apiKey={process.env.REACT_APP_MAP_API_KEY!}>
       <Map
         center={center}
         onClick={onClick}

@@ -26,9 +26,6 @@ const useInput = <T>(initialForm: T): ReturnTypes<T> => {
           const result = await onUpload(files);
           value = result.data.url;
           break;
-        case 'upr_cd': //시/구 변경 -> 시군구 ''
-          setForm((form) => ({ ...form, org_cd: '' }));
-          break;
       }
       setForm((form) => ({ ...form, [name]: value }));
     },

@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './discovery.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import {
   DiscoveryAnimal,
   initDiscoveryData,
 } from '../../page/discovery/DiscoveryPage';
-import moment from 'moment';
 import { getDiscoveryAnimalInfo } from '../../apis/discoveryAnimal';
-import { useNavigate } from 'react-router-dom';
 import DiscoverySkeleton from './skeleton/discoverySkeleton';
+import DateTime from '../dateTime/dateTime';
+import Location from '../location/location';
+import Character from '../character/character';
+import Title from '../title/title';
 
 const Discovery = () => {
-  const navigate = useNavigate();
   const [count, setCount] = useState(0);
   const [discovery, setDiscovery] = useState<Array<DiscoveryAnimal>>([
     initDiscoveryData,
@@ -31,6 +30,7 @@ const Discovery = () => {
     discoveryAnimalInfo();
   }, []);
 
+  //5초에 한번 화면 전환
   useEffect(() => {
     interval.current = setInterval(discoveryChange, 5000);
     return () => {
@@ -48,53 +48,35 @@ const Discovery = () => {
   return (
     <section className={styles.discovery_container}>
       <div className={styles.discovery}>
-        <h2
-          className={styles.title}
-          onClick={() => {
-            navigate('/discovery');
-          }}
-        >
-          우리동네 반려동물 발견<span className={styles.more}>▶</span>
-        </h2>
-
-        <p className={styles.subTitle}>
-          우리 동네에 돌아다니는 동물 정보입니다. 주인이거나 주인을 아는 분들은
-          연락주세요.
-        </p>
-        {!isLoading && (
-          <div className={styles.info}>
-            {discovery[count]?.photo ? (
-              <img className={styles.photo} src={discovery[count]?.photo} />
-            ) : (
-              <img className={styles.photo} src='emptyPhoto.png' />
-            )}
-            <p className={styles.location}>
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                className={styles.locationIcon}
-              />
-              {discovery[count]?.location}
-            </p>
-            <p className={styles.date}>
-              {moment(discovery[count]?.createddate).format('MM월 DD일')}
-            </p>
-            <p className={styles.time}>
-              {moment(discovery[count]?.createddate).format('HH시 mm분')}
-            </p>
-            <span className={styles.feature}>
-              [ {discovery[count]?.upkind} ] {discovery[count]?.kind}{' '}
-              {discovery[count]?.size} {discovery[count]?.color}{' '}
-              {discovery[count]?.gender === 'F'
-                ? '암컷'
-                : discovery[count]?.gender === 'M'
-                ? '수컷'
-                : ''}
-            </span>
-          </div>
-        )}
-        {isLoading && (
+        <Title
+          title='우리동네 반려동물 발견'
+          subTitle='우리 동네에 돌아다니는 동물 정보입니다. 주인이거나 주인을 아는 분들은
+          연락주세요.'
+          page='discovery'
+        />
+        {isLoading ? (
           <div className={styles.info}>
             <DiscoverySkeleton />
+          </div>
+        ) : (
+          <div className={styles.info}>
+            <img
+              className={styles.photo}
+              src={
+                discovery[count]?.photo
+                  ? discovery[count]?.photo
+                  : 'emptyPhoto.png'
+              }
+            />
+            <div className={styles.location}>
+              <Location location={discovery[count]?.location} />
+            </div>
+            <div className={styles.dateTime}>
+              <DateTime dateTime={discovery[count]?.createddate} />
+            </div>
+            <div className={styles.character}>
+              <Character animal={discovery[count]} />
+            </div>
           </div>
         )}
       </div>

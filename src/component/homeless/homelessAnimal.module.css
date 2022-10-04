@@ -1,5 +1,5 @@
-@value makerNavy, makerPink, makerGrey, makerYellow from '../../common/colors.css';
-@value container from '../../common/size.css';
+@value makerNavy, makerPink, makerGrey,makerDarkGrey, makerYellow from '../../common/colors.css';
+@value mediaQueryWidth,mediaQuery from '../../common/size.css';
 
 .info {
   display: flex;
@@ -23,6 +23,7 @@
 .info_img {
   height: 70px;
   width: 70px;
+  min-width: 70px;
   object-fit: cover;
   border-radius: 8px;
   margin-left: 5px;
@@ -30,11 +31,13 @@
   background-color: makerGrey;
 }
 .info_text {
+  overflow: hidden;
+  width: 100%;
   display: flex;
   align-items: center;
   font-size: 0.9rem;
-  width: 100%;
   text-align: center;
+  padding: 0 2em;
 }
 .gender {
   color: white;
@@ -44,7 +47,7 @@
   font-size: 0.6rem;
   text-align: center;
   line-height: 3em;
-  margin: 0 2em;
+  margin-right: 2em;
 }
 .female {
   background-color: makerPink;
@@ -55,23 +58,57 @@
 .unknown {
   background-color: makerGrey;
 }
+.featureAndLocation {
+  flex: 1;
+  display: flex;
+}
 .feature {
   flex: 2;
   font-weight: 700;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.feature li:not(:last-child)::after {
+  content: '|';
+  margin: 0 0.3em;
 }
 .location {
   flex: 1;
+  overflow: hidden;
 }
 .locationIcon {
   margin-right: 0.3em;
 }
 .period {
+  margin-left: auto;
   display: flex;
   align-items: center;
-  padding: 0 2em;
-  /* background-color: makerYellow; */
+  padding-left: 2em;
   height: 80px;
   color: makerNavy;
   border-radius: 0 10px 10px 0;
   font-weight: 700;
+}
+
+@media (max-width: mediaQueryWidth) {
+  .gender,
+  .period {
+    display: none;
+  }
+  .feature,
+  .location {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: mediaQuery) {
+  .location {
+    display: none;
+  }
+  .feature {
+    flex-direction: column;
+  }
+  .feature li:not(:last-child)::after {
+    content: '';
+  }
 }

@@ -1,12 +1,13 @@
-@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
-@value container from '../../common/size.css';
+@value makerNavy,makerYellow,makerGrey,makerLightGrey from '../../common/colors.css';
+@value mediaQuery,mediaQueryWidth,mediaWidth from '../../common/size.css';
 
 .lostMyPet_container {
   background-color: white;
   width: 100%;
+  padding: 2em 1em;
+  min-width: mediaWidth;
 }
 .lostMyPet {
-  padding: 2em 0;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -19,10 +20,11 @@
 }
 
 .lostpet_container {
+  min-width: mediaWidth;
   background-color: makerLightGrey;
   min-height: calc(100% - 50px);
   width: 100%;
-  padding: 1em;
+  padding: 1em 1em 3em;
 }
 .lostpet {
   max-width: 1000px;
@@ -30,17 +32,6 @@
 }
 .header {
   display: flex;
-}
-.write {
-  margin-left: auto;
-  background-color: makerNavy;
-  width: 5em;
-  font-size: 0.8rem;
-  color: white;
-  text-align: center;
-  padding: 0.3em 0;
-  margin-bottom: 2em;
-  cursor: pointer;
 }
 .lostAnimals {
   display: flex;
@@ -50,7 +41,7 @@
 .animal_wrap {
   display: flex;
   flex-direction: column;
-  min-width: 230px;
+  min-width: 300px;
   width: 300px;
   height: 350px;
   padding: 0.8em;
@@ -68,6 +59,7 @@
   font-size: 0.7rem;
   flex: 1;
   overflow: auto;
+  white-space: normal;
 }
 .desc::-webkit-scrollbar {
   width: 8px;
@@ -124,4 +116,14 @@
 }
 .animal_wrap:hover .participate {
   opacity: 1;
+}
+
+@media (max-width: mediaQueryWidth) {
+  .lostMyPet {
+    flex-direction: column;
+  }
+  .line {
+    border-bottom: 1px solid makerGrey;
+    margin: 1em 0;
+  }
 }

@@ -1,0 +1,24 @@
+@value makerGrey from '../../../common/colors.css';
+@value mediaQuery from '../../../common/size.css';
+
+.nav_container {
+  background-color: rgb(235, 235, 235);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  padding: 2em 4em;
+  align-items: center;
+  justify-content: center;
+}
+.line {
+  width: 8%;
+  height: 0;
+  border-top: 1px dashed makerGrey;
+  margin: 0 0.6em;
+}
+
+@media (max-width: mediaQuery) {
+  .nav_container {
+    padding: 1em 1em;
+  }
+}

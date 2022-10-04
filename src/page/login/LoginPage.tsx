@@ -6,10 +6,16 @@ import styles from './LoginPage.module.css';
 import { setLoggedInfo } from '../../modules/user';
 import storage from '../../service/storage';
 import Alert from '../../component/alert/alert';
+import useInput from '../../hooks/useInput';
 
 type LoginUser = {
   email: string;
   pw: string;
+};
+
+const initLogin = {
+  email: '',
+  pw: '',
 };
 
 const LoginPage = () => {
@@ -17,26 +23,17 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
   const [error, setError] = useState(false);
-  const [loginUser, setLoginUser] = useState({
-    email: '',
-    pw: '',
-  });
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginUser((loginUser: LoginUser) => {
-      return { ...loginUser, [name]: value };
-    });
-  };
+  const [form, onChange, reset] = useInput<LoginUser>(initLogin);
 
   const onLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const result = await login(loginUser);
+      const result = await login(form);
       if (!result.data) {
         setError(true);
       } else {
-        const loggedInfo = await getUserInfo(loginUser.email);
+        const loggedInfo = await getUserInfo(form.email);
         storage.set('loggedInfo', loggedInfo);
         dispatch(setLoggedInfo(loggedInfo));
         window.location.replace('/');
@@ -85,7 +82,6 @@ const LoginPage = () => {
         >
           회원가입
         </div>
-        <div>비밀번호 찾기</div>
       </div>
       {error && (
         <Alert

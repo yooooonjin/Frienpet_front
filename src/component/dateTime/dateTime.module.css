@@ -1,0 +1,19 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+
+.datetime {
+  margin-left: auto;
+  display: flex;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+.clockIcon {
+  margin-right: 0.2em;
+}
+.date {
+  color: makerDarkGrey;
+}
+.time {
+  margin-left: 0.5em;
+  color: makerPink;
+  font-weight: 700;
+}

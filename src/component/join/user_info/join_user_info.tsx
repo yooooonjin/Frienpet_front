@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './join_user_info.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
-import Sido from '../../../component/homeless/sido';
-import SiGunGu from '../../../component/homeless/sigungu';
 import { useNavigate } from 'react-router-dom';
 import { SignupValidation } from '../../../page/join/validation';
-import { JoinUserInfoProps, User } from '../../../page/join/JoinPage';
+import { User } from '../../../page/join/JoinPage';
 import Alert from '../../alert/alert';
-import { addrlink } from '../../../service/address';
 import PopupDom from './popupDom';
 import PopupPostCode from './popupPostCode';
+import { emailCheck } from '../../../apis/user';
+import InfoInput from '../infoInput/infoInput';
 
+interface JoinUserInfoProps {
+  setCurrentPage: Dispatch<SetStateAction<string>>;
+  user: User;
+  setUser: Dispatch<SetStateAction<User>>;
+}
 const JoinUserInfo: React.FunctionComponent<JoinUserInfoProps> = ({
   setCurrentPage,
   user,
@@ -23,68 +25,47 @@ const JoinUserInfo: React.FunctionComponent<JoinUserInfoProps> = ({
   const [rePwError, setRePwError] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const onValueCheck = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value, parentNode, parentElement, nextElementSibling } =
-      e.target;
+  const onValueCheck = async (
+    e: React.FocusEvent<HTMLInputElement>
+  ): Promise<string> => {
+    const { name, value } = e.target;
+
+    //이메일 중복 체크
+    if (name === 'email') {
+      const count = await emailCheck(value);
+      if (count > 0) {
+        onSetUser('', name);
+        return '아이디가 존재합니다.';
+      }
+    }
+
+    //가입자 정보 유효성 체크
     const result = SignupValidation(name, value, user)!;
-    if (value == null || value == '') {
-      parentNode!.nextSibling!.textContent = '내용을 입력해주세요.';
-      parentElement!.classList.add(`${styles.error}`);
-      return;
-    }
+
+    if (value == null || value == '') return '내용을 입력해주세요.';
+
     if (result === value) {
-      nextElementSibling!.classList.add(`${styles.check}`);
-      parentNode!.nextSibling!.textContent = '';
-      parentElement!.classList.remove(`${styles.error}`);
-      if (name !== 're_pw') {
-        setUser((user) => {
-          return { ...user, [name]: result };
-        });
-      } else {
-        setRePwError(false);
-      }
+      //비밀번호 확인의 경우 가입자 정보에 입력하지 않음
+      name !== 're_pw' ? onSetUser(value, name) : setRePwError(false);
+      return '';
     } else {
-      nextElementSibling!.classList.remove(`${styles.check}`);
-      parentNode!.nextSibling!.textContent = result;
-      parentElement!.classList.add(`${styles.error}`);
-      if (name !== 're_pw') {
-        setUser((user) => {
-          return { ...user, [name]: '' };
-        });
-      } else {
-        setRePwError(true);
-      }
+      name !== 're_pw' ? onSetUser('', name) : setRePwError(true);
+      return result;
     }
   };
 
-  // const onAddressChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   const { name, value } = e.target;
-  //   setUser((user: User): User => {
-  //     return { ...user, [name]: value };
-  //   });
-  // };
-
-  // const onSigunguReset = () => {
-  //   setUser((user: User): User => {
-  //     return { ...user, org_cd: '' };
-  //   });
-  // };
-
-  const onSetAddress = (data: any) => {
-    setUser((user) => {
-      return { ...user, ...data };
-    });
-  };
-
-  const onPopupControl = (toChange: boolean) => {
-    setIsPopupOpen(toChange);
+  //가입자 정보 입력 // value가 string 타입이 아닐 경우 시도/시군구/동네 정보 입력
+  const onSetUser = (value: string | any, name?: string) => {
+    typeof value === 'string'
+      ? setUser((user) => ({ ...user, [name!]: value }))
+      : setUser((user) => ({ ...user, ...value }));
   };
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(user);
     for (const key in user) {
       if (user[key] == null || user[key] === '' || rePwError === true) {
+        //기입란이 비어있거나 비밀번호 확인에 오류가 있을 경우 alert
         setError(true);
         return;
       }
@@ -95,79 +76,26 @@ const JoinUserInfo: React.FunctionComponent<JoinUserInfoProps> = ({
   return (
     <>
       <form className={styles.form_container}>
-        <div className={styles.info_wrap}>
-          <p className={styles.info_title}>* 이메일</p>
-          <div className={styles.input}>
-            <input type='email' name='email' id='email' onBlur={onValueCheck} />
-            <FontAwesomeIcon
-              icon={faCircleCheck}
-              className={styles.checkIcon}
-            />
-          </div>
-          <p className={styles.errorMsg}></p>
-        </div>
-        <div className={styles.info_wrap}>
-          <p className={styles.info_title}>* 이름</p>
-          <div className={styles.input}>
-            <input type='text' name='name' id='name' onBlur={onValueCheck} />
-            <FontAwesomeIcon
-              icon={faCircleCheck}
-              className={styles.checkIcon}
-            />
-          </div>
-          <p className={styles.errorMsg}></p>
-        </div>
-        <div className={styles.info_wrap}>
-          <p className={styles.info_title}>
-            * 비밀번호
-            <span className={styles.desc}>
-              8-15자의 영문, 숫자 또는 특수문자 조합
-            </span>
-          </p>
-          <div className={styles.input}>
-            <input type='password' name='pw' id='pw' onBlur={onValueCheck} />
-            <FontAwesomeIcon
-              icon={faCircleCheck}
-              className={styles.checkIcon}
-            />
-          </div>
-          <p className={styles.errorMsg}></p>
-        </div>
-        <div className={styles.info_wrap}>
-          <p className={styles.info_title}>
-            * 비밀번호 확인
-            <span className={styles.desc}>
-              위의 비밀번호를 다시 입력해주세요.
-            </span>
-          </p>
-          <div className={styles.input}>
-            <input
-              type='password'
-              name='re_pw'
-              id='re_pw'
-              onBlur={onValueCheck}
-            />
-            <FontAwesomeIcon
-              icon={faCircleCheck}
-              className={styles.checkIcon}
-            />
-          </div>
-          <p className={styles.errorMsg}></p>
-        </div>
-        <div className={styles.info_wrap}>
-          <p className={styles.info_title}>
-            * 핸드폰번호
-            <span className={styles.desc}>'-' 없이 번호만 입력해주세요. </span>
-          </p>
-          <div className={styles.input}>
-            <input type='text' name='phone' id='phone' onBlur={onValueCheck} />
-            <FontAwesomeIcon
-              icon={faCircleCheck}
-              className={styles.checkIcon}
-            />
-          </div>
-          <p className={styles.errorMsg}></p>
-        </div>
+        <InfoInput onValueCheck={onValueCheck} title='* 이메일' name='email' />
+        <InfoInput onValueCheck={onValueCheck} title='* 이름' name='name' />
+        <InfoInput
+          onValueCheck={onValueCheck}
+          title='* 비밀번호'
+          desc='8-15자의 영문, 숫자 또는 특수문자 조합'
+          name='pw'
+        />
+        <InfoInput
+          onValueCheck={onValueCheck}
+          title='* 비밀번호 확인'
+          desc='위의 비밀번호를 다시 입력해주세요.'
+          name='re_pw'
+        />
+        <InfoInput
+          onValueCheck={onValueCheck}
+          title='* 핸드폰번호'
+          desc="'-' 없이 번호만 입력해주세요."
+          name='phone'
+        />
         <div className={styles.info_wrap}>
           <p className={styles.info_title}>* 주소</p>
           <div className={`${styles.address}`}>
@@ -176,52 +104,32 @@ const JoinUserInfo: React.FunctionComponent<JoinUserInfoProps> = ({
             <input type='text' readOnly value={user.bname} />
             <div
               className={styles.searchBtn}
-              onClick={() => onPopupControl(true)}
+              onClick={() => setIsPopupOpen(true)}
             >
               검색
             </div>
           </div>
         </div>
-        <div id='PopupDom' className={styles.popup}>
+        {/* 가입자 동네 정보 입력 다음 API*/}
+        <div id='PopupDom' className={`${isPopupOpen && styles.popup}`}>
           {isPopupOpen && (
             <PopupDom>
               <PopupPostCode
-                onPopupControl={onPopupControl}
-                onSetAddress={onSetAddress}
+                onPopupControl={setIsPopupOpen}
+                onSetAddress={onSetUser}
               />
             </PopupDom>
           )}
         </div>
-        {/* <div className={styles.info_wrap}>
-          <p className={styles.info_title}>* 주소</p>
-          <div className={styles.address_wrap}>
-            <div className={styles.address}>
-              <span>지역 : </span>
-              <Sido onSidoChange={onAddressChange} />
-            </div>
-            <div className={styles.address}>
-              <span>세부 지역 : </span>
-              <SiGunGu
-                selectedSido={user.upr_cd}
-                onFilterChange={onAddressChange}
-                onReset={onSigunguReset}
-              />
-            </div>
-          </div>
-        </div> */}
         <div className={styles.button_wrap}>
           <button
             onClick={() => {
               navigate('/');
             }}
-            className={`${styles.button} ${styles.cancel}`}
           >
             홈
           </button>
-          <button
-            onClick={onSubmit}
-            className={`${styles.button} ${styles.submit}`}
-          >
+          <button onClick={onSubmit} className={styles.submit}>
             다음
           </button>
         </div>

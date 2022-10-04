@@ -1,0 +1,37 @@
+@value makerNavy,makerYellow, makerDarkGrey from '../../common/colors.css';
+@value mediaQueryWidth from '../../common/size.css';
+
+.title {
+  font-size: 1.8rem;
+  color: makerNavy;
+  letter-spacing: -0.7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.subTitle {
+  font-size: 0.8rem;
+  color: makerDarkGrey;
+  text-align: center;
+}
+.more {
+  font-size: 0.6rem;
+  margin-left: 1.2em;
+}
+.homeless .title {
+  color: makerYellow;
+}
+.homeless .subTitle {
+  color: white;
+}
+
+@media (max-width: mediaQueryWidth) {
+  .title {
+    font-size: 1.3rem;
+  }
+  .subTitle {
+    font-size: 0.6rem;
+    white-space: normal;
+  }
+}

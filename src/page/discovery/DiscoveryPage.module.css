@@ -1,10 +1,11 @@
 @value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
-@value container from '../../common/size.css';
+@value mediaQueryWidth,mediaWidth from '../../common/size.css';
 
 .discovery_container {
+  min-width: mediaWidth;
   min-height: calc(100% - 50px);
   width: 100%;
-  padding: 1em;
+  padding: 1em 1em 2em;
   max-width: 1000px;
   margin: auto;
 }
@@ -12,16 +13,16 @@
   display: flex;
   width: 100%;
 }
-.write {
-  margin-left: auto;
-  background-color: makerNavy;
-  width: 5em;
-  font-size: 0.8rem;
-  color: white;
-  text-align: center;
-  padding: 0.3em 0;
-  margin-bottom: 2em;
-  cursor: pointer;
+.locationIcon {
+  color: makerPink;
+  margin-right: 0.3em;
+}
+.explanation {
+  font-size: 0.7rem;
+  text-align: end;
+  margin-bottom: 0.8em;
+  letter-spacing: -0.7px;
+  color: makerDarkGrey;
 }
 .discovery_wrap {
   display: flex;
@@ -32,7 +33,6 @@
 .map {
   width: 25em;
   height: 25em;
-  top: 0;
   margin-right: 2em;
 }
 .animal {
@@ -46,7 +46,7 @@
 .animal:hover {
   transform: scale(1.01);
 }
-.animal div:first-child {
+.animal > div:first-child {
   display: flex;
   align-items: center;
 }
@@ -60,39 +60,17 @@
   flex: 1;
   padding: 0 1em;
 }
-.info > div:first-child {
+.lostInfo {
   display: flex;
   align-items: center;
-  font-weight: 700;
 }
-.locationIcon {
-  margin-right: 0.3em;
+.location {
+  max-width: 11em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.address {
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: makerDarkGrey;
-}
-.date {
+.dateTime {
   margin-left: auto;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-.time {
-  margin-left: 0.5em;
-  color: makerPink;
-  font-size: 0.8rem;
-}
-.character {
-  margin-top: 0.3em;
-  font-size: 0.9rem;
-  display: flex;
-}
-.character div {
-  margin-right: 0.8em;
-}
-.character div:first-child {
-  font-weight: 700;
 }
 .desc {
   margin-top: 1em;
@@ -101,4 +79,28 @@
   font-size: 0.7rem;
   height: 2.5em;
   overflow-y: auto;
+  white-space: normal;
+}
+
+@media (max-width: mediaQueryWidth) {
+  .discovery_container {
+    max-width: 33.5em;
+  }
+  .address {
+    display: none;
+  }
+  .discovery_wrap {
+    display: block;
+  }
+  .map {
+    width: 100%;
+    height: 10em;
+    margin-bottom: 1em;
+  }
+  .location {
+    font-size: 0.8rem;
+  }
+  .lostInfo {
+    display: block;
+  }
 }

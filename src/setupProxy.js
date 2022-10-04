@@ -8,11 +8,11 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
-  app.use(
-    '/addrlink',
-    createProxyMiddleware({
-      target: 'https://business.juso.go.kr',
-      changeOrigin: true,
-    })
-  );
+  // app.use(
+  //   '/abandonmentPublicSrvc',
+  //   createProxyMiddleware({
+  //     target: 'http://apis.data.go.kr/1543061',
+  //     changeOrigin: true,
+  //   })
+  // );
 };

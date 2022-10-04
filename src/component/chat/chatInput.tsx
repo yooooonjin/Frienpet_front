@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './chatInput.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
+import Icon from '../icon/icon';
 
 interface ChatInputProps {
   socket: any;
@@ -14,7 +13,6 @@ const ChatInput: React.FunctionComponent<ChatInputProps> = ({
   userId,
 }) => {
   const [chatMessage, setChatMessage] = useState('');
-  const formRef = useRef<HTMLFormElement>(null);
 
   const onChatMsgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChatMessage(e.target.value);
@@ -28,15 +26,20 @@ const ChatInput: React.FunctionComponent<ChatInputProps> = ({
       time: moment(new Date()).format('HH시 mm분'),
     });
     setChatMessage('');
-    formRef.current?.reset();
   };
   return (
-    <form ref={formRef} className={styles.send}>
-      <input className={styles.input} onChange={onChatMsgChange} />
+    <div className={styles.send}>
+      <input
+        value={chatMessage}
+        className={styles.input}
+        onChange={onChatMsgChange}
+      />
       <button className={styles.sendBtn} onClick={onSubmit}>
-        <FontAwesomeIcon icon={faPaperPlane} className={styles.sendIcon} />
+        <p className={styles.sendIcon}>
+          <Icon icon='PaperPlane' />
+        </p>
       </button>
-    </form>
+    </div>
   );
 };
 

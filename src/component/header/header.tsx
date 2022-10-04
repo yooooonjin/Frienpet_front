@@ -3,12 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Guest from './guest/guest';
 import styles from './header.module.css';
 import Member from './member/member';
+import Icon from '../icon/icon';
+import Nav from './nav';
 
-interface HeaderProps {
-  accessToken: string;
-}
-
-const Header: React.FunctionComponent<HeaderProps> = ({ accessToken }) => {
+const Header = ({ accessToken }: { accessToken: string }) => {
   const navigate = useNavigate();
   const [selectedPage, setSelectedPage] = useState<string>();
 
@@ -22,34 +20,29 @@ const Header: React.FunctionComponent<HeaderProps> = ({ accessToken }) => {
     <header className={styles.header_container}>
       <div className={styles.header}>
         <img
-          id=''
           onClick={onPageChange}
           className={styles.logo}
           src='frienpet.png'
-          alt='logo'
         />
         <ul className={styles.nav}>
-          <li
-            className={`${selectedPage === 'discovery' && styles.selected}`}
-            id='discovery'
+          <Nav
+            selectedPage={selectedPage}
+            pageId='discovery'
+            msg='우리동네 반려동물 발견'
             onClick={onPageChange}
-          >
-            우리동네 반려동물 발견
-          </li>
-          <li
-            className={`${selectedPage === 'lostPet' && styles.selected}`}
-            id='lostPet'
+          />
+          <Nav
+            selectedPage={selectedPage}
+            pageId='lostPet'
+            msg='함께 우리동네 반려동물 찾기'
             onClick={onPageChange}
-          >
-            함께 우리동네 반려동물 찾기
-          </li>
-          <li
-            className={`${selectedPage === 'homeless' && styles.selected}`}
-            id='homeless'
+          />
+          <Nav
+            selectedPage={selectedPage}
+            pageId='homeless'
+            msg='보호중인 유기동물'
             onClick={onPageChange}
-          >
-            보호중인 유기동물
-          </li>
+          />
         </ul>
         {accessToken ? (
           <Member onPageChange={onPageChange} />

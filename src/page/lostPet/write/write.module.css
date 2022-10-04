@@ -1,5 +1,5 @@
 @value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey from '../../../common/colors.css';
-@value container from '../../../common/size.css';
+@value mediaQuery,mediaWidth from '../../../common/size.css';
 
 .dim {
   position: fixed;
@@ -80,4 +80,11 @@
 }
 .button:hover {
   transform: scale(1.01, 1.05);
+}
+
+@media (max-width: mediaQuery) {
+  .write_popup {
+    max-width: mediaWidth;
+    width: 90%;
+  }
 }

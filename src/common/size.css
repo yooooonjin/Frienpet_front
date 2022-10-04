@@ -1,10 +1,8 @@
-@value mediaQuery: 480px;
-/* @value mediaQuery: 768px; */
+/* @value mediaQuery: 480px; */
+@value mediaQuery: 575px;
+@value mediaQueryWidth: 768px;
 @value tabletQuery: 1024px;
 @value maxWidth: 60em;
-@value minWidth: 40em;
+@value mediaWidth: 340px;
 
 @value container: 1024px;
-
-@value size_title: 1.8rem;
-@value size_sub: .8rem;

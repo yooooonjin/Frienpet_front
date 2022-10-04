@@ -1,0 +1,31 @@
+@value makerNavy,makerYellow from '../../common/colors.css';
+@value mediaQueryWidth from '../../common/size.css';
+
+li {
+  cursor: pointer;
+}
+.text {
+  font-size: 0.8rem;
+  margin: 0 1.5em;
+}
+li:hover,
+.selected {
+  font-weight: 700;
+}
+.icon {
+  display: none;
+}
+
+@media (max-width: mediaQueryWidth) {
+  .text {
+    display: none;
+  }
+  .icon {
+    display: block;
+    font-size: 1rem;
+    color: #ffe585;
+  }
+  .selected .icon {
+    color: makerNavy !important;
+  }
+}

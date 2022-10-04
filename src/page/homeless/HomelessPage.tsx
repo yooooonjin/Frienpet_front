@@ -1,31 +1,38 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import Banner from '../../component/banner/banner';
-import Homeless, { Animals } from '../../component/homeless/homeless';
-import HomelessAnimal from '../../component/homeless_animal/homeless_animal';
+import HeartAnimals from '../../component/heartAnimals/heartAnimals';
+import Homeless, { HomelessAnimalT } from '../../component/homeless/homeless';
+import HomelessAnimalInfo from '../../component/homeless/homelessAnimalInfo';
+import { RootState } from '../../modules';
 
 export interface HomelessAnimalProps {
-  selectedAnimal: Animals | undefined;
+  // selectedAnimal: Animals | undefined;
+  selectedAnimal: HomelessAnimalT;
+  email: string;
 }
 export interface HomelessProps {
-  setSelectedAnimal: Dispatch<SetStateAction<Animals | undefined>>;
+  setSelectedAnimal: Dispatch<SetStateAction<HomelessAnimalT | undefined>>;
 }
 
 const HomelessPage = () => {
   const location = useLocation();
-  const state = location.state as { animal: Animals };
+  const email = useSelector((state: RootState) => state.user.loggedInfo.email);
+  const state = location.state as { animal: HomelessAnimalT };
   const animal = state?.animal;
-  const [selectedAnimal, setSelectedAnimal] = useState<Animals>();
+  const [selectedAnimal, setSelectedAnimal] = useState<HomelessAnimalT>();
 
   useEffect(() => {
     state && setSelectedAnimal(animal);
   }, []);
   return (
-    <>
-      <Banner />
-      {selectedAnimal && <HomelessAnimal selectedAnimal={selectedAnimal} />}
+    <div>
+      <HeartAnimals email={email} />
+      {selectedAnimal && (
+        <HomelessAnimalInfo selectedAnimal={selectedAnimal} email={email} />
+      )}
       <Homeless setSelectedAnimal={setSelectedAnimal} />
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+@value makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
 
 .chatting {
   width: 100%;

@@ -1,12 +1,14 @@
-@value makerNavy,makerYellow, makerPink, makerGrey from '../../common/colors.css';
-@value container from '../../common/size.css';
+@value makerNavy,makerYellow, makerPink, makerGrey,makerDarkGrey from '../../common/colors.css';
+@value mediaQueryWidth,mediaQuery,mediaWidth from '../../common/size.css';
 
-.homelessPet {
+.homelessPet_container {
   width: 100%;
   max-width: 900px;
   margin: 2em auto;
+  min-width: mediaWidth;
 }
 .info {
+  margin: 0 1em;
   display: flex;
   flex-direction: column;
 }
@@ -14,6 +16,10 @@
   display: flex;
   align-items: center;
   color: makerNavy;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
 }
 .noticeInfo {
   display: flex;
@@ -27,17 +33,32 @@
   font-size: 0.7rem;
   margin-left: 1em;
 }
+.heartIcon {
+  width: 40px;
+  height: 40px;
+  font-size: 1.3rem;
+  color: makerDarkGrey;
+  border: 1px solid makerDarkGrey;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.heartIcon:hover {
+  color: makerPink;
+}
+.heart {
+  color: makerPink;
+  border: 1px solid makerPink;
+}
 .image {
   width: 250px;
   height: 250px;
   object-fit: cover;
   border-radius: 50%;
-  filter: grayscale(90%);
   margin-right: 3em;
   transition: all 100ms ease-in;
-}
-.image:hover {
-  filter: grayscale(0%);
 }
 .character {
   display: flex;
@@ -56,18 +77,18 @@
 }
 .gender span {
   background-color: makerYellow;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: makerNavy;
   border-radius: 50%;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   text-align: center;
   font-weight: 700;
   margin-left: 0.5em;
 }
 .kind {
   margin-left: 0.8em;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .arrowIcon {
   margin: 0 0.3em;
@@ -81,13 +102,22 @@
 .rescueInfo p {
   margin-right: 0.8em;
 }
+p {
+  font-size: 0.8rem;
+}
+.shelterInfo p,
+.rescueInfo p {
+  white-space: normal;
+}
 .privacy span,
 .rescueInfo span,
 .shelterInfo span {
   font-weight: 700;
 }
 .feature {
-  font-size: 1.8rem;
+  word-break: break-all;
+  white-space: initial;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.7px;
   margin: 0.8em 0;
@@ -102,4 +132,30 @@
   font-size: 0.6rem;
   color: makerPink;
   font-weight: 700;
+}
+@media (max-width: mediaQueryWidth) {
+  .animalInfo {
+    flex-direction: column;
+  }
+  .image {
+    width: 180px;
+    height: 180px;
+    margin: 0;
+  }
+  .animalInfo_text {
+    text-align: center;
+    margin-top: 2em;
+    width: 100%;
+  }
+  .privacy,
+  .character,
+  .rescueInfo {
+    justify-content: center;
+  }
+  .noticeInfo {
+    margin-bottom: 2em;
+  }
+  .rescueInfo {
+    flex-direction: column;
+  }
 }

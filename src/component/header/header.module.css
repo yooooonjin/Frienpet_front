@@ -1,16 +1,18 @@
-@value makerNavy,makerYellow,makerGrey from '../../common/colors.css';
-@value container from '../../common/size.css';
+@value makerNavy,makerYellow from '../../common/colors.css';
+@value mediaQueryWidth from '../../common/size.css';
 
 .header_container {
   background-color: makerYellow;
   height: 50px;
+  padding: 0 1em;
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  width: container;
+  width: 100%;
+  max-width: 900px;
   margin: auto;
 }
 .logo {
@@ -19,15 +21,13 @@
 }
 .nav {
   display: flex;
-  font-size: 0.8rem;
 }
-.nav li {
-  margin: 0 1.5em;
-  cursor: pointer;
-  border-bottom: 1px solid transparent;
-}
-.nav li:hover,
-.nav .selected {
-  font-weight: 700;
-  border-bottom: 1px solid makerNavy;
+
+@media (max-width: mediaQueryWidth) {
+  .nav {
+    width: 30%;
+    justify-content: space-between;
+    min-width: 100px;
+    margin: 0 1em;
+  }
 }

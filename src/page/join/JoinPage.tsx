@@ -1,25 +1,13 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './JoinPage.module.css';
 import JoinUserInfo from '../../component/join/user_info/join_user_info';
 import JoinAnimalInfo from '../../component/join/animal_info/join_animal_info';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { join } from '../../apis/user';
 import { savePetInfo } from '../../apis/pet';
+import Nav from '../../component/join/nav/nav';
+import Icon from '../../component/icon/icon';
 
-export interface JoinUserInfoProps {
-  setCurrentPage: Dispatch<SetStateAction<string>>;
-  user: User;
-  setUser: Dispatch<SetStateAction<User>>;
-}
-export interface JoinAnimalInfoProps {
-  setCurrentPage: Dispatch<SetStateAction<string>>;
-  join(): void;
-  animal: Animal;
-  setAnimal: Dispatch<SetStateAction<Animal>>;
-}
 export type User = {
   [key: string]: string | undefined;
   email: string;
@@ -36,11 +24,21 @@ export type Animal = {
   upkind: string;
   kind: string;
   gender: string;
-  weight: string;
+  size: string;
   color: string;
-  character: string;
+  feature: string;
 };
 
+export const initAnimal = {
+  petid: '',
+  name: '',
+  upkind: '',
+  kind: '',
+  gender: '',
+  size: '',
+  color: '',
+  feature: '',
+};
 const JoinPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState('userInfo');
@@ -54,18 +52,7 @@ const JoinPage = () => {
     bname: '',
   });
 
-  const [animal, setAnimal] = useState<Animal>({
-    petid: '',
-    name: '',
-    upkind: '',
-    kind: '',
-    gender: '',
-    weight: '',
-    color: '',
-    character: '',
-  });
-
-  const onSubmit = () => {
+  const onSubmit = (animal: Animal) => {
     try {
       join(user);
       savePetInfo({ ...animal, userid: user.email });
@@ -79,47 +66,12 @@ const JoinPage = () => {
       <p className={styles.sub_title}>
         회원 가입 하신 후 다양한 서비스를 만나보세요.
       </p>
-      <div className={styles.nav_container}>
-        <div className={styles.nav}>
-          <div className={`${styles.circle} ${styles.current}`}></div>
-          <p className={`${styles.nav_title} ${styles.current_title}`}>
-            사용자 정보 입력
-          </p>
-        </div>
-        <div className={styles.line}></div>
-        <div className={styles.nav}>
-          <div
-            className={`${styles.circle} ${
-              currentPage !== 'userInfo' && styles.current
-            }`}
-          ></div>
-          <p
-            className={`${styles.nav_title} ${
-              currentPage !== 'userInfo' && styles.current_title
-            }`}
-          >
-            반려 동물 정보 입력
-          </p>
-        </div>
-        <div className={styles.line}></div>
-        <div className={styles.nav}>
-          <div
-            className={`${styles.circle} ${
-              currentPage === 'completion' && styles.current
-            }`}
-          ></div>
-          <p
-            className={`${styles.nav_title} ${
-              currentPage === 'completion' && styles.current_title
-            }`}
-          >
-            가입 완료
-          </p>
-        </div>
-      </div>
+      <Nav currentPage={currentPage} />
+      {/* 가입자 정보 입력 페이지 (입력 정보를 기억하기 위해 hide 처리) */}
       <div
-        className={`${currentPage !== 'userInfo' && styles.hide}
-        ${styles.info_wrap}`}
+        className={`${styles.info_wrap} ${
+          currentPage !== 'userInfo' && styles.hide
+        }`}
       >
         <JoinUserInfo
           setCurrentPage={setCurrentPage}
@@ -127,23 +79,24 @@ const JoinPage = () => {
           setUser={setUser}
         />
       </div>
+      {/* 동물 정보 입력 페이지 (입력 정보를 기억하기 위해 hide 처리) */}
       <div
-        className={`${currentPage !== 'animalInfo' && styles.hide}
-        ${styles.info_wrap}`}
+        className={`${styles.info_wrap} ${
+          currentPage !== 'animalInfo' && styles.hide
+        }`}
       >
-        <JoinAnimalInfo
-          setCurrentPage={setCurrentPage}
-          join={onSubmit}
-          animal={animal}
-          setAnimal={setAnimal}
-        />
+        <JoinAnimalInfo setCurrentPage={setCurrentPage} join={onSubmit} />
       </div>
+      {/* 가입 완료 페이지 (입력 정보를 기억하기 위해 hide 처리) */}
       <div
-        className={`${currentPage !== 'completion' && styles.hide}
-        ${styles.info_wrap}`}
+        className={`${styles.info_wrap} ${
+          currentPage !== 'completion' && styles.hide
+        }`}
       >
         <div className={styles.completion_container}>
-          <FontAwesomeIcon icon={faCircleCheck} className={styles.checkIcon} />
+          <p className={styles.checkIcon}>
+            <Icon icon='ircleCheck' />
+          </p>
           <div className={styles.completion_title}>회원가입 완료</div>
           <p className={styles.completion_sub_title}>
             프렌펫 가입이 완료되었습니다.

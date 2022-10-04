@@ -1,0 +1,18 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+
+.character {
+  margin-top: 0.3em;
+  font-size: 0.8rem;
+  display: flex;
+}
+.character div {
+  margin-right: 0.5em;
+}
+.character div:not(:first-child, :last-child)::after {
+  content: '|';
+  margin-left: 0.5em;
+  color: makerGrey;
+}
+.character div:first-child {
+  font-weight: 700;
+}

@@ -1,7 +1,7 @@
 @value makerNavy,makerYellow, makerPink, makerGrey from '../../../common/colors.css';
-@value container from '../../../common/size.css';
+@value mediaQuery from '../../../common/size.css';
 
-.button {
+.button_container > button {
   color: white;
   border: 1px solid white;
   border-radius: 13px;
@@ -11,5 +11,17 @@
 }
 .login {
   background-color: makerNavy;
-  border: 1px solid makerNavy;
+  border: 1px solid makerNavy !important;
+}
+.guest {
+  display: none;
+}
+
+@media (max-width: mediaQuery) {
+  .guest {
+    display: block;
+  }
+  .button_container {
+    display: none;
+  }
 }

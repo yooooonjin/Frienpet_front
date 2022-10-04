@@ -1,13 +1,15 @@
-@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+@value makerNavy from '../../common/colors.css';
 
 .send {
   width: 100%;
   display: flex;
 }
 .input {
+  border: 1px solid makerNavy;
   flex: 1;
   padding: 0.1em 0.5em;
   font-size: 0.8rem;
+  outline: 0;
 }
 .sendBtn {
   width: 3em;

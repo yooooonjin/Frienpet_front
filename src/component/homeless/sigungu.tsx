@@ -6,8 +6,7 @@ interface SiGunGuProps {
   onFilterChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void;
-  onReset?(): void;
-  userSiGunGu?: string;
+  onReset(): void;
 }
 
 type Sigungu = {
@@ -19,7 +18,6 @@ const SiGunGu: FunctionComponent<SiGunGuProps> = ({
   selectedSido,
   onFilterChange,
   onReset,
-  userSiGunGu,
 }) => {
   const [sigungu, setSigungu] = useState([]);
 
@@ -37,18 +35,11 @@ const SiGunGu: FunctionComponent<SiGunGuProps> = ({
     } else {
       setSigungu([]);
     }
-    onReset && onReset();
+    onReset();
   }, [selectedSido]);
 
   return (
-    <select
-      ref={selectRef}
-      name='org_cd'
-      id='org_cd'
-      onChange={onFilterChange}
-      value={userSiGunGu && userSiGunGu}
-      disabled={userSiGunGu ? true : false}
-    >
+    <select ref={selectRef} name='org_cd' id='org_cd' onChange={onFilterChange}>
       <option value=''>전체</option>
       {sigungu.map((data: Sigungu) => {
         return (

@@ -1,0 +1,87 @@
+@value makerNavy,makerPink,makerDarkGrey,makerYellow,makerLightGrey,makerGrey,makerLightGrey from '../../common/colors.css';
+@value mediaQuery,mediaWidth from '../../common/size.css';
+
+.dim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+.write_popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 25em;
+  z-index: 3;
+  border-radius: 1em;
+  padding: 1em 1.5em 1.5em;
+  min-width: mediaWidth;
+}
+.close {
+  display: flex;
+  justify-content: space-between;
+}
+.trashIcon {
+  color: makerGrey;
+  cursor: pointer;
+}
+.trashIcon:hover {
+  color: makerYellow;
+}
+.closeIcon {
+  color: makerNavy;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+.photo {
+  width: 10em;
+  height: 10em;
+  object-fit: contain;
+  background-color: makerLightGrey;
+}
+.animalInfo {
+  display: flex;
+  align-items: center;
+}
+.animalInfoTxt {
+  font-size: 0.8rem;
+  padding: 0 1em;
+}
+.noticeNo {
+  margin-bottom: 1em;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.phoneIcon {
+  margin-right: 0.3em;
+  font-size: 0.6rem;
+}
+.careTel {
+  margin-bottom: 1em;
+}
+.noticeEdt {
+  font-weight: 700;
+  margin-bottom: 0.3em;
+}
+.beOver {
+  color: makerPink;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+@media (max-width: mediaQuery) {
+  .write_popup {
+    width: 90%;
+  }
+  .animalInfoTxt {
+    font-size: 0.7rem;
+  }
+  .noticeNo {
+    font-size: 0.8rem;
+  }
+}

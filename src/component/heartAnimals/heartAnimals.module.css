@@ -1,0 +1,36 @@
+@value makerNavy,makerPink,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+@value mediaWidth from '../../common/size.css';
+
+.heartAnimal_container {
+  min-width: mediaWidth;
+  padding: 0 1em;
+  background-color: white;
+  height: 77px;
+  display: flex;
+}
+.heartAnimal {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  overflow-x: auto;
+}
+.heartAnimal::-webkit-scrollbar {
+  height: 7px;
+  background-color: makerLightGrey;
+}
+.heartAnimal::-webkit-scrollbar-thumb {
+  background-color: makerNavy;
+  border-radius: 4px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+.emptyMsg {
+  width: 100%;
+  text-align: center;
+  color: makerDarkGrey;
+}
+.heartIcon {
+  color: makerPink;
+  margin-right: 0.5em;
+}

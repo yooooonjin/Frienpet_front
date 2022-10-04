@@ -1,0 +1,36 @@
+@value makerGrey,makerNavy,makerYellow from '../../../common/colors.css';
+@value mediaQuery from '../../../common/size.css';
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 1px solid makerGrey;
+}
+.current {
+  border: 2px solid makerYellow;
+  background-color: makerNavy;
+}
+.nav_title {
+  font-size: 0.7rem;
+  margin-left: 0.8em;
+}
+.current_title {
+  color: makerNavy;
+  font-weight: 700;
+}
+
+@media (max-width: mediaQuery) {
+  .nav {
+    flex-direction: column;
+  }
+  .nav_title {
+    margin: 0.8em 0;
+    font-size: 0.4rem;
+  }
+}

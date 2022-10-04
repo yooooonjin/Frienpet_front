@@ -1,27 +1,10 @@
-@value makerNavy,makerYellow, makerPink, makerGrey, makerDarkGrey from '../../common/colors.css';
-@value container, size_title,size_sub from '../../common/size.css';
+@value makerNavy,makerYellow from '../../common/colors.css';
+@value mediaQuery,mediaWidth from '../../common/size.css';
 
 .discovery_container {
   background-color: white;
-  padding: 1.8em 0;
-}
-.title {
-  font-size: size_title;
-  color: makerNavy;
-  letter-spacing: -0.7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.subTitle {
-  font-size: size_sub;
-  color: makerDarkGrey;
-  text-align: center;
-}
-.more {
-  font-size: 0.6rem;
-  margin-left: 1.2em;
+  padding: 1.8em 1em;
+  min-width: mediaWidth;
 }
 .info {
   margin: 1em auto;
@@ -42,24 +25,29 @@
   margin-left: 0.4em;
   background-color: makerLightGrey;
 }
-.locationIcon {
-  margin: 0 0.3em 0 0.8em;
-  color: makerYellow;
-}
 .location {
   font-size: 1.2rem;
   color: makerYellow;
+  margin-left: 0.8em;
 }
-.time,
-.date {
+.dateTime {
   margin-left: 0.5em;
   font-size: 0.8rem;
 }
-.time {
-  color: makerPink;
+.dateTime > div > div:first-child {
+  color: white;
 }
-.feature {
+.character {
   margin-left: auto;
   font-weight: 300;
-  font-size: 0.9rem;
+}
+
+@media (max-width: mediaQuery) {
+  .character,
+  .dateTime {
+    display: none;
+  }
+  .location {
+    overflow: hidden;
+  }
 }

@@ -1,0 +1,26 @@
+@value makerYellow, makerPink from '../../common/colors.css';
+
+.heartAnimal {
+  position: relative;
+}
+.photo {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  margin: 0 0.2em;
+  cursor: pointer;
+}
+.beOver {
+  border: 3px solid makerYellow;
+}
+.end {
+  filter: grayscale(100%);
+  opacity: 0.2;
+}
+.beOverIcon {
+  position: absolute;
+  color: makerPink;
+  z-index: 2;
+  top: 0;
+  right: 0;
+}
