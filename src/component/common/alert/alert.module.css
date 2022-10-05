@@ -1,5 +1,5 @@
-@value makerNavy,makerGrey from '../../common/colors.css';
-@value mediaQuery,mediaWidth from '../../common/size.css';
+@value makerNavy,makerGrey from '../../../common/colors.css';
+@value mediaQuery,mediaWidth from '../../../common/size.css';
 
 .dim {
   position: fixed;

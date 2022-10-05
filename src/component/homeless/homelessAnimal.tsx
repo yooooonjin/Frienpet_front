@@ -2,8 +2,8 @@ import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import styles from './homelessAnimal.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { HomelessAnimalT } from './homeless';
-import DateFormat from '../dateFormat/dateFormat';
-import Icon from '../icon/icon';
+import DateFormat from '../common/dateFormat/dateFormat';
+import Icon from '../common/icon/icon';
 
 export interface AnimalProps {
   animal: HomelessAnimalT;

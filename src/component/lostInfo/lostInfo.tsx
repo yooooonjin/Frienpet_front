@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './lostInfo.module.css';
 import { LostAnimal } from '../../page/lostPet/LostPetPage';
-import DateTime from '../dateTime/dateTime';
-import Address from '../address/address';
-import Location from '../location/location';
-import Character from '../character/character';
+import DateTime from '../common/dateTime/dateTime';
+import Address from '../common/address/address';
+import Location from '../common/location/location';
+import Character from '../common/character/character';
 
 const LostInfo = ({ lostInfo }: { lostInfo: LostAnimal }) => {
   return (

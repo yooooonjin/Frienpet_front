@@ -5,7 +5,7 @@ import { LostPet } from '../LostPetPage';
 import { getPetInfo } from '../../../apis/pet';
 import { saveLostpet } from '../../../apis/lostPet';
 import storage from '../../../service/storage';
-import Icon from '../../../component/icon/icon';
+import Icon from '../../../component/common/icon/icon';
 
 interface WriteProps {
   setShowWritePopup: React.Dispatch<SetStateAction<boolean>>;

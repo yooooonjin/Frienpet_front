@@ -6,7 +6,7 @@ import { getPetInfo } from '../../apis/pet';
 import { getPetPhoto } from '../../apis/photo';
 import LostInfo from '../lostInfo/lostInfo';
 import LostInfoSkeleton from '../lostInfo/skeleton/lostInfoSkeleton';
-import Title from '../title/title';
+import Title from '../common/title/title';
 
 const LostAnimals = () => {
   const [lostAnimals, setLostAnimals] = useState<Array<LostAnimal>>();

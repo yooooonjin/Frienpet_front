@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Guest from './guest/guest';
 import styles from './header.module.css';
 import Member from './member/member';
-import Icon from '../icon/icon';
+import Icon from '../common/icon/icon';
 import Nav from './nav';
 
 const Header = ({ accessToken }: { accessToken: string }) => {

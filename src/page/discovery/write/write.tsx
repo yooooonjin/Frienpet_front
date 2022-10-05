@@ -6,7 +6,7 @@ import { RootState } from '../../../modules';
 import { DiscoveryAnimal, initDiscoveryData } from '../DiscoveryPage';
 import useInput from '../../../hooks/useInput';
 import MapWrapper from '../../../component/map/mapWrapper';
-import Icon from '../../../component/icon/icon';
+import Icon from '../../../component/common/icon/icon';
 
 interface WriteProps {
   setShowWritePopup: React.Dispatch<SetStateAction<boolean>>;

@@ -6,8 +6,8 @@ import { useDispatch } from 'react-redux';
 import { addHeartAnimal, removeHeartAnimal } from '../../modules/heartAnimals';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
-import DateFormat from '../dateFormat/dateFormat';
-import Icon from '../icon/icon';
+import DateFormat from '../common/dateFormat/dateFormat';
+import Icon from '../common/icon/icon';
 
 const HomelessAnimalInfo: React.FunctionComponent<HomelessAnimalProps> = ({
   selectedAnimal,

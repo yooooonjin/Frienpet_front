@@ -1,4 +1,4 @@
-@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
+@value makerGrey from '../../../common/colors.css';
 
 .character {
   margin-top: 0.3em;

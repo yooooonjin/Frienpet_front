@@ -1,5 +1,5 @@
-@value makerNavy,makerYellow, makerDarkGrey from '../../common/colors.css';
-@value mediaQueryWidth from '../../common/size.css';
+@value makerNavy,makerYellow, makerDarkGrey from '../../../common/colors.css';
+@value mediaQueryWidth from '../../../common/size.css';
 
 .title {
   font-size: 1.8rem;

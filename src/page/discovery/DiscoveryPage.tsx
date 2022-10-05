@@ -6,16 +6,16 @@ import { setDiscoveryAnimals } from '../../modules/discoveryAnimals';
 import { getDiscoveryAnimalInfo } from '../../apis/discoveryAnimal';
 import Write from './write/write';
 import storage from '../../service/storage';
-import Range from '../../component/range/range';
+import Range from '../../component/common/range/range';
 import DiscoverySkeleton from './skeleton/discoverySkeleton';
 import MapWrapper from '../../component/map/mapWrapper';
-import EmptyMsg from '../../component/emptyMsg/emptyMsg';
-import DateTime from '../../component/dateTime/dateTime';
-import Character from '../../component/character/character';
-import Address from '../../component/address/address';
-import Location from '../../component/location/location';
-import Button from '../../component/button/button';
-import Icon from '../../component/icon/icon';
+import EmptyMsg from '../../component/common/emptyMsg/emptyMsg';
+import DateTime from '../../component/common/dateTime/dateTime';
+import Character from '../../component/common/character/character';
+import Address from '../../component/common/address/address';
+import Location from '../../component/common/location/location';
+import Button from '../../component/common/button/button';
+import Icon from '../../component/common/icon/icon';
 
 export type DiscoveryAnimal = {
   discoveryid: string;

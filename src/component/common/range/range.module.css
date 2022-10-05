@@ -1,5 +1,4 @@
-@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../common/colors.css';
-@value container from '../../common/size.css';
+@value makerNavy from '../../../common/colors.css';
 
 .range {
   display: flex;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './infoInput.module.css';
+import Icon from '../common/icon/icon';
 import Input from './input';
-import Icon from '../../icon/icon';
 
 interface InfoInputProps {
   onValueCheck?(e: React.FocusEvent<HTMLInputElement>): Promise<string>;

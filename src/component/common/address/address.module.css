@@ -1,0 +1,7 @@
+@value makerNavy,makerPink,makerYellow,makerGrey,makerLightGrey,makerDarkGrey from '../../../common/colors.css';
+
+.address {
+  font-weight: 500;
+  color: makerDarkGrey;
+  font-size: 0.6rem;
+}

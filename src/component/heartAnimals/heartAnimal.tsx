@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './heartAnimal.module.css';
 import { HeartAnimal } from '../../apis/homeless';
 import moment from 'moment';
-import Icon from '../icon/icon';
+import Icon from '../common/icon/icon';
 
 const Heart = ({
   animal,

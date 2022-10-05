@@ -1,6 +1,6 @@
 import React from 'react';
-import { DiscoveryAnimal } from '../../page/discovery/DiscoveryPage';
-import { LostPet } from '../../page/lostPet/LostPetPage';
+import { DiscoveryAnimal } from '../../../page/discovery/DiscoveryPage';
+import { LostPet } from '../../../page/lostPet/LostPetPage';
 import styles from './address.module.css';
 
 const Address = ({ address }: { address: DiscoveryAnimal | LostPet }) => {

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import Icon from '../icon/icon';
+import Icon from '../common/icon/icon';
 import styles from './nav.module.css';
 
 interface NavProps {

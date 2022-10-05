@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Banner from '../../component/banner/banner';
+import Banner from '../../component/common/banner/banner';
 import Discovery from '../../component/discovery/discovery';
 import Homeless, { HomelessAnimalT } from '../../component/homeless/homeless';
 import LostAnimals from '../../component/lostAnimals/lostAnimals';

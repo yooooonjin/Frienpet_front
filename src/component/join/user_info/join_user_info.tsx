@@ -4,11 +4,11 @@ import styles from './join_user_info.module.css';
 import { useNavigate } from 'react-router-dom';
 import { SignupValidation } from '../../../page/join/validation';
 import { User } from '../../../page/join/JoinPage';
-import Alert from '../../alert/alert';
+import Alert from '../../common/alert/alert';
 import PopupDom from './popupDom';
 import PopupPostCode from './popupPostCode';
 import { emailCheck } from '../../../apis/user';
-import InfoInput from '../infoInput/infoInput';
+import InfoInput from '../infoInput';
 
 interface JoinUserInfoProps {
   setCurrentPage: Dispatch<SetStateAction<string>>;

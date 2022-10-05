@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from '../../dropdown/dropdown';
+import Dropdown from '../../common/dropdown/dropdown';
 import styles from './guest.module.css';
 
 interface GuestProps {

@@ -6,7 +6,7 @@ import storage from '../../../service/storage';
 import { userLogout } from '../../../modules/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../modules';
-import Dropdown from '../../dropdown/dropdown';
+import Dropdown from '../../common/dropdown/dropdown';
 
 interface MemberProps {
   onPageChange(e: React.MouseEvent<HTMLElement>): void;

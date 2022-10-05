@@ -5,9 +5,9 @@ import Sido from './sido';
 import SiGunGu from './sigungu';
 import { getAbandonmentPublic } from '../../service/abandoned_animal_api';
 import { HomelessProps } from '../../page/homeless/HomelessPage';
-import Title from '../title/title';
+import Title from '../common/title/title';
 import HomelessAnimal from './homelessAnimal';
-import Icon from '../icon/icon';
+import Icon from '../common/icon/icon';
 
 export type HomelessAnimalsFilterT = {
   bgnde: string;

@@ -7,13 +7,13 @@ import { Animal } from '../join/JoinPage';
 import { getPetPhoto } from '../../apis/photo';
 import { RootState } from '../../modules';
 import { useSelector } from 'react-redux';
-import Alert from '../../component/alert/alert';
+import Alert from '../../component/common/alert/alert';
 import InfoSharing from '../../component/infoSharing/infoSharing';
 import LostInfo from '../../component/lostInfo/lostInfo';
-import Range from '../../component/range/range';
+import Range from '../../component/common/range/range';
 import LostPetSkeleton from './skeleton/lostPetSkeleton';
-import EmptyMsg from '../../component/emptyMsg/emptyMsg';
-import Button from '../../component/button/button';
+import EmptyMsg from '../../component/common/emptyMsg/emptyMsg';
+import Button from '../../component/common/button/button';
 
 export type LostPet = {
   lostpetid?: string;

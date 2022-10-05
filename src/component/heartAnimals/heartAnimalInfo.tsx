@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import styles from './heartAnimalInfo.module.css';
 import { HeartAnimal } from '../../apis/homeless';
-import DateFormat from '../dateFormat/dateFormat';
-import Icon from '../icon/icon';
+import DateFormat from '../common/dateFormat/dateFormat';
+import Icon from '../common/icon/icon';
 
 const HeartAnimalInfo = ({
   setAnimalInfoPop,

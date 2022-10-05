@@ -1,4 +1,4 @@
-@value makerNavy,makerGrey from '../../common/colors.css';
+@value makerNavy,makerGrey from '../../../common/colors.css';
 
 .write {
   margin-left: auto;

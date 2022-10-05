@@ -1,4 +1,4 @@
-@value makerDarkGrey from '../../common/colors.css';
+@value makerDarkGrey from '../../../common/colors.css';
 
 .emptyMsg {
   text-align: center;

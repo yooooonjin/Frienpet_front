@@ -4,10 +4,10 @@ import styles from './infoSharing.module.css';
 import Chat from '../chat/chat';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
-import DateTime from '../dateTime/dateTime';
-import Location from '../location/location';
-import Address from '../address/address';
-import Icon from '../icon/icon';
+import DateTime from '../common/dateTime/dateTime';
+import Location from '../common/location/location';
+import Address from '../common/address/address';
+import Icon from '../common/icon/icon';
 
 interface InfoSharingProps {
   lostMyPet?: LostPet;

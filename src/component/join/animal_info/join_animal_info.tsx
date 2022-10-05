@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import useInput from '../../../hooks/useInput';
 import { Animal, initAnimal } from '../../../page/join/JoinPage';
-import InfoInput from '../infoInput/infoInput';
+import InfoInput from '../infoInput';
 import styles from './join_animal_info.module.css';
 
 export interface JoinAnimalInfoProps {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { DiscoveryAnimal } from '../../page/discovery/DiscoveryPage';
-import { Animal } from '../../page/join/JoinPage';
+import { DiscoveryAnimal } from '../../../page/discovery/DiscoveryPage';
+import { Animal } from '../../../page/join/JoinPage';
 import styles from './character.module.css';
 
 const Character = ({

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './chatInput.module.css';
 import moment from 'moment';
-import Icon from '../icon/icon';
+import Icon from '../common/icon/icon';
 
 interface ChatInputProps {
   socket: any;

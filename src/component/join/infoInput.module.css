@@ -1,5 +1,5 @@
-@value makerNavy, makerPink, makerGrey from '../../../common/colors.css';
-@value mediaQuery from '../../../common/size.css';
+@value makerNavy, makerPink, makerGrey from '../../common/colors.css';
+@value mediaQuery from '../../common/size.css';
 
 .info_wrap {
   margin-bottom: 1em;

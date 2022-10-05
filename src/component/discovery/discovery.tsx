@@ -6,10 +6,10 @@ import {
 } from '../../page/discovery/DiscoveryPage';
 import { getDiscoveryAnimalInfo } from '../../apis/discoveryAnimal';
 import DiscoverySkeleton from './skeleton/discoverySkeleton';
-import DateTime from '../dateTime/dateTime';
-import Location from '../location/location';
-import Character from '../character/character';
-import Title from '../title/title';
+import DateTime from '../common/dateTime/dateTime';
+import Location from '../common/location/location';
+import Character from '../common/character/character';
+import Title from '../common/title/title';
 
 const Discovery = () => {
   const [count, setCount] = useState(0);

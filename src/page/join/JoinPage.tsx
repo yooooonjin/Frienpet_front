@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { join } from '../../apis/user';
 import { savePetInfo } from '../../apis/pet';
 import Nav from '../../component/join/nav/nav';
-import Icon from '../../component/icon/icon';
+import Icon from '../../component/common/icon/icon';
 
 export type User = {
   [key: string]: string | undefined;

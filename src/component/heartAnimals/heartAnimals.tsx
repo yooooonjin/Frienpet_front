@@ -8,7 +8,7 @@ import { removeHeartAnimal, setHeartAnimals } from '../../modules/heartAnimals';
 import Heart from './heartAnimal';
 import HeartAnimalInfo from './heartAnimalInfo';
 import styles from './heartAnimals.module.css';
-import Icon from '../icon/icon';
+import Icon from '../common/icon/icon';
 
 const HeartAnimals = ({ email }: { email: string }) => {
   const dispatch = useDispatch();

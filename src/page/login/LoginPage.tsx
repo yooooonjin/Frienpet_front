@@ -5,7 +5,7 @@ import { getUserInfo, login } from '../../apis/user';
 import styles from './LoginPage.module.css';
 import { setLoggedInfo } from '../../modules/user';
 import storage from '../../service/storage';
-import Alert from '../../component/alert/alert';
+import Alert from '../../component/common/alert/alert';
 import useInput from '../../hooks/useInput';
 
 type LoginUser = {

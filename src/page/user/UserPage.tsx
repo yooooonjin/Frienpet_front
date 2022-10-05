@@ -8,8 +8,8 @@ import { getPetInfo, updatePetInfo } from '../../apis/pet';
 import { getPetPhoto, savePetPhoto } from '../../apis/photo';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
-import Button from '../../component/button/button';
-import Icon from '../../component/icon/icon';
+import Button from '../../component/common/button/button';
+import Icon from '../../component/common/icon/icon';
 
 type Photo = {
   [key: string]: string;
