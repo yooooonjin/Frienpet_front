@@ -47,6 +47,6 @@
 + 하트를 눌러 **동물의 정보를 보관**해주세요.
 <img src="https://user-images.githubusercontent.com/88491427/194487307-544bd879-71f6-4d44-98e3-7dacc98042f7.gif">
 
-### 반응형
+### 📱 반응형
 <img src="https://user-images.githubusercontent.com/88491427/194500359-6a0a2dd2-ad24-4d27-8652-9a6efd0642d3.gif">
 
