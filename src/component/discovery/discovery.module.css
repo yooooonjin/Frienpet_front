@@ -1,4 +1,4 @@
-@value makerNavy,makerYellow from '../../common/colors.css';
+@value makerNavy,makerDarkNavy,makerYellow from '../../common/colors.css';
 @value mediaQuery,mediaWidth from '../../common/size.css';
 
 .discovery_container {
@@ -17,6 +17,10 @@
   border-radius: 2em;
   color: white;
   font-weight: 700;
+}
+.emptyMsg {
+  color: makerDarkNavy;
+  justify-content: center;
 }
 .photo {
   width: 3.2em;

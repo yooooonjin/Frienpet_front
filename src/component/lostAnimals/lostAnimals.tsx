@@ -7,10 +7,13 @@ import { getPetPhoto } from '../../apis/photo';
 import LostInfo from '../lostInfo/lostInfo';
 import LostInfoSkeleton from '../lostInfo/skeleton/lostInfoSkeleton';
 import Title from '../common/title/title';
+import EmptyMsg from '../common/emptyMsg/emptyMsg';
 
 const LostAnimals = () => {
   const [lostAnimals, setLostAnimals] = useState<Array<LostAnimal>>();
   const [isLoading, setIsLoading] = useState(true);
+
+  console.log(lostAnimals);
 
   useEffect(() => {
     getLostAnimalsData();
@@ -47,6 +50,8 @@ const LostAnimals = () => {
           <div className={styles.lostAnimals}>
             {isLoading ? (
               <LostInfoSkeleton />
+            ) : lostAnimals?.length === 0 ? (
+              <EmptyMsg />
             ) : (
               lostAnimals?.map((lostInfo) => {
                 return (

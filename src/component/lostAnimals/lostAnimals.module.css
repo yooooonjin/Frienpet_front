@@ -1,3 +1,4 @@
+@value makerGrey from '../../common/colors.css';
 @value mediaQueryWidth,mediaWidth from '../../common/size.css';
 
 .lostPet_container {
@@ -10,8 +11,8 @@
   margin: auto;
 }
 .info_container {
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
   margin-top: 1.5em;
 }
 .lostAnimals {
@@ -21,7 +22,10 @@
   max-height: 206px;
   overflow: hidden;
 }
-
+.emptyMsg {
+  color: makerGrey;
+  font-size: 0.9rem;
+}
 .animal_wrap {
   display: flex;
   flex-direction: column;

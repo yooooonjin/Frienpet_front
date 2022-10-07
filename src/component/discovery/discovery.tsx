@@ -17,6 +17,8 @@ const Discovery = () => {
     initDiscoveryData,
   ]);
 
+  console.log(discovery);
+
   const [isLoading, setIsLoading] = useState(true);
 
   const interval = useRef<NodeJS.Timer>();
@@ -57,6 +59,10 @@ const Discovery = () => {
         {isLoading ? (
           <div className={styles.info}>
             <DiscoverySkeleton />
+          </div>
+        ) : discovery.length === 0 ? (
+          <div className={`${styles.info} ${styles.emptyMsg}`}>
+            게시글이 존재하지 않습니다.
           </div>
         ) : (
           <div className={styles.info}>
