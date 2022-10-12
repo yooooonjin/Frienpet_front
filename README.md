@@ -44,11 +44,12 @@
 + 주인 없이 공원이나 거리를 돌아다니는 유실 동물들입니다.
 + **지도에서 정확한 위치를 확인** 할 수 있습니다.
 + 유실 동물을 발견한다면 현재 위치와 동물의 정보, 발견 시 상황을 자세히 적어 게시글을 등록해주세요.
+<img src="https://user-images.githubusercontent.com/88491427/194487307-544bd879-71f6-4d44-98e3-7dacc98042f7.gif">
 
 ### 🐾 보호중인 유기동물
 + **지방자치단체와 유기동물 보호시설에서 등록**한 보호중 동물들 입니다.
 + 하트를 눌러 **동물의 정보를 보관**해주세요.
-<img src="https://user-images.githubusercontent.com/88491427/194487307-544bd879-71f6-4d44-98e3-7dacc98042f7.gif">
+<img src="https://user-images.githubusercontent.com/88491427/195237451-71047899-0038-485a-aff5-842f7ec3ce3c.gif">
 
 ### 📱 반응형
 <img src="https://user-images.githubusercontent.com/88491427/194500359-6a0a2dd2-ad24-4d27-8652-9a6efd0642d3.gif">
