@@ -26,6 +26,7 @@
 }
 .discovery_wrap {
   display: flex;
+  min-height: 406px;
 }
 .discovery {
   flex: 1;

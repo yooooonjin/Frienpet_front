@@ -17,8 +17,6 @@ const Discovery = () => {
     initDiscoveryData,
   ]);
 
-  console.log(discovery);
-
   const [isLoading, setIsLoading] = useState(true);
 
   const interval = useRef<NodeJS.Timer>();

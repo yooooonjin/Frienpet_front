@@ -16,6 +16,7 @@ import Address from '../../component/common/address/address';
 import Location from '../../component/common/location/location';
 import Button from '../../component/common/button/button';
 import Icon from '../../component/common/icon/icon';
+import Pagination from '../../component/pagination/pagination';
 
 export type DiscoveryAnimal = {
   discoveryid: string;
@@ -64,6 +65,11 @@ const DiscoveryPage = () => {
   const [range, setRange] = useState({ range: 'sigungu', address: sigungu });
   const [markers, setMarkers] = useState<Array<{ lat: number; lng: number }>>();
   const [panTo, setPanTo] = useState<{ lat: number; lng: number }>();
+  //pagination
+  const [limit, setLimit] = useState(3); //한페이지에 보여줄 데이터 개수
+  const [page, setPage] = useState(1);
+  const [counts, setCounts] = useState(1);
+  const [blockNum, setBlockNum] = useState(0); //한 페이지에 보여줄 페이지네이션의 개수를 block으로 지정하는 state
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -81,6 +87,7 @@ const DiscoveryPage = () => {
     );
     dispatch(setDiscoveryAnimals(discoveryAnimalInfo));
     setMarkers(onMarkersPosition(discoveryAnimalInfo)); //지도에 마커 띄우기
+    setCounts(discoveryAnimalInfo.length);
 
     setIsLoading(false);
   };
@@ -90,6 +97,7 @@ const DiscoveryPage = () => {
     const addrByRange =
       range === 'sido' ? sido : range === 'sigungu' ? sigungu : bname;
     setRange({ range, address: addrByRange });
+    setPage(1);
   };
 
   //위도 경도가 존재하는 게시글만 추려 마커 띄우기
@@ -139,43 +147,53 @@ const DiscoveryPage = () => {
           {isLoading ? (
             <DiscoverySkeleton />
           ) : (
-            discoveryAnimal.map((animal: DiscoveryAnimal) => {
-              return (
-                <div
-                  className={styles.animal}
-                  key={animal.discoveryid}
-                  onClick={() => onShowMarker(animal.lat, animal.lng)}
-                >
-                  <div>
-                    <img
-                      className={styles.photo}
-                      src={
-                        animal.photo === '' ? 'emptyPhoto.png' : animal.photo
-                      }
-                    />
-                    <div className={styles.info}>
-                      <div className={styles.lostInfo}>
-                        <div className={styles.location}>
-                          <Location
-                            location={animal.location}
-                            marker={animal.lat ? true : false}
-                          />
+            discoveryAnimal
+              .slice((page - 1) * limit, page * limit)
+              .map((animal: DiscoveryAnimal) => {
+                return (
+                  <div
+                    className={styles.animal}
+                    key={animal.discoveryid}
+                    onClick={() => onShowMarker(animal.lat, animal.lng)}
+                  >
+                    <div>
+                      <img
+                        className={styles.photo}
+                        src={
+                          animal.photo === '' ? 'emptyPhoto.png' : animal.photo
+                        }
+                      />
+                      <div className={styles.info}>
+                        <div className={styles.lostInfo}>
+                          <div className={styles.location}>
+                            <Location
+                              location={animal.location}
+                              marker={animal.lat ? true : false}
+                            />
+                          </div>
+                          <div className={styles.address}>
+                            <Address address={animal} />
+                          </div>
+                          <DateTime dateTime={animal.createddate} />
                         </div>
-                        <div className={styles.address}>
-                          <Address address={animal} />
-                        </div>
-                        <DateTime dateTime={animal.createddate} />
+                        <Character animal={animal} />
                       </div>
-                      <Character animal={animal} />
                     </div>
+                    <div className={styles.desc}>{animal.desc}</div>
                   </div>
-                  <div className={styles.desc}>{animal.desc}</div>
-                </div>
-              );
-            })
+                );
+              })
           )}
         </div>
       </div>
+      <Pagination
+        limit={limit}
+        page={page}
+        setPage={setPage}
+        blockNum={blockNum}
+        setBlockNum={setBlockNum}
+        counts={counts}
+      />
       {showWritePopup && (
         <Write
           setShowWritePopup={setShowWritePopup}

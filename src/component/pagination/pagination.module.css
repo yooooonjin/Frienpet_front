@@ -1,0 +1,31 @@
+@value makerNavy,makerYellow,makerGrey,makerLightGrey from '../../common/colors.css';
+@value mediaQuery,mediaQueryWidth,mediaWidth from '../../common/size.css';
+
+.pagination_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+}
+.buttonWrap {
+  margin: 0 1em;
+  display: flex;
+}
+button:hover {
+  background-color: makerGrey;
+  font-weight: 700;
+}
+
+button {
+  margin: 0 0.2em;
+  background-color: #e9e9e9;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  font-size: 0.7rem;
+}
+.currentPageBtn {
+  background-color: makerNavy !important;
+  color: white;
+  font-weight: 700;
+}

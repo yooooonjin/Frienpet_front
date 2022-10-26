@@ -13,8 +13,6 @@ const LostAnimals = () => {
   const [lostAnimals, setLostAnimals] = useState<Array<LostAnimal>>();
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(lostAnimals);
-
   useEffect(() => {
     getLostAnimalsData();
   }, []);
